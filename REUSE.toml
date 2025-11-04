@@ -17,7 +17,7 @@ SPDX-FileCopyrightText = "2025 SAP SE or an SAP affiliate company and samples-op
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
-path = "converge-cloud/**"
+path = "sap-cloud-infrastructure/**"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2025 SAP SE or an SAP affiliate company and samples-opendesk-ocm-landscaper contributors"
 SPDX-License-Identifier = "Apache-2.0"

@@ -2,7 +2,7 @@
 apiVersion: landscaper.gardener.cloud/v1alpha1
 kind: DataObject
 metadata:
-  name: cc-cluster-opendeskocm-release
+  name: sci-cluster-opendeskocm-release
   namespace: default
 data:
   Name: local

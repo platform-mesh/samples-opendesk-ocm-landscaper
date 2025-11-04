@@ -10,6 +10,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: poc-bmi-opendesk
-  path: "./landscaper/cc-cluster-opendeskocm"
+  path: "./landscaper/sci-cluster-opendeskocm"
   prune: true
   timeout: 1m

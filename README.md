@@ -226,11 +226,11 @@ poc-bmi-opendesk/
 ├── README.md                    # Comprehensive documentation (this file)
 ├── Makefile                     # Build and deployment automation
 ├── renovate.json                # Dependency update configuration
-├── converge-cloud/              # SAP Cloud Infrastructure k8s cluster specific configurations
+├── sap-cloud-infrastructure/    # SAP Cloud Infrastructure k8s cluster specific configurations
 ├── credentials/                 # Credential management
 ├── flux/                    # Flux GitOps configurations
 ├── landscaper/              # Landscaper deployment definitions
-│       └── cc-cluster-opendeskocm/  # cluster "OpenDeskOCM" which is managed by Landscaper via OCM
+│       └── sci-cluster-opendeskocm/  # cluster "OpenDeskOCM" which is managed by Landscaper via OCM
 ├── mcp-order-api/              # MCP Ordering API configurations
 └── ocm/                        # Open Component Model content layer
     ├── apps/                   # OpenDesk HelmFile Application component definitions
@@ -286,21 +286,21 @@ Flux provides continuous deployment capabilities:
 
 ```bash
 # Apply service account token on SAP Cloud Infrastructure cluster
-kubectl apply -f converge-cloud/ccloud-sa-token.yaml
+kubectl apply -f sap-cloud-infrastructure/sci-sa-token.yaml
 
 # Extract information of this service account in order 
-# to create a kubeconfig secret ccloud-hcp03-opendeskocm-service-account-kubeconfig 
+# to create a kubeconfig secret sci-hcp03-opendeskocm-service-account-kubeconfig 
 # for Landscaper on OpenManagedControlPlane to be able to manage openDesk instance
 ```
 
 #### 2️⃣ Certificate Management
 
-Create [required TLS certificate](https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/docs/getting-started.md#dns) secret on Gardener Shoot Cluster for your own domain: [`converge-cloud/ccloud-hcp03-opendeskocm-tls-cert.yaml`](./converge-cloud/ccloud-hcp03-opendeskocm-tls-cert.yaml)
+Create [required TLS certificate](https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/docs/getting-started.md#dns) secret on Gardener Shoot Cluster for your own domain: [`sap-cloud-infrastructure/sci-hcp03-opendeskocm-tls-cert.yaml`](./sap-cloud-infrastructure/sci-hcp03-opendeskocm-tls-cert.yaml)
 
 
 #### 3️⃣ Core Infrastructure Components Configuration
 
-Configure nginx-ingress with proper annotations at `landscaper/cc-cluster-opendeskocm/data-object-base.yaml`:
+Configure nginx-ingress with proper annotations at `landscaper/sci-cluster-opendeskocm/data-object-base.yaml`:
 ```yaml
 annotations:
   ingressclass.kubernetes.io/is-default-class: "true"
@@ -310,7 +310,7 @@ annotations:
   dns.gardener.cloud/ttl: '600'
 ```
 
-Configure openDesk core components at `landscaper/cc-cluster-opendeskocm/data-object-environments-defaults.yaml`.
+Configure openDesk core components at `landscaper/sci-cluster-opendeskocm/data-object-environments-defaults.yaml`.
 
 #### 🔐 Security & Credential Management
 
@@ -324,7 +324,7 @@ The following **Kubernetes secrets** must be present on your `OpenManagedControl
 
 | Secret Name                                               | Documentation                                                                                                                         | Purpose                                                                                                                       |
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **`ccloud-hcp03-opendeskocm-service-account-kubeconfig`** | SAP Cloud Infrastructure Cluster Service Account kubeconfig                                                                           | K8s Service Account credentials for `Landscaper` to access SAP Cloud Infrastructure Cluster and manage openDesk installation. |
+| **`sci-hcp03-opendeskocm-service-account-kubeconfig`** | SAP Cloud Infrastructure Cluster Service Account kubeconfig                                                                           | K8s Service Account credentials for `Landscaper` to access SAP Cloud Infrastructure Cluster and manage openDesk installation. |
 | **`github-pull-secret`**                                  | [GitHub Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)  | Access private Github repository access                                                                                       |
 | **`ocm-secret`**         | [ghcr.io Identity Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) | Credentials to access ghcr.io OCI-compliant registry for OCM components |                                             |
 
@@ -442,7 +442,7 @@ Each application is configured through:
 
 - **Helm Values**: Application-specific configuration -> `ocm/k8s-landscaper-blueprint/deploy-execution.yaml` & `ocm/k8s-landscaper-blueprint/helmfile/**`
 - **Secrets Management**: Automated password generation -> `ocm/k8s-landscaper-blueprint/blueprint.yaml`
-- **Theme Integration**: Consistent branding across applications -> `landscaper/cc-cluster-opendeskocm/data-object-theme.yaml`
+- **Theme Integration**: Consistent branding across applications -> `landscaper/sci-cluster-opendeskocm/data-object-theme.yaml`
 
 ### 🔄 Phase 3: GitOps Setup
 
@@ -465,13 +465,13 @@ The following files should be synced via `flux` on the MCP!
 
 ```bash
 # manual apply target cluster configuration
-kubectl apply -f landscaper/cc-cluster-opendeskocm/target.yaml
+kubectl apply -f landscaper/sci-cluster-opendeskocm/target.yaml
 
 # manual apply data objects (configuration)
-kubectl apply -f landscaper/cc-cluster-opendeskocm/data-object-*.yaml
+kubectl apply -f landscaper/sci-cluster-opendeskocm/data-object-*.yaml
 
 # manual apply installation
-kubectl apply -f landscaper/cc-cluster-opendeskocm/installation.yaml
+kubectl apply -f landscaper/sci-cluster-opendeskocm/installation.yaml
 ```
 
 ## ⚙️ Configuration Management
@@ -493,7 +493,7 @@ secrets:
 
 ### 🎨 Theme Customization
 
-The platform supports comprehensive theming at `landscaper/cc-cluster-opendeskocm/data-object-theme.yaml`:
+The platform supports comprehensive theming at `landscaper/sci-cluster-opendeskocm/data-object-theme.yaml`:
 
 - **Logos**: SVG and PNG formats for different applications
 - **Favicons**: Application-specific icons

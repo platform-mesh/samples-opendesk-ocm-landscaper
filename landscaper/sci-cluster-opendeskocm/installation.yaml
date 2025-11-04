@@ -1,13 +1,13 @@
 apiVersion: landscaper.gardener.cloud/v1alpha1
 kind: Installation
 metadata:
-  name: ccloud-hcp03-opendeskocm
+  name: sci-hcp03-opendeskocm
   namespace: default
   annotations:
     landscaper.gardener.cloud/reconcile-if-changed: "true"
 
 spec:
-  context: ccloud-hcp03-opendeskocm
+  context: sci-hcp03-opendeskocm
 
   componentDescriptor:
     ref:
@@ -21,14 +21,14 @@ spec:
   imports:
     data:
       - name: release
-        dataRef: cc-cluster-opendeskocm-release
+        dataRef: sci-cluster-opendeskocm-release
       - name: base
-        dataRef: cc-cluster-opendeskocm-base
+        dataRef: sci-cluster-opendeskocm-base
       - name: environmentsDefaults
-        dataRef: cc-cluster-opendeskocm-environments-defaults
+        dataRef: sci-cluster-opendeskocm-environments-defaults
       - name: theme
-        dataRef: cc-cluster-opendeskocm-theme
+        dataRef: sci-cluster-opendeskocm-theme
 
     targets:
       - name: cluster # name of an import parameter of the blueprint
-        target: ccloud-hcp03-opendeskocm # name of the Target custom resource containing the kubeconfig of the target cluster      
+        target: sci-hcp03-opendeskocm # name of the Target custom resource containing the kubeconfig of the target cluster      

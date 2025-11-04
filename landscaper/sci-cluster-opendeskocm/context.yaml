@@ -1,7 +1,7 @@
 apiVersion: landscaper.gardener.cloud/v1alpha1
 kind: Context
 metadata:
-  name: ccloud-hcp03-opendeskocm
+  name: sci-hcp03-opendeskocm
   namespace: default
 
 repositoryContext:

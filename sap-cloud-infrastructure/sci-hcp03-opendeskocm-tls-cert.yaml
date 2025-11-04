@@ -1,7 +1,7 @@
 apiVersion: cert.gardener.cloud/v1alpha1
 kind: Certificate
 metadata:
-  name: ccloud-hcp03-tls-cert
+  name: sci-hcp03-tls-cert
   namespace: default
 spec:
   commonName: "*.opendeskocm.shoot.example.com"

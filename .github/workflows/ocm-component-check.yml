@@ -1,4 +1,4 @@
-name: OCM Package& Transfer
+name: OCM Package & Transfer
 
 on:
   workflow_dispatch:

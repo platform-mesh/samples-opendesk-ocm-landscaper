@@ -1,9 +1,9 @@
 apiVersion: landscaper.gardener.cloud/v1alpha1
 kind: Target
 metadata:
-  name: ccloud-hcp03-opendeskocm
+  name: sci-hcp03-opendeskocm
   namespace: default
 spec:
   type: landscaper.gardener.cloud/kubernetes-cluster
   secretRef:
-    name: ccloud-hcp03-opendeskocm-service-account-kubeconfig
+    name: sci-hcp03-opendeskocm-service-account-kubeconfig
