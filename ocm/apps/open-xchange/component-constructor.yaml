@@ -1,0 +1,50 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/open-xchange
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/open-xchange ##################
+      ## 2 Helm Charts installations!!
+      # - name: helm-chart-postfix
+      #   type: helmChart
+      #   version: "4.0.0"
+      #   access:
+      #     type: helm
+      #     helmChart: postfix:4.0.0
+      #     helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-postfix
+      #
+      #     #imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-postfix/postfix:4.0.0
+      - name: helm-chart-opendesk-open-xchange-bootstrap
+        type: helmChart
+        version: "3.0.1"
+        access:
+          type: helm
+          helmChart: opendesk-open-xchange-bootstrap:3.0.1
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-open-xchange-bootstrap
+
+      - name: helm-chart-dovecot
+        type: helmChart
+        version: "3.1.1"
+        access:
+          type: helm
+          helmChart: "dovecot:3.1.1"
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-dovecot
+
+      - name: helm-chart-appsuite-public-sector
+        type: helmChart
+        version: "2.20.247"
+        access:
+          type: helm
+          helmChart: appsuite-public-sector:2.20.247
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/charts-mirror
+
+      - name: helm-chart-ox-connector
+        type: helmChart
+        version: "0.19.0"
+        access:
+          type: helm
+          helmChart: ox-connector:0.19.0
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/supplier/univention/charts-mirror

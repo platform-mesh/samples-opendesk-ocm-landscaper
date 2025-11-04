@@ -1,0 +1,19 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/collabora
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/collabora ##################
+
+      - name: helm-chart-collabora-online
+        type: helmChart
+        version: "1.1.41"
+        access:
+          type: helm
+          helmChart: collabora-online:1.1.41
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/supplier/collabora/charts-mirror
+          
+          

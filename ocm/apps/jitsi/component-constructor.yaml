@@ -1,0 +1,15 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/jitsi
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/jitsi ##################
+      - name: helm-chart-opendesk-jitsi
+        type: helmChart
+        version: "3.1.0"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-jitsi/opendesk-jitsi:3.1.0

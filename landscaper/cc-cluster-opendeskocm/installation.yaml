@@ -1,0 +1,34 @@
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: Installation
+metadata:
+  name: ccloud-hcp03-opendeskocm
+  namespace: default
+  annotations:
+    landscaper.gardener.cloud/reconcile-if-changed: "true"
+
+spec:
+  context: ccloud-hcp03-opendeskocm
+
+  componentDescriptor:
+    ref:
+      componentName: opendesk.poc.sap.com/base
+      version: 0.1.2-6-gdfa6567
+  blueprint:
+    ref:
+      resourceName: blueprint
+  exports: {}
+  # Set values for the import parameters of the blueprint
+  imports:
+    data:
+      - name: release
+        dataRef: cc-cluster-opendeskocm-release
+      - name: base
+        dataRef: cc-cluster-opendeskocm-base
+      - name: environmentsDefaults
+        dataRef: cc-cluster-opendeskocm-environments-defaults
+      - name: theme
+        dataRef: cc-cluster-opendeskocm-theme
+
+    targets:
+      - name: cluster # name of an import parameter of the blueprint
+        target: ccloud-hcp03-opendeskocm # name of the Target custom resource containing the kubeconfig of the target cluster      

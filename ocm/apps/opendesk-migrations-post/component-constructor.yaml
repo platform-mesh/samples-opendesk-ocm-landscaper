@@ -1,0 +1,16 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/opendesk-migrations-post
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/opendesk-migrations-post ##################
+      - name: helm-chart-opendesk-migrations
+        type: helmChart
+        version: "1.7.4"
+        access:
+          type: helm
+          helmChart: opendesk-migrations:1.7.4
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-migrations

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/opendesk-services
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/opendesk-services ##################
+      - name: helm-chart-home
+        type: helmChart
+        version: "1.0.2"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-home/opendesk-home:1.0.2
+
+      - name: helm-chart-static-files
+        type: helmChart
+        version: "4.0.1"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-static-files/opendesk-static-files:4.0.1
+          
+      - name: helm-chart-certificates
+        type: helmChart
+        version: "3.1.1"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-certificates/opendesk-certificates:3.1.1

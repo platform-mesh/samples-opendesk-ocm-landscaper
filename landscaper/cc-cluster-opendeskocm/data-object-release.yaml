@@ -1,0 +1,13 @@
+---
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: DataObject
+metadata:
+  name: cc-cluster-opendeskocm-release
+  namespace: default
+data:
+  Name: local
+  Namespace: default
+  IsUpgrade: false
+  IsInstall: true
+  Revision: 1
+  Service: helm

@@ -1,0 +1,26 @@
+---
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: DataObject
+metadata:
+  name: cc-cluster-opendeskocm-base
+  namespace: default
+data:
+  # cannot be used, because of dns.gardener.cloud/dnsnames needs dynamic values -> putting this into deployItems directly!
+  nginx:
+    controller:
+      allowSnippetAnnotations: true
+      config:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/docs/requirements.md#supported-controllers
+        controller.config.annotations-risk-level: "Critical"
+        controller.config.strict-validate-path-type: false
+        annotations-risk-level: "Critical"
+        strict-validate-path-type: false
+        allow-snippet-annotations: true
+      service:
+        annotations:
+          loadbalancer.openstack.org/class: internet
+          # Let Gardener manage external DNS records for this Service.
+          #dns.gardener.cloud/dnsnames: "*.{{ .imports.environmentsDefaults.global.domain | toYaml }}"
+          dns.gardener.cloud/dnsnames: "*.opendeskocm.shoot.example.com"
+          dns.gardener.cloud/ttl: "600"
+          dns.gardener.cloud/class: garden

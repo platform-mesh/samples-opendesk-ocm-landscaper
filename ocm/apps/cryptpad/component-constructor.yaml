@@ -1,0 +1,15 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/cryptpad
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/cryptpad ##################
+      - name: helm-chart-cryptpad
+        type: helmChart
+        version: "0.0.20"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/xwiki/charts-mirror/cryptpad:0.0.20

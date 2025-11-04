@@ -1,0 +1,89 @@
+name: OCM Package& Transfer
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main      
+    paths:
+      - "**/component-constructor.yaml"
+  pull_request:
+    paths:
+      - "**/component-constructor.yaml"
+
+jobs:
+  find-files:
+    runs-on: [ubuntu-latest]
+    outputs:
+      files: ${{ steps.set-matrix.outputs.files }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0          
+
+      - name: Find all component-constructor.yaml files
+        id: set-matrix
+        run: |          
+          files=$(find . -type f -name 'component-constructor.yaml' | jq -R -s -c 'split("\n")[:-1]')
+          echo "files=$files" >> $GITHUB_OUTPUT
+
+  ocm-version:
+    needs: [find-files]
+    runs-on: [ubuntu-latest]
+    strategy:
+      matrix:
+        file: ${{ fromJson(needs.find-files.outputs.files) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Set env.Version
+        run: |
+          echo "VERSION=$(make print-ocm-version)" >> $GITHUB_ENV
+          echo "Parsed VERSION \"$VERSION\" ..."
+
+      - name: Login to OCI Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: setup OCM
+        uses: open-component-model/ocm-setup-action@main
+
+      - run: ocm --version
+
+      - name: Show pwd and ocm version
+        run: |
+          file="${{ matrix.file }}"
+
+          printf "filename: %s\n" "${file##*/}"
+          printf "directory path: %s\n" "${file%/*}"
+
+          filename="${file##*/}"
+          echo "FILENAME=$filename" >> $GITHUB_ENV
+
+          folder="${file%/*}"
+          echo "FOLDER=$folder" >> $GITHUB_ENV
+
+      - run: |
+          cd "$(dirname "${{ matrix.file }}")"
+          pwd
+          ocm add components --create --file ./ctf ${{ env.FILENAME }} artifactVersion=${{ env.VERSION }} repository=${{ github.repository }}
+
+      - run: |
+          cd "$(dirname "${{ matrix.file }}")"
+          echo "github.event_name: ${{ github.event_name}}"
+          ocm transfer ctf --overwrite ./ctf ghcr.io/platform-mesh/samples-opendesk-ocm-k8s-toolkit
+        # for development purpose, we transfere every commit within a PR
+        if: ${{ github.event_name != 'pull_request' }}

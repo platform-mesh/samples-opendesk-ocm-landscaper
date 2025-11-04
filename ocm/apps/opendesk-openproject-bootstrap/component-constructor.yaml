@@ -1,0 +1,16 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/opendesk-openproject-bootstrap
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/opendesk-openproject-bootstrap ##################
+      - name: helm-chart-opendesk-openproject-bootstrap
+        type: helmChart
+        version: "2.2.0"
+        access:
+          type: helm
+          helmChart: opendesk-openproject-bootstrap:2.2.0
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-openproject-bootstrap

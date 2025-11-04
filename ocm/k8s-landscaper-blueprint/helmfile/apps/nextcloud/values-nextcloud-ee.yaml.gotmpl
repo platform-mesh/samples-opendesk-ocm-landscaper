@@ -1,0 +1,3 @@
+aio:
+  image:
+    registry: {{ coalesce .Values.repositories.image.registryOpencodeDeEnterprise .Values.global.imageRegistry .Values.images.nextcloud.registry | quote }}

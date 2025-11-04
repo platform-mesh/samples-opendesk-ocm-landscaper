@@ -1,0 +1,13 @@
+appsuite:
+  plugins-ui:
+    enabled: false
+  core-mw:
+    global:
+      extras:
+        monitoring:
+          enabled: true
+    image:
+      registry: {{ coalesce .Values.repositories.image.registryOpencodeDeEnterprise .Values.global.imageRegistry .Values.images.openxchangeCoreMW.registry | quote }}
+    update:
+      image:
+        registry: {{ coalesce .Values.repositories.image.registryOpencodeDeEnterprise .Values.global.imageRegistry .Values.images.openxchangeCoreMW.registry | quote }}

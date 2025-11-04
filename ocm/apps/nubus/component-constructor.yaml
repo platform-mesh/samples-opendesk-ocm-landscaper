@@ -1,0 +1,33 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/nubus
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/nubus ##################
+      - name: helm-chart-nubus
+        type: helmChart
+        version: "1.11.2"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/univention/charts-mirror/nubus:1.11.2
+      - name: helm-chart-intercom-service
+        type: helmChart
+        version: "2.12.0"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/univention/charts-mirror/intercom-service:2.12.0
+      - name: helm-chart-opendesk-keycloak-bootstrap
+        type: helmChart
+        version: "2.6.0"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-keycloak-bootstrap/opendesk-keycloak-bootstrap:2.6.0
+      - name: helm-chart-nginx-s3-gateway
+        type: helmChart
+        version: "1.0.1"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/nginx-s3-gateway/nginx-s3-gateway:1.0.1

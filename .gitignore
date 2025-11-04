@@ -1,0 +1,37 @@
+# OCM
+ocm/cft
+**/ctf/*
+# Credentials
+credentials/*
+opendesk/unpacked-helm-chart-deps
+
+# Helm Charts pkgs
+*.tgz
+# Compiled class file
+*.class
+target/
+.DS_Store
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+mta_archives/
+
+#Intellij
+*.iml
+.idea/
+#eclispe
+.project
+.classpath
+.springBeans
+.settings/
+
+#Fortify Scan Results
+*.fpr

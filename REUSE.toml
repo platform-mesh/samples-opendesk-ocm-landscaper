@@ -9,3 +9,39 @@ path = "<YOUR-FILE-OR-FOLDER-LIST>"
 precedence = "aggregate"
 SPDX-FileCopyrightText = "<YEARS-RELEVANT-FOR-YOUR-PROJECT> SAP SE or an SAP affiliate company and <YOUR-PROJECT-NAME> contributors"
 SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "*"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 SAP SE or an SAP affiliate company and samples-opendesk-ocm-k8s-toolkit contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ".github/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 SAP SE or an SAP affiliate company and samples-opendesk-ocm-k8s-toolkit contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "flux/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 SAP SE or an SAP affiliate company and samples-opendesk-ocm-k8s-toolkit contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "ocm/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 SAP SE or an SAP affiliate company and samples-opendesk-ocm-k8s-toolkit contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "ocm-k8s-toolkit/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 SAP SE or an SAP affiliate company and samples-opendesk-ocm-k8s-toolkit contributors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "ocm/k8s-landscaper-blueprint/helmfile/**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Copyright (C) 2024-2025 Zentrum für Digitale Souveränität der Öffentlichen Verwaltung (ZenDiS) GmbH"
+SPDX-License-Identifier = "Apache-2.0"

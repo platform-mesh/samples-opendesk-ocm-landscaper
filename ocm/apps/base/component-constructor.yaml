@@ -1,0 +1,84 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+components:
+  - name: opendesk.poc.sap.com/base
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+
+    resources:
+      ################## converge cloud core infrastructure ##################
+      - name: blueprint
+        type: blueprint
+        input:
+          type: dir
+          path: ./../../k8s-landscaper-blueprint
+          compress: true
+          mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
+
+      - name: helm-chart-ingress-nginx
+        type: helmChart
+        version: "4.11.6"
+        access:
+          type: helm
+          helmChart: ingress-nginx:4.11.6
+          helmRepository: https://kubernetes.github.io/ingress-nginx
+
+      - name: image-ingress-nginx
+        type: ociImage
+        version: "1.12.2"
+        access:
+          type: ociArtifact
+          imageReference: https://registry.k8s.io/ingress-nginx/controller:v1.12.2
+
+      - name: helm-chart-cert-manager
+        type: helmChart
+        version: "4.11.6"
+        access:
+          type: helm
+          helmChart: cert-manager:1.17.2
+          helmRepository: https://charts.jetstack.io
+     
+    componentReferences:
+      - name: opendesk-services
+        componentName: opendesk.poc.sap.com/opendesk-services
+        # exact version will be set after other component-constructors have been transfered & published
+        version: ${artifactVersion}
+      - name: services-external
+        componentName: opendesk.poc.sap.com/services-external
+        version: ${artifactVersion}
+      - name: open-xchange
+        componentName: opendesk.poc.sap.com/open-xchange
+        version: ${artifactVersion}
+      - name: nextcloud
+        componentName: opendesk.poc.sap.com/nextcloud
+        version: ${artifactVersion}
+      - name: collabora
+        componentName: opendesk.poc.sap.com/collabora
+        version: ${artifactVersion}
+      - name: cryptpad
+        componentName: opendesk.poc.sap.com/cryptpad
+        version: ${artifactVersion}
+      - name: jitsi
+        componentName: opendesk.poc.sap.com/jitsi
+        version: ${artifactVersion}
+      - name: element
+        componentName: opendesk.poc.sap.com/element
+        version: ${artifactVersion}
+      - name: openproject
+        componentName: opendesk.poc.sap.com/openproject
+        version: ${artifactVersion}
+      - name: xwiki
+        componentName: opendesk.poc.sap.com/xwiki
+        version: ${artifactVersion}
+      - name: opendesk-openproject-bootstrap
+        componentName: opendesk.poc.sap.com/opendesk-openproject-bootstrap
+        version: ${artifactVersion}
+      - name: opendesk-migrations-post
+        componentName: opendesk.poc.sap.com/opendesk-migrations-post
+        version: ${artifactVersion}
+      - name: notes
+        componentName: opendesk.poc.sap.com/notes
+        version: ${artifactVersion}
+      - name: nubus
+        componentName: opendesk.poc.sap.com/nubus
+        version: ${artifactVersion}

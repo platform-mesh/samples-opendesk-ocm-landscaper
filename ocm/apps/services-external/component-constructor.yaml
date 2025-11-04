@@ -1,0 +1,63 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/services-external
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/service-external ##################
+      - name: helm-chart-mariadb
+        type: helmChart
+        version: "3.0.3"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-mariadb/mariadb:3.0.3
+
+      - name: helm-chart-postgresql
+        type: helmChart
+        version: "2.1.2"
+        access:
+          type: helm
+          helmChart: postgresql:2.1.2
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-postgresql
+
+      - name: helm-chart-postfix
+        type: helmChart
+        version: "4.0.0"
+        access:
+          type: helm
+          helmChart: postfix:4.0.0
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-postfix
+
+      - name: helm-chart-clamav
+        type: helmChart
+        version: "4.0.6"
+        access:
+          type: helm
+          helmChart: clamav-simple:4.0.6
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-clamav
+    
+      - name: helm-chart-minio
+        type: helmChart
+        version: "16.0.10"
+        access:
+          type: helm
+          helmChart: minio:16.0.10
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/external/charts/bitnami-charts
+
+      - name: helm-chart-redis
+        type: helmChart
+        version: "18.6.1"
+        access:
+          type: helm
+          helmChart: redis:18.6.1
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/external/charts/bitnami-charts
+
+      - name: helm-chart-memcached
+        type: helmChart
+        version: "6.7.1"
+        access:
+          type: helm
+          helmChart: memcached:6.7.1
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/external/charts/bitnami-charts

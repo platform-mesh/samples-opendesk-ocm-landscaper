@@ -1,0 +1,16 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/openproject
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/openproject ##################
+      - name: helm-chart-openproject
+        type: helmChart
+        version: "10.1.0"
+        access:
+          type: helm
+          helmChart: openproject:10.1.0
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/supplier/openproject/charts-mirror

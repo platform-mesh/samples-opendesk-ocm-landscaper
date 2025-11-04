@@ -1,0 +1,12 @@
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: Context
+metadata:
+  name: ccloud-hcp03-opendeskocm
+  namespace: default
+
+repositoryContext:
+  baseUrl: ghcr.io/platform-mesh/samples-opendesk-ocm-k8s-landscaper/
+  type: ociRegistry
+
+registryPullSecrets: # additional pull secrets to access component descriptors and blueprints
+  - name: image-pull-secret

@@ -1,0 +1,84 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+components:
+  - name: opendesk.poc.sap.com/element
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/element ##################
+      - name: helm-chart-opendesk-element
+        type: helmChart
+        version: "6.1.3"
+        access:
+          type: helm
+          helmChart: opendesk-element:6.1.3
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element                     
+                    
+      - name: helm-chart-matrix-neoboard-widget
+        type: helmChart
+        version: "3.5.1"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-matrix-widgets/matrix-neoboard-widget:3.5.1
+          
+      - name: helm-chart-matrix-neochoice-widget
+        type: helmChart
+        version: "3.5.1"
+        access:          
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-matrix-widgets/matrix-neochoice-widget:3.5.1
+
+      - name: helm-chart-opendesk-synapse-web
+        type: helmChart
+        version: "6.1.3"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element/opendesk-synapse-web:6.1.3
+
+      - name: helm-chart-matrix-neodatefix-widget
+        type: helmChart
+        version: "3.5.1"
+        access:
+          type: helm
+          helmChart: matrix-neodatefix-widget:3.5.1
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-matrix-widgets
+          
+      - name: helm-chart-opendesk-synapse
+        type: helmChart
+        version: "6.1.3"
+        access:          
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element/opendesk-synapse:6.1.3
+
+      - name: helm-chart-matrix-neodatefix-bot
+        type: helmChart
+        version: "3.5.1"
+        access:
+          type: helm
+          helmChart: matrix-neodatefix-bot:3.5.1
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-matrix-widgets
+                    
+      - name: helm-chart-opendesk-synapse-create-account
+        type: helmChart
+        version: "6.1.3"
+        access:
+          type: helm
+          helmChart: opendesk-synapse-create-account:6.1.3
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element
+                  
+      - name: helm-chart-opendesk-matrix-user-verification-service
+        type: helmChart
+        version: "6.1.3"
+        access:
+          type: helm
+          helmChart: opendesk-matrix-user-verification-service:6.1.3
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element
+      
+      - name: helm-chart-opendesk-well-known  
+        type: helmChart
+        version: "6.1.3"
+        access:
+          type: helm
+          helmChart: opendesk-well-known:6.1.3
+          # TODO: duplicate helmRepository, same as opendesk-element
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element
