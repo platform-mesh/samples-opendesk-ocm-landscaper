@@ -540,13 +540,13 @@ kubectl logs -f deployment/<app-name> -n default
 
 ```bash
 # lookup of available component versions
-ocm get componentversions mcp-blueprints.common.repositories.cloud.sap/ocm//opendesk.poc.sap.com/base 
+ocm get componentversions github.com/platform-mesh/samples-opendesk-ocm-landscaper//opendesk.poc.sap.com/base 
 ```
 <details>
 <summary><strong>example</strong></summary>
 
 ```bash
-ocm get componentversions mcp-blueprints.common.repositories.cloud.sap/ocm//opendesk.poc.sap.com/base                          
+ocm get componentversions github.com/platform-mesh/samples-opendesk-ocm-landscaper//opendesk.poc.sap.com/base                          
 COMPONENT                 VERSION           PROVIDER
 opendesk.poc.sap.com/base 0.0.2-61-g6ba43a8 opendesk
 opendesk.poc.sap.com/base 0.0.2-66-gb8190c0 opendesk
@@ -564,14 +564,14 @@ opendesk.poc.sap.com/base 0.1.2-9-ge86e0ee  opendesk
 
 ```bash
 # lookup of resources of a specific component version
-ocm get resources mcp-blueprints.common.repositories.cloud.sap/ocm//opendesk.poc.sap.com/base:0.1.2-6-gdfa6567
+ocm get resources github.com/platform-mesh/samples-opendesk-ocm-landscaper//opendesk.poc.sap.com/base:0.1.2-6-gdfa6567
 ```
 
 <details>
 <summary><strong>example</strong></summary>
 
 ```bash
-ocm get resources mcp-blueprints.common.repositories.cloud.sap/ocm//opendesk.poc.sap.com/base:0.1.2-6-gdfa6567   
+ocm get resources github.com/platform-mesh/samples-opendesk-ocm-landscaper//opendesk.poc.sap.com/base:0.1.2-6-gdfa6567   
 NAME                     VERSION          IDENTITY TYPE      RELATION
 blueprint                0.1.2-6-gdfa6567          blueprint local
 helm-chart-cert-manager  4.11.6                    helmChart external
@@ -583,14 +583,14 @@ image-ingress-nginx      1.12.2                    ociImage  external
 
 ```bash
 # lookup of all referenced resources of a specific component version
-ocm get resources mcp-blueprints.common.repositories.cloud.sap/ocm//opendesk.poc.sap.com/base:0.1.2-6-gdfa6567 -r -otree
+ocm get resources github.com/platform-mesh/samples-opendesk-ocm-landscaper//opendesk.poc.sap.com/base:0.1.2-6-gdfa6567 -r -otree
 ```
 
 <details>
 <summary><strong>example</strong></summary>
 
 ```bash
-ocm get resources mcp-blueprints.common.repositories.cloud.sap/ocm//opendesk.poc.sap.com/base:0.1.2-6-gdfa6567 -r -otree
+ocm get resources github.com/platform-mesh/samples-opendesk-ocm-landscaper//opendesk.poc.sap.com/base:0.1.2-6-gdfa6567 -r -otree
 COMPONENT                                                 NAME                                                 VERSION          IDENTITY TYPE      RELATION
 └─ opendesk.poc.sap.com/base                                                                                   0.1.2-6-gdfa6567                    
    ├─                                                     blueprint                                            0.1.2-6-gdfa6567          blueprint local
