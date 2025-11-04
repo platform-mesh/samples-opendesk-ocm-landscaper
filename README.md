@@ -85,7 +85,7 @@ graph TB
         end
             
     end
-    subgraph "Managed Control Plane (MCP)"
+    subgraph "Open Managed Control Plane (MCP)"
         LS[Landscaper]
         FL[Flux]
         
@@ -137,7 +137,7 @@ flowchart TB
         JFrog["OCM Repository"]
     end
     
-    subgraph MCP["`ManagedControlPlane`"]
+    subgraph MCP["`OpenManagedControlPlane`"]
         Flux["Flux (GitOps)"]
         Landscaper["Landscaper"]
         ExtSecrets["External Secrets"]
@@ -228,12 +228,9 @@ poc-bmi-opendesk/
 ├── renovate.json                # Dependency update configuration
 ├── converge-cloud/              # SAP Cloud Infrastructure k8s cluster specific configurations
 ├── credentials/                 # Credential management
-├── mcp/                         # Managed Control Plane configurations
-│   ├── flux/                    # Flux GitOps configurations
-│   └── landscaper/              # Landscaper deployment definitions
-│       ├── cc-cluster-opendesk/     # cluster "OpenDesk" which was used to install openDesk via helmfiles to have an working reference architecture
-│       ├── cc-cluster-opendeskocm/  # cluster "OpenDeskOCM" which is managed by Landscaper via OCM
-│       └── local/                   # Local kind/minikube/k3d development setup
+├── flux/                    # Flux GitOps configurations
+├── landscaper/              # Landscaper deployment definitions
+│       └── cc-cluster-opendeskocm/  # cluster "OpenDeskOCM" which is managed by Landscaper via OCM
 ├── mcp-order-api/              # MCP Ordering API configurations
 └── ocm/                        # Open Component Model content layer
     ├── apps/                   # OpenDesk HelmFile Application component definitions
@@ -272,13 +269,14 @@ Flux provides continuous deployment capabilities:
 ### 🏗️ Infrastructure Requirements
 
 1. **local tooling**: [OCM CLI tools](https://ocm.software/docs/getting-started/installation/) & [kubectl](https://kubernetes.io/de/docs/reference/kubectl/) installed
-2. **`ManagedControlPlane`**: Access to [`ManagedControlPlane`](https://pages.github.tools.sap/cloud-orchestration/docs/managed-control-planes/get-started/get-started-mcp-connect) cluster with [Landscaper installed](https://pages.github.tools.sap/cloud-orchestration/docs/managed-control-planes/get-started/get-started-mcp-configure)
-3. JFrog / OCI Artifactory [technical user](https://pages.github.tools.sap/Common-Repository/Artifactory-Internet-Facing/commonrepo-onboard/#technical-users)
-4. [Github Repository](https://pages.github.tools.sap/github/getting-started) & [Github Action Runner](https://pages.github.tools.sap/github/features-and-how-tos/features/actions/introduction)
-5. **SAP Cloud Infrastructure Account**: account on Internet-facing domain (e.g., HCP03)
-6. **Gardener Project**: Workload/Shoot Cluster on SAP Cloud Infrastructure deployed and exposed to internet
+2. **OpenManagedControlPlane`**: Access to [`OpenManagedControlPlane`](https://github.com/openmcp-project) cluster with [Landscaper](https://github.com/gardener/landscaper) installed
+3. **OCI Artifactory**: ghcr.io or other OCI-compliant registry for OCM components
+4. **Gardener Cluster**: Gardener Workload/Shoot Cluster on deployed and exposed to internet
+5. **Landscaper installed**: Landscaper installed on `OpenManagedControlPlane` with access to the Gardener Shoot Cluster
+6. **Network Infrastructure**: Cluster with Internet access and Internet-facing domain
 7. **Load Balancer**: Internet-facing ingress controller
 8. **DNS Management**: Wildcard certificate support
+
 
 ## 📖 Installation Guide
 
@@ -292,7 +290,7 @@ kubectl apply -f converge-cloud/ccloud-sa-token.yaml
 
 # Extract information of this service account in order 
 # to create a kubeconfig secret ccloud-hcp03-opendeskocm-service-account-kubeconfig 
-# for Landscaper on ManagedControlPlane to be able to manage openDesk instance
+# for Landscaper on OpenManagedControlPlane to be able to manage openDesk instance
 ```
 
 #### 2️⃣ Certificate Management
@@ -302,7 +300,7 @@ Create [required TLS certificate](https://gitlab.opencode.de/bmi/opendesk/deploy
 
 #### 3️⃣ Core Infrastructure Components Configuration
 
-Configure nginx-ingress with proper annotations at `mcp/landscaper/cc-cluster-opendeskocm/data-object-base.yaml`:
+Configure nginx-ingress with proper annotations at `landscaper/cc-cluster-opendeskocm/data-object-base.yaml`:
 ```yaml
 annotations:
   ingressclass.kubernetes.io/is-default-class: "true"
@@ -312,23 +310,23 @@ annotations:
   dns.gardener.cloud/ttl: '600'
 ```
 
-Configure openDesk core components at `mcp/landscaper/cc-cluster-opendeskocm/data-object-environments-defaults.yaml`.
+Configure openDesk core components at `landscaper/cc-cluster-opendeskocm/data-object-environments-defaults.yaml`.
 
 #### 🔐 Security & Credential Management
 
 > [!IMPORTANT]  
-> **Best Practice**: Leverage [**SAP Vault**](http://vault.tools.sap) and [**External Secrets Operator**](https://external-secrets.io/latest/) on your `ManagedControlPlane` to [**securely handle**](https://pages.github.tools.sap/cloud-orchestration/docs/use-cases/advanced/vault) all credentials!
+> **Best Practice**: Leverage [**SAP Vault**](http://vault.tools.sap) and [**External Secrets Operator**](https://external-secrets.io/latest/) on your `OpenManagedControlPlane` to [**securely handle**](https://pages.github.tools.sap/cloud-orchestration/docs/use-cases/advanced/vault) all credentials!
 
 <a id="required-kubernetes-secrets"></a>
 #### Required Kubernetes Secrets
 
-The following **Kubernetes secrets** must be present on your `ManagedControlPlane` and either be created manually or synced via [**External Secrets Operator**](https://pages.github.tools.sap/cloud-orchestration/docs/use-cases/advanced/vault):
+The following **Kubernetes secrets** must be present on your `OpenManagedControlPlane` and either be created manually or synced via [**External Secrets Operator**](https://pages.github.tools.sap/cloud-orchestration/docs/use-cases/advanced/vault):
 
 | Secret Name                                               | Documentation                                                                                                                         | Purpose                                                                                                                       |
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | **`ccloud-hcp03-opendeskocm-service-account-kubeconfig`** | SAP Cloud Infrastructure Cluster Service Account kubeconfig                                                                           | K8s Service Account credentials for `Landscaper` to access SAP Cloud Infrastructure Cluster and manage openDesk installation. |
-| **`github-pull-secret`**                                  | [GitHub Access Token](https://pages.github.tools.sap/cloud-orchestration/docs/managed-control-planes/features/gitops#private-source)  | Access private Github repository access                                                                                       |
-| **`image-pull-secret`**                             | [JFrog Identity Token](https://pages.github.tools.sap/cloud-orchestration/docs/use-cases/advanced/jfrog_access#create-identity-token) | Credentials to access JFrog/OCI artifactory in which OCM artifact are stored                                                  |
+| **`github-pull-secret`**                                  | [GitHub Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)  | Access private Github repository access                                                                                       |
+| **`ocm-secret`**         | [ghcr.io Identity Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) | Credentials to access ghcr.io OCI-compliant registry for OCM components |                                             |
 
 ### 🚀 Phase 2: Application Deployment
 
@@ -444,7 +442,7 @@ Each application is configured through:
 
 - **Helm Values**: Application-specific configuration -> `ocm/k8s-landscaper-blueprint/deploy-execution.yaml` & `ocm/k8s-landscaper-blueprint/helmfile/**`
 - **Secrets Management**: Automated password generation -> `ocm/k8s-landscaper-blueprint/blueprint.yaml`
-- **Theme Integration**: Consistent branding across applications -> `mcp/landscaper/cc-cluster-opendeskocm/data-object-theme.yaml`
+- **Theme Integration**: Consistent branding across applications -> `landscaper/cc-cluster-opendeskocm/data-object-theme.yaml`
 
 ### 🔄 Phase 3: GitOps Setup
 
@@ -455,10 +453,10 @@ Each application is configured through:
 
 ```bash
 # Apply Git repository source
-kubectl apply -f mcp/flux/git-repository.yaml
+kubectl apply -f flux/git-repository.yaml
 
 # Apply Kustomization for continuous deployment
-kubectl apply -f mcp/flux/kustomization.yaml
+kubectl apply -f flux/kustomization.yaml
 ```
 
 #### 🌱 Landscaper Installation
@@ -467,13 +465,13 @@ The following files should be synced via `flux` on the MCP!
 
 ```bash
 # manual apply target cluster configuration
-kubectl apply -f mcp/landscaper/cc-cluster-opendeskocm/target.yaml
+kubectl apply -f landscaper/cc-cluster-opendeskocm/target.yaml
 
 # manual apply data objects (configuration)
-kubectl apply -f mcp/landscaper/cc-cluster-opendeskocm/data-object-*.yaml
+kubectl apply -f landscaper/cc-cluster-opendeskocm/data-object-*.yaml
 
 # manual apply installation
-kubectl apply -f mcp/landscaper/cc-cluster-opendeskocm/installation.yaml
+kubectl apply -f landscaper/cc-cluster-opendeskocm/installation.yaml
 ```
 
 ## ⚙️ Configuration Management
@@ -495,7 +493,7 @@ secrets:
 
 ### 🎨 Theme Customization
 
-The platform supports comprehensive theming at `mcp/landscaper/cc-cluster-opendeskocm/data-object-theme.yaml`:
+The platform supports comprehensive theming at `landscaper/cc-cluster-opendeskocm/data-object-theme.yaml`:
 
 - **Logos**: SVG and PNG formats for different applications
 - **Favicons**: Application-specific icons
@@ -524,10 +522,10 @@ The platform supports comprehensive theming at `mcp/landscaper/cc-cluster-opende
 ### 🐛 Debugging Commands
 
 ```bash
-# Check Landscaper installation status on ManagedControlPlane
+# Check Landscaper installation status on OpenManagedControlPlane
 kubectl get installations -n default
 
-# Monitor Landscaper deployment progress on ManagedControlPlane
+# Monitor Landscaper deployment progress on OpenManagedControlPlane
 kubectl get deployitems -n default
 
 # Check application pods on SAP Cloud Infrastructure cluster
