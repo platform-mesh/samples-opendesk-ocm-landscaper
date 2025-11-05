@@ -137,7 +137,7 @@ flowchart TB
         JFrog["OCM Repository"]
     end
     
-    subgraph MCP["`OpenManagedControlPlane`"]
+    subgraphopenMCP["`OpenManagedControlPlane`"]
         Flux["Flux (GitOps)"]
         Landscaper["Landscaper"]
         ExtSecrets["External Secrets"]
@@ -228,12 +228,12 @@ poc-bmi-opendesk/
 ├── renovate.json                # Dependency update configuration
 ├── sap-cloud-infrastructure/    # SAP Cloud Infrastructure k8s cluster specific configurations
 ├── credentials/                 # Credential management
-├── flux/                    # Flux GitOps configurations
-├── landscaper/              # Landscaper deployment definitions
+├── flux/                        # Flux GitOps configurations
+├── landscaper/                  # Landscaper deployment definitions
 │       └── sci-cluster-opendeskocm/  # cluster "OpenDeskOCM" which is managed by Landscaper via OCM
-├── mcp-order-api/              # MCP Ordering API configurations
-└── ocm/                        # Open Component Model content layer
-    ├── apps/                   # OpenDesk HelmFile Application component definitions
+├── openmcp/                     # OpenMCP Ordering API configurations
+└── ocm/                         # Open Component Model content layer
+    ├── apps/                    # OpenDesk HelmFile Application component definitions
     └── k8s-landscaper-blueprint/ # Kubernetes deployment blueprints
 ```
 
@@ -269,7 +269,7 @@ Flux provides continuous deployment capabilities:
 ### 🏗️ Infrastructure Requirements
 
 1. **local tooling**: [OCM CLI tools](https://ocm.software/docs/getting-started/installation/) & [kubectl](https://kubernetes.io/de/docs/reference/kubectl/) installed
-2. **OpenManagedControlPlane`**: Access to [`OpenManagedControlPlane`](https://github.com/openmcp-project) cluster with [Landscaper](https://github.com/gardener/landscaper) installed
+2. **OpenManagedControlPlane**: Access to [`OpenManagedControlPlane`](https://github.com/openmcp-project) cluster with [Landscaper](https://github.com/gardener/landscaper) installed
 3. **OCI Artifactory**: ghcr.io or other OCI-compliant registry for OCM components
 4. **Gardener Cluster**: Gardener Workload/Shoot Cluster on deployed and exposed to internet
 5. **Landscaper installed**: Landscaper installed on `OpenManagedControlPlane` with access to the Gardener Shoot Cluster
@@ -282,7 +282,7 @@ Flux provides continuous deployment capabilities:
 
 ### 🏗️ Phase 1: Infrastructure Setup
 
-#### 1️⃣ SAP Cloud Infrastructure Configuration
+#### SAP Cloud Infrastructure Configuration
 
 ```bash
 # Apply service account token on SAP Cloud Infrastructure cluster
@@ -293,12 +293,32 @@ kubectl apply -f sap-cloud-infrastructure/sci-sa-token.yaml
 # for Landscaper on OpenManagedControlPlane to be able to manage openDesk instance
 ```
 
-#### 2️⃣ Certificate Management
+#### Certificate Management
 
 Create [required TLS certificate](https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/docs/getting-started.md#dns) secret on Gardener Shoot Cluster for your own domain: [`sap-cloud-infrastructure/sci-hcp03-opendeskocm-tls-cert.yaml`](./sap-cloud-infrastructure/sci-hcp03-opendeskocm-tls-cert.yaml)
 
+#### Provision Open Managed Control Plane
 
-#### 3️⃣ Core Infrastructure Components Configuration
+> [!NOTE] 
+> This step is optional. If you do not have access to the [Open Managed Control Plane](https://github.com/openmcp-project), you can just install [Landscaper](https://github.com/gardener/landscaper) directly on the workload cluster.
+
+You can provision Open Managed Control Plane by applying the necessary configurations and resources defined in the `openmcp` directory.
+
+> [!IMPORTANT]  
+> Make sure to replace any placeholder values in the configuration files with your actual settings before applying them.
+
+Prepare your kubeconfig for Open Managed Control Plane. You can use `openmcp/mcp-order-api-canary.kubeconfig.yaml` as a template.
+
+```bash
+# Prepare
+kubectl apply -f openmcp/project.core.openmcp.cloud.yml
+kubectl apply -f openmcp/workspace.core.openmcp.cloud.yml
+kubectl apply -f openmcp/managedcontrolplane.core.openmcp.cloud.yml
+```
+
+Once the `OpenManagedControlPlane` is up and running, configure your local kubectl to use the OpenMCP kubeconfig. You can use `openmcp/poc-bmi-opendesk.kubeconfig.yaml` as a template.
+
+#### Core Infrastructure Components Configuration
 
 Configure nginx-ingress with proper annotations at `landscaper/sci-cluster-opendeskocm/data-object-base.yaml`:
 ```yaml
@@ -461,7 +481,7 @@ kubectl apply -f flux/kustomization.yaml
 
 #### 🌱 Landscaper Installation
 
-The following files should be synced via `flux` on the MCP!
+The following files should be synced via `flux` on theopenMCP!
 
 ```bash
 # manual apply target cluster configuration

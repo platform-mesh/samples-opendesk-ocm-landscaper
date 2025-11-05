@@ -2,7 +2,7 @@
 apiVersion: landscaper.gardener.cloud/v1alpha1
 kind: DataObject
 metadata:
-  name: cc-cluster-opendeskocm-environments-defaults
+  name: sci-cluster-opendeskocm-environments-defaults
   namespace: default
 data:
   ################## environments/default ##################

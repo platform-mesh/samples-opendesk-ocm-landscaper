@@ -2,7 +2,7 @@
 apiVersion: landscaper.gardener.cloud/v1alpha1
 kind: DataObject
 metadata:
-  name: cc-cluster-opendeskocm-theme
+  name: sci-cluster-opendeskocm-theme
   namespace: default
 data:
   theme:

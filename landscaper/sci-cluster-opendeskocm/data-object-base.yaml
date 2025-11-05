@@ -2,7 +2,7 @@
 apiVersion: landscaper.gardener.cloud/v1alpha1
 kind: DataObject
 metadata:
-  name: cc-cluster-opendeskocm-base
+  name: sci-cluster-opendeskocm-base
   namespace: default
 data:
   # cannot be used, because of dns.gardener.cloud/dnsnames needs dynamic values -> putting this into deployItems directly!

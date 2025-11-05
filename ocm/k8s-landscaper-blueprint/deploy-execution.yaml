@@ -706,7 +706,7 @@ deployItems:
 
         values: "matrix-neodatefix-bot.yaml.gotmpl"
 
-  ####### cc-cluster-ocmopendesk-helm-chart-values-element-3 #######
+  ####### sci-cluster-ocmopendesk-helm-chart-values-element-3 #######
   - name: deploy-item-opendesk-matrix-user-verification-service-bootstrap
     type: landscaper.gardener.cloud/helm
     dependsOn:
