@@ -1,3 +1,4 @@
+# see https://github.com/gardener/landscaper/blob/master/docs/technical/target_types.md
 apiVersion: landscaper.gardener.cloud/v1alpha1
 kind: Target
 metadata:
