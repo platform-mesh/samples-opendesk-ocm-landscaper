@@ -270,8 +270,12 @@ Flux provides continuous deployment capabilities:
 
 1. **local tooling**: [OCM CLI tools](https://ocm.software/docs/getting-started/installation/) & [kubectl](https://kubernetes.io/de/docs/reference/kubectl/) installed
 2. **OpenManagedControlPlane**: Access to [`OpenManagedControlPlane`](https://github.com/openmcp-project) cluster with [Landscaper](https://github.com/gardener/landscaper) installed
+> [!TIP]
+> You can also install Landscaper directly on the workload or deployment cluster if you do not have access to OpenMCP.
 3. **OCI Artifactory**: ghcr.io or other OCI-compliant registry for OCM components
 4. **Gardener Cluster**: Gardener Workload/Shoot Cluster on deployed and exposed to internet
+> [!TIP]
+> You can use any Kubernetes Cluster if you do not have access to Gardener.
 5. **Landscaper installed**: Landscaper installed on `OpenManagedControlPlane` with access to the Gardener Shoot Cluster
 6. **Network Infrastructure**: Cluster with Internet access and Internet-facing domain
 7. **Load Balancer**: Internet-facing ingress controller
@@ -282,10 +286,10 @@ Flux provides continuous deployment capabilities:
 
 ### 🏗️ Phase 1: Infrastructure Setup
 
-#### SAP Cloud Infrastructure Configuration
+#### K8S Workload Cluster Configuration
 
 ```bash
-# Apply service account token on SAP Cloud Infrastructure cluster
+# Apply service account token on your k8s workload cluster, if landscaper is running on a different cluster
 kubectl apply -f sap-cloud-infrastructure/sci-sa-token.yaml
 
 # Extract information of this service account in order 
@@ -297,10 +301,13 @@ kubectl apply -f sap-cloud-infrastructure/sci-sa-token.yaml
 
 Create [required TLS certificate](https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/docs/getting-started.md#dns) secret on Gardener Shoot Cluster for your own domain: [`sap-cloud-infrastructure/sci-hcp03-opendeskocm-tls-cert.yaml`](./sap-cloud-infrastructure/sci-hcp03-opendeskocm-tls-cert.yaml)
 
+> [!IMPORTANT]
+> If you are using your own k8s cluster, you need to fullfill the [openDesk requirements](https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/docs/getting-started.md#dns) by yourself!
+
 #### Provision Open Managed Control Plane
 
 > [!NOTE] 
-> This step is optional. If you do not have access to the [Open Managed Control Plane](https://github.com/openmcp-project), you can just install [Landscaper](https://github.com/gardener/landscaper) directly on the workload cluster.
+> This step is optional. If you do not have access to the [Open Managed Control Plane](https://github.com/openmcp-project), you can just install [Landscaper](https://github.com/gardener/landscaper) directly on the deployment or workload cluster.
 
 You can provision Open Managed Control Plane by applying the necessary configurations and resources defined in the `openmcp` directory.
 
@@ -335,12 +342,12 @@ Configure openDesk core components at `landscaper/sci-cluster-opendeskocm/data-o
 #### 🔐 Security & Credential Management
 
 > [!IMPORTANT]  
-> **Best Practice**: Leverage [**SAP Vault**](http://vault.tools.sap) and [**External Secrets Operator**](https://external-secrets.io/latest/) on your `OpenManagedControlPlane` to [**securely handle**](https://pages.github.tools.sap/cloud-orchestration/docs/use-cases/advanced/vault) all credentials!
+> **Best Practice**: Leverage a Credential Store (such as [**openbao**](https://openbao.org) and [**External Secrets Operator**](https://external-secrets.io/latest/) on your k8s cluster to **securely handle** all credentials!
 
 <a id="required-kubernetes-secrets"></a>
 #### Required Kubernetes Secrets
 
-The following **Kubernetes secrets** must be present on your `OpenManagedControlPlane` and either be created manually or synced via [**External Secrets Operator**](https://pages.github.tools.sap/cloud-orchestration/docs/use-cases/advanced/vault):
+The following **Kubernetes secrets** must be present on your `OpenManagedControlPlane` and either be created manually or synced via [**External Secrets Operator**](https://external-secrets.io/latest/):
 
 | Secret Name                                               | Documentation                                                                                                                         | Purpose                                                                                                                       |
 | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -692,10 +699,10 @@ COMPONENT                                                 NAME                  
 
 ### 🔗 Additional Resources
 
-- [Landscaper Documentation](https://pages.github.tools.sap/kubernetes/landscaper-docs/)
+- [Landscaper Documentation](https://github.com/gardener/landscaper/blob/master/docs/README.md)
 - [OCM Documentation](https://ocm.software/)
 - [Flux Documentation](https://fluxcd.io/docs/)
-- [Gardener Documentation](https://pages.github.tools.sap/kubernetes/gardener/)
+- [Gardener Documentation](http://gardener.cloud)
 
 ## Support, Feedback, Contributing
 
