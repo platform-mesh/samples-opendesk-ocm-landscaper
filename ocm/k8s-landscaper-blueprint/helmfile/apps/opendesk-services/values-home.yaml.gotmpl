@@ -1,0 +1,14 @@
+additionalAnnotations:
+  {{ .Values.annotations.opendeskServicesHome.additional | toYaml | nindent 2 }}
+
+global:
+  domain: {{ .Values.global.domain | quote }}
+  hosts:
+    {{ .Values.global.hosts | toYaml | nindent 4 }}
+
+ingress:
+  ingressClassName: {{ .Values.ingress.ingressClassName | quote }}
+  tls:
+    secretName: {{ .Values.ingress.tls.secretName | quote }}
+  annotations:
+    {{ .Values.annotations.opendeskServicesHome.ingress | toYaml | nindent 4 }}

@@ -1,0 +1,15 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/xwiki
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/xwiki ##################
+      - name: helm-chart-xwiki
+        type: helmChart
+        version: "1.4.4"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/xwiki/charts-mirror/xwiki:1.4.4

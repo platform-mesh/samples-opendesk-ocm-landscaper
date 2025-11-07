@@ -1,0 +1,178 @@
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: Blueprint
+jsonSchema: "https://json-schema.org/draft/2019-09/schema"
+
+imports:
+  - name: cluster
+    type: target
+    targetType: landscaper.gardener.cloud/kubernetes-cluster
+
+  - name: release
+    type: data
+    schema:
+      type: object
+
+  - name: base
+    type: data
+    schema:
+      type: object
+  
+  - name: environmentsDefaults
+    type: data
+    schema:
+      type: object
+
+importExecutions:
+  - name: secrets
+    type: GoTemplate
+    template: |
+      bindings:
+        secrets:
+          cassandra:
+            rootPassword: {{ "sovereign-workplace cassandra root_password" | sha1sum | quote }}
+            dovecotACLUser: {{ "sovereign-workplace cassandra dovecot_acl_user" | sha1sum | quote }}
+            dovecotDictmapUser: {{ "sovereign-workplace cassandra dovecot_dictmap_user" | sha1sum | quote }}
+          oxAppSuite:
+            adminPassword: {{ "sovereign-workplace ox_appsuite admin_password" | sha1sum | quote }}
+            basicAuthPassword: {{ "sovereign-workplace ox_appsuite basic_auth_password" | sha1sum | quote }}
+            cookieHashSalt: {{ "sovereign-workplace ox_appsuite cookie_hash_salt" | sha1sum | quote }}
+            hzGroupPassword: {{ "sovereign-workplace ox_appsuite hz_group_password" | sha1sum | quote }}
+            jolokiaPassword: {{ "sovereign-workplace ox_appsuite jolokia_password" | sha1sum | quote }}
+            migrationsMasterPassword: {{ "opendesk ox_appsuite migrations_master_password" | sha1sum | quote }}
+            oxguardMC: {{ printf "MC%s" ("sovereign-workplace ox_appsuite oxguardMC" | sha1sum | trunc 20 | b64enc) | quote }}
+            oxguardRC: {{ printf "RC%s" ("sovereign-workplace ox_appsuite oxguardRC" | sha1sum | trunc 20 | b64enc) | quote }}
+            sessiondEncryptionKey: {{ "sovereign-workplace ox_appsuite sessiond_encryption_key" | sha1sum | quote }}
+            shareCryptKey: {{ "sovereign-workplace ox_appsuite share_crypt_key" | sha1sum | quote }}
+            synapseAsToken: {{ "sovereign-workplace ox_appsuite as_token" | sha1sum | quote }}
+          oxConnector:
+            provisioningApiPassword: {{ "sovereign-workplace nubus ox-connector" | sha1sum | quote }}
+          postfix:
+            opendeskSystemPassword: {{ "sovereign-workplace postfix opendesk-system" | sha1sum | quote }}
+          nubus:
+            masterpassword: {{ "sovereign-workplace" }}
+            ldapSecret: {{ "sovereign-workplace cn=admin ldap" | sha1sum | quote }}
+            ldapSearch:
+              keycloak: {{ "sovereign-workplace nubus ldapsearch_keycloak" | sha1sum | quote }}
+              nextcloud: {{ "sovereign-workplace nubus ldapsearch_nextcloud" | sha1sum | quote }}
+              dovecot: {{ "sovereign-workplace nubus ldapsearch_dovecot" | sha1sum | quote }}
+              element: {{ "sovereign-workplace nubus ldapsearch_element" | sha1sum | quote }}
+              ox: {{ "sovereign-workplace nubus ldapsearch_ox" | sha1sum | quote }}
+              openproject: {{ "sovereign-workplace nubus ldapsearch_openproject" | sha1sum | quote }}
+              xwiki: {{ "sovereign-workplace nubus ldapsearch_xwiki" | sha1sum | quote }}
+            systemAccounts:
+              administratorPassword: {{ "sovereign-workplace nubus Administrator" | sha1sum | quote }}
+              sysIdpUserPassword: {{ "sovereign-workplace nubus sysIdpUser" | sha1sum | quote }}
+            portalConsumer:
+              provisioningApiPassword: {{ "sovereign-workplace portal-consumer provisioning-api" | sha1sum | quote }}
+            selfserviceConsumer:
+              provisioningApiPassword: {{ "sovereign-workplace selfservice-consumer provisioning-api" | sha1sum | quote }}
+            provisioning:
+              api:
+                adminPassword: {{ "sovereign-workplace api admin_api" | sha1sum | quote }}
+                natsPassword: {{ print "L" ("sovereign-workplace api nats" | sha1sum) | quote }}
+                prefillPassword: {{ "sovereign-workplace prefill prefill_service" | sha1sum | quote }}
+                udmTransformerPassword: {{ "sovereign-workplace udmproducer events_api" | sha1sum | quote }}
+              dispatcherNatsPassword: {{ print "L" ("sovereign-workplace dispatcher nats" | sha1sum) | quote }}
+              prefillNatsPassword: {{ print "L" ("sovereign-workplace prefill nats" | sha1sum) | quote }}
+              udmListenerNatsPassword: {{ print "L" ("sovereign-workplace udmListener nats" | sha1sum) | quote }}
+              udmTransformerNatsPassword: {{ print "L" ("sovereign-workplace udmTransformer nats" | sha1sum) | quote }}
+            guardian:
+              udmPassword: {{ "sovereign-workplace cn=admin udm" | sha1sum | quote }}
+          nats:
+            natsAdminPassword: {{ print "L" ("sovereign-workplace admin nats" | sha1sum) | quote }}
+          postgresql:
+            postgresUser: {{ "sovereign-workplace postgres postgres_user" | sha1sum | quote }}
+            keycloakUser: {{ "sovereign-workplace postgres keycloak_user" | sha1sum | quote }}
+            keycloakExtensionUser: {{ "sovereign-workplace postgres keycloak_extensions_user" | sha1sum | quote }}
+            matrixUser: {{ "sovereign-workplace postgres matrix_user" | sha1sum | quote }}
+            nextcloudUser: {{ "sovereign-workplace postgres nextcloud_user" | sha1sum | quote }}
+            notesUser: {{ "sovereign-workplace postgres notes_user" | sha1sum | quote }}
+            openprojectUser: {{ "sovereign-workplace postgres openproject_user" | sha1sum | quote }}
+            umsNotificationsApiUser: {{ "sovereign-workplace postgres notificationsapi_user" | sha1sum | quote }}
+            umsGuardianManagementApiUser: {{ "sovereign-workplace postgres guardianmanagementapi_user" | sha1sum | quote }}
+            umsSelfserviceUser: {{ "sovereign-workplace postgres selfservice_user" | sha1sum | quote }}
+            xwikiUser: {{ "sovereign-workplace postgres xwiki_user" | sha1sum | quote }}
+          mariadb:
+            rootPassword: {{ "sovereign-workplace mariadb root_password" | sha1sum | quote }}
+            xwikiUser: {{ "sovereign-workplace mariadb xwiki_user" | sha1sum | quote }}
+            openxchangeUser: {{ "sovereign-workplace mariadb openxchange_user" | sha1sum | quote }}
+            nextcloudUser: {{ "sovereign-workplace mariadb nextcloud_user" | sha1sum | quote }}
+          minio:
+            dovecotUser: {{ "sovereign-workplace minio dovecot_user" | sha1sum | quote }}
+            rootPassword: {{ "sovereign-workplace minio root_password" | sha1sum | quote }}
+            migrationsUser: {{ "sovereign-workplace minio migrations_user" | sha1sum | quote }}
+            nextcloudUser: {{ "sovereign-workplace minio nextcloud_user" | sha1sum | quote }}
+            notesUser: {{ "sovereign-workplace minio notes_user" | sha1sum | quote }}
+            openprojectUser: {{ "sovereign-workplace minio openproject_user" | sha1sum | quote }}
+            openxchangeUser: {{ "sovereign-workplace minio openxchange_user" | sha1sum | quote }}
+            umsUser: {{ "sovereign-workplace minio ums_user" | sha1sum | quote }}
+          keycloak:
+            adminPassword: {{ "sovereign-workplace keycloak adminPassword" | sha1sum | quote }}
+            clientSecret:
+              dovecot: {{ "sovereign-workplace keycloak dovecot_client_secret" | sha1sum | quote }}
+              intercom: {{ "sovereign-workplace keycloak intercom_client_secret" | sha1sum | quote }}
+              matrix: {{ "sovereign-workplace keycloak matrix_client_secret" | sha1sum | quote }}
+              jitsi: {{ "sovereign-workplace keycloak jitsi_plain_client_secret" | sha1sum | quote }}
+              ncoidc: {{ "sovereign-workplace keycloak ncoidc_client_secret" | sha1sum | quote }}
+              openproject: {{ "sovereign-workplace keycloak openproject_client_secret" | sha1sum | quote }}
+              xwiki: {{ "sovereign-workplace keycloak xwiki_client_secret" | sha1sum | quote }}
+              as8oidc: {{ "sovereign-workplace keycloak as8oidc_client_secret" | sha1sum | quote }}
+              guardian: {{ "sovereign-workplace keycloak guardian_client_secret" | sha1sum | quote }}
+              notes: {{ "sovereign-workplace keycloak notes_client_secret" | sha1sum | quote }}
+          nextcloud:
+            adminPassword: {{ "sovereign-workplace nextcloud nextcloud_admin_user" | sha1sum | quote }}
+            metricsToken: {{ "sovereign-workplace nextcloud metricsToken" | sha1sum | quote }}
+          openproject:
+            adminPassword: {{ "sovereign-workplace openproject openproject_admin_user" | sha1sum | quote }}
+            apiAdminUsername: {{ "sovereign-workplace openproject openproject_api_admin_username" | sha1sum | quote }}
+            apiAdminPassword: {{ "sovereign-workplace openproject openproject_api_admin_password" | sha1sum | quote }}
+          collabora:
+            adminPassword: {{ "sovereign-workplace collabora collabora_admin_user" | sha1sum | quote }}
+          jitsi:
+            jwtAppSecret: {{ "sovereign-workplace jistiStandalone jwtAppSecret" | sha1sum | quote }}
+            jibriRecorderPassword: {{ "sovereign-workplace jistiStandalone jibriRecorderPassword" | sha1sum | quote }}
+            jibriXmppPassword: {{ "sovereign-workplace jistiStandalone jibriXmppPassword" | sha1sum | quote }}
+            jicofoAuthPassword: {{ "sovereign-workplace jistiStandalone jicofoAuthPassword" | sha1sum | quote }}
+            jicofoComponentPassword: {{ "sovereign-workplace jistiStandalone jicofoComponentPassword" | sha1sum | quote }}
+            jigasiXmppPassword: {{ "sovereign-workplace jistiStandalone jigasiXmppPassword" | sha1sum | quote }}
+            jvbAuthPassword: {{ "sovereign-workplace jistiStandalone jvbAuthPassword" | sha1sum | quote }}
+          whiteboard:
+            apiKey: {{ "sovereign-workplace whiteboard apiKey" | sha1sum | quote }}
+          centralnavigation:
+            apiKey: {{ "sovereign-workplace centralnavigation api_key" | sha1sum | quote }}
+          redis:
+            password: {{ "sovereign-workplace redis password" | sha1sum | quote }}
+          dovecot:
+            doveadm: {{ "sovereign-workplace dovecot doveadm" | sha1sum | quote }}
+          xwiki:
+            superadminpassword: {{ "sovereign-workplace xwiki superadminpassword" | sha1sum | quote }}
+          intercom:
+            secret: {{ "sovereign-workplace intercom secret" | sha1sum | quote }}
+            synapseAsToken: {{ "sovereign-workplace intercom as_token" | sha1sum | quote }}
+          matrixAdminBot:
+            backupPassphrase: {{ "sovereign-workplace matrix-admin-bot backupPassphrase" | sha1sum | quote }}
+            password: {{ "sovereign-workplace matrix-admin-bot password" | sha1sum | quote }}
+            synapseAsToken: {{ "sovereign-workplace matrix-admin-bot as_token" | sha1sum | quote }}
+          matrixAuditBot:
+            backupPassphrase: {{ "sovereign-workplace matrix-auditbot-bot backupPassphrase" | sha1sum | quote }}
+            password: {{ "sovereign-workplace matrix-auditbot-bot password" | sha1sum | quote }}
+            synapseAsToken: {{ "sovereign-workplace matrix-audit-bot as_token" | sha1sum | quote }}
+          matrixGroupsync:
+            synapseAsToken: {{ "sovereign-workplace matrix-groupsync as_token" | sha1sum | quote }}
+          matrixNeoDateFixBot:
+            password: {{ "sovereign-workplace matrix-neodatefix-bot password" | sha1sum | quote }}
+          matrixUserVerificationService:
+            password: {{ "sovereign-workplace matrix-user-verification-service password" | sha1sum | quote }}
+          synapse:
+            registrationSharedSecret: {{ "sovereign-workplace synapse registrationSharedSecret" | sha1sum | quote }}
+          certificates:
+            password: {{ "sovereign-workplace certificates password" | sha1sum | quote }}
+          notes:
+            djangoSecretKey: {{ "sovereign-workplace notes djangoSecretKey" | sha256sum | quote }}
+            superuser: {{ "sovereign-workplace notes superuser" | sha1sum | quote }}
+            collaborationSecret: {{ "sovereign-workplace notes collaborationSecret" | sha1sum | quote }}
+
+deployExecutions:
+  - name: default
+    type: GoTemplate
+    file: /deploy-execution.yaml

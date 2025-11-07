@@ -1,0 +1,3407 @@
+---
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: DataObject
+metadata:
+  name: sci-cluster-opendeskocm-environments-defaults
+  namespace: default
+data:
+  ################## environments/default ##################
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/ai.yaml.gotmpl?ref_type=heads
+  ai:
+    endpoint: ""
+    apiKey: ""
+    model: ""
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/annotations.yaml.gotmpl?ref_type=heads
+  annotations:
+    cassandra:
+      ingress: ~
+      pod: ~
+      serviceAccount: ~
+    coco:
+      ingress: ~
+      pod: ~
+      serviceAccount: ~
+    collabora:
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    cryptpad:
+      ingress: ~
+      pod: ~
+      serviceAccount: ~
+    element:
+      common: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    elementMatrixNeoboardWidget:
+      additional: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    elementMatrixNeochoiceWidget:
+      additional: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    elementMatrixNeodatefixBot:
+      additional: ~
+      ingress: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    elementMatrixNeodatefixBotBootstrap:
+      pod: ~
+      serviceAccount: ~
+    elementMatrixNeodatefixWidget:
+      additional: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    elementMatrixUserVerificationService:
+      additional: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    elementMatrixUserVerificationServiceBootstrap:
+      pod: ~
+      serviceAccount: ~
+    elementSynapse:
+      common: ~
+      federationIngress: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    elementSynapseWeb:
+      common: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    elementWellKnown:
+      common: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    jitsi:
+      pod: ~
+      serviceAccount: ~
+    jitsiGlobal:
+      pod: ~
+    jitsiJibri:
+      pod: ~
+    jitsiJicofo:
+      pod: ~
+    jitsiJigasi:
+      pod: ~
+    jitsiJitsiPatchJVB:
+      serviceAccount: ~
+    jitsiJvb:
+      pod: ~
+      service: ~
+      metricsPrometheus: ~
+      metricsGrafana: ~
+    jitsiProsody:
+      pod: ~
+    jitsiWeb:
+      ingress: ~
+      pod: ~
+    nextcloudAio:
+      additional: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nextcloudExporter:
+      additional: ~
+      ingress: ~
+      pod: ~
+      serviceAccount: ~
+    nextcloudNextcloudMgmt:
+      additional: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nextcloudNotifyPush:
+      additional: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceMetrics: ~
+      serviceAccount: ~
+    notes:
+      ingressAdmin: ~
+      ingressCollaborationWS: ~
+      ingressCollaborationAPI: ~
+      ingressMedia: ~
+      serviceMedia: ~
+    notesBackend:
+      migrateJob: ~
+      pod: ~
+      service: ~
+    notesFrontend:
+      pod: ~
+      service: ~
+    notesYProvider:
+      pod: ~
+      service: ~
+    nubus:
+      additional: ~
+      ingress: ~
+    nubusGuardian:
+      authorizationApiPod: ~
+      globalPod: ~
+      ingressIngress: ~
+      ingressManagementUi: ~
+      ingressManagementApi: ~
+      ingressAuthorizationApi: ~
+      managementApiPod: ~
+      managementUiPod: ~
+      serviceAccount: ~
+    nubusIntercomService:
+      additional: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusKeycloak:
+      common: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusKeycloakBootstrap:
+      additional: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusKeycloakBootstrapNubus:
+      additional: ~
+      pod: ~
+      serviceAccount: ~
+    nubusKeycloakExtensions:
+      handlerAdditional: ~
+      handlerPod: ~
+      handlerService: ~
+      handlerServiceAccount: ~
+      proxyAdditional: ~
+      proxyIngress: ~
+      proxyPod: ~
+      proxyService: ~
+      proxyServiceAccount: ~
+    nubusLdapNotifier:
+      additional: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusLdapServer:
+      additional: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusNotificationsApi:
+      additional: ~
+      ingress: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusOxConnector:
+      pod: ~
+      serviceAccount: ~
+    nubusPortalConsumer:
+      pod: ~
+    nubusPortalFrontend:
+      additional: ~
+      ingressIngress: ~
+      ingressRewrites: ~
+      ingressRedirects: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusPortalServer:
+      additional: ~
+      ingress: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusProvisioning:
+      additional: ~
+      apiAdditional: ~
+      apiPod: ~
+      dispatcherAdditional: ~
+      dispatcherPod: ~
+      natsAdditional: ~
+      natsPod: ~
+      udmTransformerAdditional: ~
+      udmTransformerPod: ~
+      pod: ~
+      prefillAdditional: ~
+      prefillPod: ~
+      registerConsumersAdditional: ~
+      registerConsumersPod: ~
+      service: ~
+      serviceAccount: ~
+    nubusNginxS3Gateway:
+      additional: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusSelfserviceConsumer:
+      pod: ~
+      serviceAccount: ~
+    nubusStackDataUms:
+      additional: ~
+      pod: ~
+      serviceAccount: ~
+    nubusUdmListener:
+      pod: ~
+      serviceAccount: ~
+    nubusUdmRestApi:
+      additional: ~
+      ingress: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    nubusUmcGateway:
+      ingress: ~
+      pod: ~
+      serviceAccount: ~
+    nubusUmcServer:
+      additional: ~
+      ingress: ~
+      pod: ~
+      serviceAccount: ~
+    opendeskMigrationsPost:
+      additional: ~
+      pod: ~
+      serviceAccount: ~
+    opendeskMigrationsPre:
+      additional: ~
+      pod: ~
+      serviceAccount: ~
+    opendeskServicesHome:
+      additional: ~
+      ingress: ~
+    opendeskServicesOtterize:
+      additional: ~
+    opendeskServicesStaticFiles:
+      additional: ~
+      ingress: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    openproject:
+      ingress: ~
+      pod: ~
+      openprojectTempVolumes: ~
+      serviceAccount: ~
+      seederJob: ~
+    openprojectBootstrap:
+      additional: ~
+      pod: ~
+    openxchangeAppsuiteCoreDocumentconverter:
+      pod: ~
+    openxchangeAppsuiteCoreGuidedtours:
+      pod: ~
+    openxchangeAppsuiteCoreImageconverter:
+      pod: ~
+    openxchangeAppsuiteCoreUi:
+      pod: ~
+    openxchangeAppsuiteCoreUiMiddleware:
+      pod: ~
+    openxchangeAppsuiteCoreMw:
+      gotenbergPod: ~
+      pod: ~
+      serviceAccount: ~
+      updatePod: ~
+    openxchangeAppsuiteCoreUserGuide:
+      pod: ~
+    openxchangeAppsuiteIngress:
+      appsuitebase: ~
+      ingress: ~
+      rootredirect: ~
+      trailslash: ~
+      restRoutesAdmin: ~
+      restRoutesAdvertisement: ~
+      restRoutesChronos: ~
+      restRoutesPreliminary: ~
+      restRoutesUserfeedback: ~
+      staticRoutesServlet: ~
+      staticRoutesRealtime: ~
+      staticRoutesInfostore: ~
+      staticRoutesWebservices: ~
+      driveClientWindowsOxRoute: ~
+      guardApiRoute: ~
+      guardSupportApiRoute: ~
+      guardPgpRoute: ~
+      httpApiRoutesApi: ~
+      httpApiRoutesAjax: ~
+      httpApiRoutesAppsuiteApi: ~
+      httpApiRoutesAppRootApi: ~
+      rt2Route: ~
+      documentsHelpRoute: ~
+      driveHelpRoute: ~
+      coreHelpRoute: ~
+      officeWebRoute: ~
+      caldavWellKnownRedirect: ~
+      carddavWellKnownRedirect: ~
+      davInfostoreRoute: ~
+      davRootRoute: ~
+      wopiServerRoute: ~
+    openxchangeBootstrap:
+      additional: ~
+      serviceAccount: ~
+    openxchangeDovecot:
+      common: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    openxchangeEnterpriseContactPicker:
+      appsuiteCoreMw:
+      appsuiteCoreMwPod: ~
+      appsuiteCoreMwServiceAccount: ~
+    openxchangeNextcloudIntegrationUi:
+      pod: ~
+    openxchangePostfix:
+      pod: ~
+      service: ~
+    openxchangePublicSectorUi:
+      pod: ~
+    servicesExternalClamavDistributed:
+      clamdCommon: ~
+      clamdPod: ~
+      clamdService: ~
+      clamdServiceAccount: ~
+      freshclamCommon: ~
+      freshclamService: ~
+      freshclamServiceAccount: ~
+      milterCommon: ~
+      milterPod: ~
+      milterService: ~
+      milterServiceAccount: ~
+      persistence: ~
+    servicesExternalClamavSimple:
+      common: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    servicesExternalDkimpy:
+      additional: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    servicesExternalMariadb:
+      common: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    servicesExternalMemcached:
+      common: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    servicesExternalMinio:
+      apiIngress: ~
+      common:
+      ingress: ~
+      persistence: ~
+      provisioningPod: ~
+      pod: ~
+      serviceService: ~
+      serviceHeadless: ~
+      serviceAccount: ~
+    servicesExternalPostfix:
+      common: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    servicesExternalPostgresql:
+      common: ~
+      persistence: ~
+      pod: ~
+      service: ~
+      serviceAccount: ~
+    servicesExternalRedis:
+      common: ~
+      masterMaster: ~
+      masterPersistence: ~
+      masterPod: ~
+      masterService: ~
+      masterServiceAccount: ~
+      replicaReplica: ~
+      replicaPersistence: ~
+      replicaPod: ~
+      replicaService: ~
+      replicaServiceAccount: ~
+      secret: ~
+    xwiki:
+      common: ~
+      ingress: ~
+      persistence: ~
+      service: ~
+      serviceAccount: ~
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/antivirus.yaml.gotmpl?ref_type=heads
+  antivirus:
+    icap:
+      host: ~
+      port: 1344
+    milter:
+      host: ~
+      port: 7357
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/cache.yaml.gotmpl?ref_type=heads
+  cache:
+    intercomService:
+      host: "redis-headless"
+      port: 6379
+      username: "default"
+      password: ""
+    nextcloud:
+      host: "redis-headless"
+      port: 6379
+      username: "default"
+      password: ""
+      tls: false
+    notes:
+      host: "redis-headless"
+      port: 6379
+      password: ""
+    openproject:
+      host: "memcached"
+      port: 11211
+    oxAppSuite:
+      host: "redis-headless"
+      port: 6379
+      username: "default"
+      password: ""
+    umsSelfservice:
+      host: "memcached"
+      port: 11211
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/certificate.yaml.gotmpl?ref_type=heads
+  certificate:
+    issuerRef:
+      name: "letsencrypt-prod"
+      kind: "ClusterIssuer"
+    # When using `wildcard: true` please ensure you configure the cert-manager accordingly, e.g. using DNS
+    # validation (`DNS-01`) in case of letsencrypt.
+    wildcard: false
+    selfSigned: false
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/cluster.yaml.gotmpl?ref_type=heads
+  cluster:
+    service:
+      # Based on the available Implementations of your cluster, choose the type of Service.
+      # Choose out of "ClusterIP", "NodePort" or "LoadBalancer.
+      type: "LoadBalancer"
+
+    persistence:
+      # Enable if ReadWriteMany (RWX) storage is available (f.e. CephFS, NFS, ...).
+      readWriteMany:
+        enabled: false
+
+    networking:
+      # Kubernetes internal cluster domain.
+      domain: "cluster.local"
+      # Kubernetes cluster network CIDRs.
+      cidr:
+        - "10.0.0.0/8"
+      # IP addresses or IP ranges of the reverse proxy / load balancer to restrict the requesting source
+      # for defined services.
+      incomingCIDR: []
+      # Ingress-gateway IP - only relevant for "NodePort" cluster services.
+      # When ingress and egress gateway use different ips, which results that pods can't self-discover their incoming ip,
+      # you need to provide the public (load-balanced) ingress gateways ip address.
+      ingressGatewayIP: ""
+      # LoadBalancer status field - only relevant for "LoadBalancer" cluster services.
+      # The IP/DNS of your load-balancer will be fetched for some components from 'status' map of services.
+      # Most providers use '.status.loadBalancer.ingress[0].ip' to store public ip. You can modify the chosen field here.
+      loadBalancerStatusField: "ip"
+      # Network protocol options: "IPv4", "IPv6", "DualStack"
+      ipFamilies: "DualStack"
+
+    container:
+      # Used container engine in kubernetes cluster.
+      engine: "cri-o"
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/database.yaml.gotmpl?ref_type=heads
+  databases:
+    defaults:
+      userConnectionLimit: 100
+    dovecotDictmap:
+      type: "cassandra"
+      name: "dovecot_dictmap"
+      host: "cassandra"
+      port: 9042
+      username: "dovecot_dictmap_user"
+      password: ""
+      connectionLimit: ~
+    dovecotACL:
+      type: "cassandra"
+      name: "dovecot_acl"
+      host: "cassandra"
+      port: 9042
+      username: "dovecot_acl_user"
+      password: ""
+      connectionLimit: ~
+    keycloak:
+      type: "postgresql"
+      name: "keycloak"
+      host: "postgresql"
+      port: 5432
+      username: "keycloak_user"
+      password: ""
+      connectionLimit: ~
+    keycloakExtension:
+      type: "postgresql"
+      name: "keycloak_extensions"
+      host: "postgresql"
+      port: 5432
+      ssl: "false"
+      username: "keycloak_extensions_user"
+      password: ""
+      connectionLimit: ~
+    nextcloud:
+      type: "postgresql"
+      name: "nextcloud"
+      host: "postgresql"
+      port: 5432
+      username: "nextcloud_user"
+      password: ""
+      connectionLimit: ~
+    notes:
+      type: "postgresql"
+      name: "notes"
+      host: "postgresql"
+      port: 5432
+      username: "notes_user"
+      password: ""
+      connectionLimit: ~
+    openproject:
+      type: "postgresql"
+      name: "openproject"
+      host: "postgresql"
+      port: 5432
+      username: "openproject_user"
+      password: ""
+      connectionLimit: ~
+    oxAppSuite:
+      type: "mariadb"
+      name: "configdb"
+      host: "mariadb"
+      port: 3306
+      username: "root"
+      password: ""
+      # Optional settings: Route read queries to a different host.
+      readHost: ~
+      # If provided, uses a different set of credentials for read queries. By default oxAppSuite.username and oxAppsuite.password are used.
+      readUser: ~
+      readPassword: ~
+      connectionLimit: ~
+    synapse:
+      type: "postgresql"
+      name: "matrix"
+      host: "postgresql"
+      port: 5432
+      username: "matrix_user"
+      password: ""
+      requireAuth: []
+      channelBinding: "prefer"
+      connectTimeout: 10
+      clientEncoding: "auto"
+      keepalives: 1
+      keepalivesIdle: 10
+      keepalivesInterval: 10
+      keepalivesCount: 3
+      replication: false
+      gssencmode: "prefer"
+      sslmode: "prefer"
+      sslcompression: 0
+      sslMinProtocolVersion: "TLSv1.2"
+      connectionPoolMin: "3"
+      connectionPoolMax: "5"
+      connectionLimit: ~
+    umsGuardianManagementApi:
+      type: "postgresql"
+      name: "guardianmanagementapi"
+      host: "postgresql"
+      port: 5432
+      username: "guardianmanagementapi_user"
+      password: ""
+      connectionLimit: ~
+    umsNotificationsApi:
+      type: "postgresql"
+      name: "notificationsapi"
+      host: "postgresql"
+      port: 5432
+      username: "notificationsapi_user"
+      password: ""
+      connectionLimit: ~
+    umsSelfservice:
+      type: "postgresql"
+      name: "selfservice"
+      host: "postgresql"
+      port: 5432
+      username: "selfservice_user"
+      password: ""
+      connectionLimit: 10
+    xwiki:
+      type: "postgresql"
+      name: "xwiki"
+      host: "postgresql"
+      port: 5432
+      username: "xwiki_user"
+      password: ""
+      connectionLimit: ~
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/debug.yaml.gotmpl?ref_type=heads
+  debug:
+    cleanup:
+      # Keep Pods/Job logs after successful run.
+      deletePodsOnSuccess: true
+      # When deletePodsOnSuccess is enabled, the pod will be deleted after configured seconds.
+      deletePodsOnSuccessTimeout: 60
+      # Keep persistence on deletion of a release.
+      keepPVCOnDelete: false
+      # Keep additional resources, like certificates on deletion of a release.
+      keepRessourceOnDelete: true
+    # should activate debug output in all components and even allow e.g. successfully executed jobs
+    # to stay available. This is going to be implemented on a case by case basis when we actually
+    # need debugging in a component.
+    enabled: false
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/enterprise_features.yaml.gotmpl?ref_type=heads
+  enterpriseFeatures:
+    collabora:
+      # Collabora autoscaling can be configured here. To enable autoscaling enable the Collabora
+      # Controller, see `opendesk_main.yaml.gotmpl` for reference.
+      autoscaling:
+        minReplicas: 1
+        maxReplicas: 4
+        scaleDownDisabled: false
+        targetMemoryUtilizationPercentage: 99
+        targetCPUUtilizationPercentage: 99
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/enterprise_keys.yaml.gotmpl?ref_type=heads
+  enterpriseKeys:
+    openproject:
+      # Enterprise token must match the deployment's OpenProject host name.
+      token: ~
+    xwiki:
+      # Per instance their must be a unique set of keys.
+      opendeskEnterpriseLicense: ""
+      proApplicationslicense: ""
+    nextcloud:
+      # Subscription key can be used for all customer owned instances, the number of users
+      # from all instances and is limited by the number of users the key was bought for.
+      subscriptionKey: ""
+      # Subscription data is required for air gapped installations.
+      subscriptionData: ""
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/functional.yaml.gotmpl?ref_type=heads
+  functional:
+
+    admin:
+      portal:
+        deploymentTimestamp:
+          # Set to `false` to disable to not provide and update openDesk deployment timestamp for admins in the portal.
+          # This is helpful in GitOps deployments as with the timestamp there will always be a change detected.
+          enabled: true
+
+    authentication:
+      newDeviceLoginNotification:
+        # openDesk's Keycloak extensions can send out an email every time a user logs in with a new "device".
+        # It uses device/browser fingerprinting to identify such an event. The feature can be toggled below.
+        enabled: true
+      twoFactor:
+        # Define a list of groups to enable 2FA for.
+        # Note: Removing a group from the list will not disable 2FA for the removed group.
+        groups:
+          - "Domain Admins"
+      oidc:
+        # Define additional/custom OIDC clients to be created in the 'opendesk' realm within Keycloak.
+        clients: ~
+        # Define additional/custom OIDC client scopes to be created in the 'opendesk' realm within Keycloak.
+        clientScopes: ~
+      # Configure global settings of the 'opendesk' realm within Keycloak. The values are directly
+      # passed into the `realmSettings` section of the `opendesk-keycloak-bootstrap` chart.
+      # Ref.: https://gitlab.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-keycloak-bootstrap
+      # Note: Global settings can potentially be overridden on a client level.
+      realmSettings:
+        accessTokenLifespan: 300
+        revokeRefreshToken: false
+        ssoSessionIdleTimeout: 14400
+        ssoSessionMaxLifespan: 57600
+        offlineSessionIdleTimeout: 2592000
+        offlineSessionMaxLifespanEnabled: false
+        offlineSessionMaxLifespan: 5184000
+        clientSessionIdleTimeout: 0
+        clientSessionMaxLifespan: 0
+        clientOfflineSessionIdleTimeout: 0
+        clientOfflineSessionMaxLifespan: 0
+      # SSO federation allows an external OIDC IdP to authenticate users within openDesk
+      ssoFederation:
+        # Enabling SSO federation requires an upstream IdP specific configuration in `idpDetails` below.
+        enabled: false
+        # When enforcing the federated login all users are immediately redirected to the federated IdP when a login
+        # is requested or required.
+        enforceFederatedLogin: false
+        # Name of the SSO federation, if you do not enforce the login the name is shown as a login option the user can select
+        # within the openDesk login dialog.
+        name: "My upstream IdP"
+        # Configuration details for your upstream IdP, when you configured them manually in the Keycloak UI e.g. for
+        # testing the setup, you can get them from a Keycloak realm export in the `identityProviders` list.
+        # Notes:
+        # - You have to convert the configuration into YAML to apply it below.
+        # - You have to omit the following attributes as they are either defined explicitly above or implicitly by
+        #   the openDesk configuration
+        #  - `displayName`
+        #  - `alias`
+        #  - `firstBrokerLoginFlowAlias`
+        #  - `internalId`
+        idpDetails: {}
+
+    chat:
+      matrix:
+        profile:
+          # Once connected with a user that user's Matrix ID is rarely checked by their communication partners, as the
+          # display name is used to see whom they are communicating with. Not allowing users to change their
+          # own display name reduces the risk of identity fraud.
+          # To get the display name updated from the central identity and access management you have to have the Synapse
+          # enterprise feature "groupsync" configured.
+          allowUsersToUpdateDisplayname: true
+
+          # If the LDAP entryUUID should be used for the localpart of user's Matrix IDs following setting must be `true`.
+          useImmutableIdentifierForLocalpart: false
+
+    externalServices:
+      nubus:
+        udmRestApi:
+          # Enable to make the UDM REST API from the Nubus stack externally available.
+          enabled: false
+      matrix:
+        federation:
+          # Disable to not support Matrix federation with your installation.
+          enabled: true
+          # List of matrix homeserver domains you want to allow federation with
+          domainAllowList: []
+
+    dataProtection:
+      matrixPresence:
+        # Enable to allow information about the user presence status to be shared.
+        # Ref.: https://element-hq.github.io/synapse/latest/usage/configuration/config_documentation.html#presence
+        enabled: false
+      jitsiRoomHistory:
+        # Disable to avoid the room history to be stored in the user's browser local storage.
+        # Ref.: https://github.com/jitsi/docker-jitsi-meet/issues/898
+        enabled: true
+
+    filestore:
+      quota:
+        # Set the default quota for all users in GB
+        default: 1
+      # Options related to file sharing.
+      # Changing these options might require a restart of the `opendesk-nextcloud-php` Pod(s).
+      sharing:
+        # External shares
+        external:
+          # Enables sharing of files with external participants (create external links, send links by mail and allow external upload in shared folders).
+          # If you disable this option existing external shares stop working, when re-enabling it the old shares are available again.
+          enabled: false
+          # Enforces passwords to be used on external shares.
+          enforcePasswords: false
+          # Let Nextcloud send the password set for the share by mail to the recipient of the share.
+          sendPasswordMail: true
+          # Expiry settings for the external shares.
+          expiry:
+            # If true the check box for the expiry date is enabled by default.
+            activeByDefault: true
+            # Enforce an expiry date to be set overriding `activeByDefault` setting.
+            enforced: false
+            # Set the number of days the default expiry date is in the future (requires `activeByDefault` to be `true`)
+            defaultDays: 30
+        # External shares
+        internal:
+          # Expiry settings for the internal shares.
+          expiry:
+            # If true the check box for the expiry date is enabled by default.
+            activeByDefault: false
+            # Enforce an expiry date to be set overriding `activeByDefault` setting.
+            enforced: false
+            # Set the number of days the default expiry date is in the future (requires `activeByDefault` to be `true`).
+            defaultDays: 90
+      # Nextcloud specific configuration
+      nextcloud:
+        retentionObligation:
+          # yamllint disable rule:line-length
+          # Set Nextcloud's `trashbin_retention_obligation`
+          # Ref.: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#trashbin-retention-obligation
+          trashbin: "auto"
+          # Set Nextcloud's `versions_retention_obligation`
+          # Ref.: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#versions-retention-obligation
+          versions: "auto"
+          # yamllint enable rule:line-length
+
+    groupware:
+      # Related settings for the CalDAV and CardCAV support of the groupware module.
+      davSupport:
+        # Enabled by default it is available at:
+        # - https://<.Values.global.hosts.openxchangeDav>.<.Values.global.domain>/caldav/[folderId]"
+        # - https://<.Values.global.hosts.openxchangeDav>.<.Values.global.domain>/carddav/[folderId]"
+        # Can be switched off using the below feature toggle.
+        enabled: true
+
+    migration:
+      oxAppSuite:
+        # Note: Only available in openDesk Enterprise.
+        # Turn on temporary for migration purposes only. Will enable master password auth in OX AppSuite and Dovecot using
+        # `secrets.oxAppSuite.migrationsMasterPassword`.
+        enabled: false
+
+    portal:
+      # Configure if the a re-direct to the login dialogue is enforced, or if the portal is shown and the user as to actively
+      # trigger the login flow, e.g. but clicking on the "Login" portal tile.
+      enforceLogin: true
+      # Link to the legal notice shown in the portal menu, set to "~" if you want to remove the link
+      linkLegalNotice: "https://opendesk.eu/impressum"
+      # Link to the privacy statement shown in the portal menu, set to "~" if you want to remove the link
+      linkPrivacyStatement: "https://zendis.de/datenschutzerklaerung"
+      # Link to documentation, shown in the right lower corner of the portal, set to "~" if you want to remove the link
+      linkDocumentation: "https://docs.opendesk.eu/"
+      # Link to support, shown in the right lower corner of the portal, set to "~" if you want to remove the link
+      linkSupport: "https://opendesk.eu/support"
+      # Link to feedback, shown in the right lower corner of the portal, set to "~" if you want to remove the link
+      linkFeedback: "https://opendesk.eu/feedback"
+      # Newsfeed related settings
+      newsfeed:
+        # Newsfeed is enabled by default, when XWiki is also deployed, you can forcefully disable the newsfeed
+        enabled: true
+      # Welcome message related settings
+      welcomeMessage:
+        # Welcome message is enabled by default and can be switched off below.
+        enabled: true
+
+    weboffice:
+      # Set the file format to be used by default when creating new documents from the portal or the Nextcloud app.
+      # You can choose between "ODF" and "OOXML".
+      # Ref.: https://en.wikipedia.org/wiki/Comparison_of_Office_Open_XML_and_OpenDocument
+      defaultFormat: "ODF"
+
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/secrets.yaml.gotmpl?ref_type=heads
+  # see importExecutions of ocm/k8s-landscaper-blueprint/blueprint.yaml
+
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/global.yaml.gotmpl?ref_type=heads
+  global:
+    ## Define host
+    #
+    domain: "opendeskocm.shoot.example.com"
+
+    ## Define mail host
+    ## If this is unset the "domain" value above should be used in all references
+    #
+    mailDomain: ""
+
+    ## Define additional mail domains, comma separated, e.g. domain1.de,domain2.de
+    #
+    additionalMailDomains: []
+
+    ## Define synapse host
+    ## If this is unset the "domain" value above should be used in all references
+    #
+    matrixDomain: ""
+
+    ## Define docker registry address.
+    #
+    helmRegistry: ""
+    imageRegistry: ""
+
+    ## Define ingress host.
+    # Beware: Changing hostnames on an existing deployment will break links the users may already make use of.
+    #         Also some links are used directly in the portal and do not get updated after the initial
+    #         deployment.
+    #
+    hosts:
+      adminBot: "adminbot"
+      collabora: "office"
+      cryptpad: "pad"
+      element: "chat"
+      intercomService: "ics"
+      jitsi: "meet"
+      keycloak: "id"
+      matrixNeoBoardWidget: "matrix-neoboard-widget"
+      matrixNeoChoiceWidget: "matrix-neochoice-widget"
+      matrixNeoDateFixBot: "matrix-neodatefix-bot"
+      matrixNeoDateFixWidget: "matrix-neodatefix-widget"
+      minioApi: "objectstore"
+      minioConsole: "objectstore-ui"
+      nextcloud: "files"
+      notes: "notes"
+      nubus: "portal"
+      openproject: "projects"
+      openxchange: "webmail"
+      openxchangeDav: "dav"
+      static: "static"
+      synapse: "matrix"
+      synapseAdmin: "synapse-admin"
+      synapseFederation: "matrix-federation"
+      whiteboard: "whiteboard"
+      xwiki: "wiki"
+
+    ## Credentials to fetch images from private registry
+    ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    #
+    imagePullSecrets: []
+
+    ## Define the policy to pull container images.
+    ## Ref: https://kubernetes.io/docs/concepts/containers/images/#image-pull-policy
+    #
+    imagePullPolicy: "IfNotPresent"
+    # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/global.generated.yaml.gotmpl?ref_type=heads
+    systemInformation:
+      releaseVersion: "v1.5.0"
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/images.yaml.gotmpl?ref_type=heads
+  images:
+    bitnamiOSShell:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "bitnami/os-shell"
+      registry: "registry-1.docker.io"
+      repository: "bitnami/os-shell"
+      tag: "12-debian-12-r44@sha256:6388c7c27a09472906e2f2094410c9ffdadf23b4b242293ce023d0314ec10920"
+    cassandra:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "bitnami/cassandra"
+      registry: "registry-1.docker.io"
+      repository: "bitnami/cassandra"
+      tag: "5.0.4-debian-12-r4@sha256:9d909ebe10802dae2fb99ef7c8e9e0dbc496c8d30366e2f7abbe0713b945fa7d"
+    cassandraExporter:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "bitnami/cassandra-exporter"
+      registry: "registry-1.docker.io"
+      repository: "bitnami/cassandra-exporter"
+      tag: "2.3.8-debian-12-r46@sha256:e44c65f08d85153041f68bcf180f948341d74018eef8b56e8869ed87fdfd34f0"
+    clamd:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "clamav/clamav"
+      registry: "registry-1.docker.io"
+      repository: "clamav/clamav"
+      tag: "1.4.2-38_base@sha256:e7d108f30ea8f16935dbd12e4b58665f1bc148ce3dd59028cf04088330216910"
+    collabora:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Collabora"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/supplier/collabora/images/collabora-online-for-opendesk"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/collabora/images/collabora-online-for-opendesk"
+      tag: "25.04.2.2.1@sha256:03ec7f7740c5030eeb4f642c41fa0b9989d7a0dab81435a86b5c82479d0f78e2"
+    collaboraController:
+      # Enterprise Component
+      # providerCategory: "Supplier"
+      # providerResponsible: "Collabora"
+      registry: "registry.opencode.de"
+      repository: "zendis/opendesk-enterprise/components/supplier/collabora/images-mirror/cool-controller"
+      tag: "1.1.3@sha256:552b63fd748ec873bd286c4d9ea0cf675f349f35a9ca2a69d2962336e4bc5f83"
+    cryptpad:
+      # providerCategory: "Supplier"
+      # providerResponsible: "XWiki"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "cryptpad/cryptpad"
+      # upstreamMirrorTagFilterRegEx: '^opendesk-(\d+)$'
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/xwiki/images-mirror/cryptpad"
+      tag: "opendesk-20241022@sha256:3e5bf06cb9d0a7ec8257874b8b347599200eb677fc428a2e043ccab06ef2be17"
+    dkimpy:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/dkimpy-milter"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/dkimpy-milter"
+      tag: "1.1.0@sha256:f140c7fc3fd9636addc612edd6e10f6aefa69e34ff637c95ce9036a32e44555f"
+    dovecot:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/supplier/open-xchange/images/dovecot-public-sector"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images/dovecot-public-sector"
+      tag: "2.3.21@sha256:c76965a84d1ca527f523404eb027119f6736b199c094e4671037cb345ecad3dc"
+    dovecotBootstrap:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "alpine/k8s"
+      registry: "registry-1.docker.io"
+      repository: "alpine/k8s"
+      tag: "1.33.1@sha256:7f8133af0dd210cb5b168f889c5bc77dd65ecc935f3e3cb72d1b98ff96bfed40"
+    element:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      # upstreamRegistry: "https://ghcr.io"
+      # upstreamRepository: "element-hq/element-web-modules/opendesk-plugin"
+      # upstreamMirrorTagFilterRegEx: '^latest-\d+$'
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/element/images-mirror/opendesk-plugin"
+      tag: "latest-250304@sha256:b997a9245c5a85ddb9935e6a9f8f8da60fed58aad17df8f1e1e2fabafdbf0dd1"
+    elementAdminBot:
+      # Enterprise Component
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      registry: "registry.opencode.de"
+      repository: "zendis/opendesk-enterprise/components/supplier/element/images-mirror/access_element_web"
+      tag: "v1.11.85@sha256:0e36121cbaab5a8146ef8561d8e77b38f711f855f1a353df3bb96a8d13303812"
+    elementGroupsync:
+      # Enterprise Component
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      registry: "registry.opencode.de"
+      repository: "zendis/opendesk-enterprise/components/supplier/element/images-mirror/groupsync"
+      tag: "v0.14.0@sha256:a8cee92b9035d8cc80cc13194e4e0118c7dfbfcbc4c0ee5ac173582d0cd55846"
+    elementPipe:
+      # Enterprise Component
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      registry: "registry.opencode.de"
+      repository: "zendis/opendesk-enterprise/components/supplier/element/images-mirror/pipe"
+      tag: "6.3.1@sha256:7f487af25f220d31aa987665f9d1393b42e925c6b1a7e0458daaa91e8e7bf0c4"
+    elementSynapseAdmin:
+      # Enterprise Component
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      registry: "registry.opencode.de"
+      repository: "zendis/opendesk-enterprise/components/supplier/element/images-mirror/synapse_admin"
+      tag: "v16.105.5-24.10@sha256:563979fc69162adf93f1286cf79dcbe58adf878a0e4e9332044e5ab6a7170350"
+    elementSyncAdmins:
+      # Enterprise Component
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-element-syncadmins"
+      tag: "1.0.5@sha256:ae0e18eadea762e11f8edacc52285742a5c4ed6e2e92bfa32ec5638e377e7b7b"
+    freshclam:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "clamav/clamav"
+      registry: "registry-1.docker.io"
+      repository: "clamav/clamav"
+      tag: "1.4.2-38_base@sha256:e7d108f30ea8f16935dbd12e4b58665f1bc148ce3dd59028cf04088330216910"
+    icap:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/clamav-icap"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/clamav-icap"
+      tag: "0.5.10@sha256:891f267a6b2a304616854ad2f013dc5d23f6f6c84d535c8b46e76d124fe39b6a"
+    intercom:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/intercom-service"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["2", "1", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/intercom-service"
+      tag: "2.12.0@sha256:380476d849fb353dc167ba52a6b0f6235b3fa7561c082e65c37e2242cedb0df1"
+    jibri:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "jitsi/jibri"
+      # upstreamMirrorTagFilterRegEx: '^stable-(\d+)-?\d?$'
+      # upstreamMirrorStartFrom: ["8922"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/jibri"
+      tag: "stable-9955@sha256:a07b82f2758389b2071c794810145111641e78f1b768b1bbfa6d3d1dc76d3da9"
+    jicofo:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "jitsi/jicofo"
+      # upstreamMirrorTagFilterRegEx: '^stable-(\d+)-?\d?$'
+      # upstreamMirrorStartFrom: ["8922"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/jicofo"
+      tag: "stable-9955@sha256:f1a1478d231bc4891b5eea06443d72187c378d5e38403bb545aab281446f8d50"
+    jigasi:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "jitsi/jigasi"
+      # upstreamMirrorTagFilterRegEx: '^stable-(\d+)-?\d?$'
+      # upstreamMirrorStartFrom: ["9955"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/jigasi"
+      tag: "stable-9955@sha256:0e191ac39d3e7299d0bcc070fa1867cceb17fe8d92e9d5cd492aec4c268fa56f"
+    jitsi:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "jitsi/web"
+      # upstreamMirrorTagFilterRegEx: '^stable-(\d+)-?\d?$'
+      # upstreamMirrorStartFrom: ["8922"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/web"
+      tag: "stable-9955@sha256:81fdcfa14287fe3358532c363875584d0cdd40ff4030695b713af6e60192d306"
+    jitsiKeycloakAdapter:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://ghcr.io"
+      # upstreamRepository: "nordeck/jitsi-keycloak-adapter"
+      # upstreamMirrorTagFilterRegEx: '^v(\d\d\d\d)(\d\d)(\d\d)$'
+      # upstreamMirrorStartFrom: ["2023", "12", "14"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/jitsi-keycloak-adapter"
+      tag: "v20250314@sha256:2e24db127ab266b90b8fd371ce547e7f9619b6be3fefed30906867b1ce368697"
+    jitsiPatchJVB:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "bitnami/kubectl"
+      registry: "registry-1.docker.io"
+      repository: "bitnami/kubectl"
+      tag: "1.32.0@sha256:48c81b7aaf4fabf2733a0b888960f6982181fbcd2c3f8dfcebc4a1a065631162"
+    jvb:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "jitsi/jvb"
+      # upstreamMirrorTagFilterRegEx: '^stable-(\d+)-?\d?$'
+      # upstreamMirrorStartFrom: ["8922"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/jvb"
+      tag: "stable-9955@sha256:27753ac320910e04f5c4f4f628d20995ea969ea38523d90a9066adc52f9bc022"
+    mariadb:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "library/mariadb"
+      registry: "registry-1.docker.io"
+      repository: "library/mariadb"
+      tag: "10.6.21@sha256:8a16204dc96c08ed0ee2c52c0f9324aa5d2dd0e43ad23a471d447a39f75765b5"
+    matrixNeoBoardWidget:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://ghcr.io"
+      # upstreamRepository: "nordeck/matrix-neoboard-widget"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "4", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-neoboard-widget"
+      tag: "2.2.1@sha256:db404ba5b8e76cbd1166529dc2156d84506f1c2d341a1798d25a074e531b9d3d"
+    matrixNeoChoiceWidget:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://ghcr.io"
+      # upstreamRepository: "nordeck/matrix-poll-widget"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "4", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-poll-widget"
+      tag: "1.5.2@sha256:8d0cce2b4f71787cab6cd1b6e6ff52205224a5d01ba384b3ebfbf05bc3228930"
+    matrixNeoDateFixBot:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://ghcr.io"
+      # upstreamRepository: "nordeck/matrix-meetings-bot"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["2", "7", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-meetings-bot"
+      tag: "2.8.3@sha256:5bc9b8d67b4ecb38b618e84d54e759ba57c0533706300154a60423dfcf86f7e1"
+    matrixNeoDateFixWidget:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://ghcr.io"
+      # upstreamRepository: "nordeck/matrix-meetings-widget"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "6", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-meetings-widget"
+      tag: "1.7.1@sha256:c03917f78ba197b2f93a59eb3d6596447de1e2bf5836194afa121fae8ea18593"
+    matrixUserVerificationService:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "matrixdotorg/matrix-user-verification-service"
+      # upstreamMirrorTagFilterRegEx: '^v(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["3", "0", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/element/images-mirror/matrix-user-verification-service"
+      tag: "v3.0.0@sha256:25e685d595785e2a72e75a525dac78cf8c782445454f8ac090d3702431c38008"
+    memcached:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "bitnami/memcached"
+      registry: "registry-1.docker.io"
+      repository: "bitnami/memcached"
+      tag: "1.6.38-debian-12-r3@sha256:3e548fba727578be9d996262471f5f3e07726d625702d26743a5e0f34684cb21"
+    migrations:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/opendesk-migrations"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-migrations"
+      tag: "1.7.5@sha256:98375df151d4b9bba81b5a7f3ab80dedd4cbd46dd0440c94b014b656b7115c71"
+    milter:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "clamav/clamav"
+      registry: "registry-1.docker.io"
+      repository: "clamav/clamav"
+      tag: "1.4.2-38_base@sha256:e7d108f30ea8f16935dbd12e4b58665f1bc148ce3dd59028cf04088330216910"
+    minio:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "bitnami/minio"
+      registry: "registry-1.docker.io"
+      repository: "bitnami/minio"
+      tag: "2025.4.22-debian-12-r1@sha256:d7cd0e172c4cc0870f4bdc3142018e2a37be9acf04d68f386600daad427e0cab"
+    nextcloud:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/opendesk-nextcloud"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-nextcloud"
+      tag: "31.0.6@sha256:760d0f1ff724d53faa757987e7068d09df0c603e3ac4fbb8aefe1bf13270c615"
+    nextcloudExporter:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/opendesk-nextcloud-exporter"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-nextcloud-exporter"
+      tag: "1.0.3@sha256:d38f211a3cdc8397deccd0243061e20972a8a796eeb9bb552fe4ddec5d56c829"
+    nginxS3Gateway:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "nginxinc/nginx-s3-gateway"
+      registry: "registry-1.docker.io"
+      repository: "nginxinc/nginx-s3-gateway"
+      tag: "unprivileged-oss-20250512@sha256:064d14fc64ba968bd8123f2f25e446e597cfc5170124879b3834deac1a6d69fd"
+    notesBackend:
+      # providerCategory: "Supplier"
+      # providerResponsible: "DINUM"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "lasuite/impress-backend"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-notes"
+      tag: "1.9.0-docs-v3.2.1-backend@sha256:17c16e4e00b15e4637d01553d56e7eecb7a477bec48677d1e7fb07b04c48d2b8"
+    notesFrontend:
+      # providerCategory: "Supplier"
+      # providerResponsible: "DINUM"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "lasuite/impress-frontend"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-notes"
+      tag: "1.9.0-docs-v3.2.1-frontend@sha256:328d5a8bf41875eb5945229adfc4a52eb2fef109e25d980910ee77edd4bc1887"
+    notesYProvider:
+      # providerCategory: "Supplier"
+      # providerResponsible: "DINUM"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "lasuite/impress-y-provider"
+      registry: "registry-1.docker.io"
+      repository: "lasuite/impress-y-provider"
+      tag: "v3.2.1@sha256:9dd7068336c02fe71806bc3576e7dc8636d7ccb139667c6303f0753e18d3ab7e"
+    nubusBlocklistCleanup:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/blocklist-cleanup"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "34", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/blocklist-cleanup"
+      tag: "0.37.1@sha256:e18a5ca77accb9438c57ec7448f0984e6de11481ca8e0cd3ce557e6492dd8355"
+    nubusDataLoader:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/data-loader"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "41", "5"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/data-loader"
+      tag: "0.95.0@sha256:57028c6a76d000a2085f7a429c704ac495be6e4e7ce0a5cc85e3bed25766ce32"
+    nubusGuardianAuthorizationApi:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://docker.software-univention.de"
+      # upstreamRepository: "guardian-authorization-api-authorization-api"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "0", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/guardian-authorization-api-authorization-api"
+      tag: "2.0.0@sha256:5f194f9385aea5a279e25a57352f7b88a6cc4fa90b3bf04c2c97b9ff2bad70a5"
+    nubusGuardianManagementApi:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://docker.software-univention.de"
+      # upstreamRepository: "guardian-management-api-management-api"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "0", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/guardian-management-api-management-api"
+      tag: "2.0.0@sha256:61a1ab84efebe2a87d358e8624f8b39073a6071683e7cd77b740a97d464753a2"
+    nubusGuardianManagementUi:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://docker.software-univention.de"
+      # upstreamRepository: "guardian-management-ui-management-ui"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "0", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/guardian-management-ui-management-ui"
+      tag: "2.0.0@sha256:57e2503a4772f0ff656e792a98fadef4d41c248218e6c368f76ce82a892478cf"
+    nubusGuardianProvisioning:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/guardian-init"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "3", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/guardian-init"
+      tag: "0.19.1@sha256:9030841a136d9addc37b2b62d39d80b113b824e50bd9cdcd5cf2c22bad74eeb0"
+    nubusKeycloak:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/keycloak"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "0", "1"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/keycloak"
+      tag: "0.2.1@sha256:c338d5bba11185b1cca6d5e5e1b6fe28bedcd8f02af8b4b96e431bde617f5f72"
+    nubusKeycloakBootstrap:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/keycloak-bootstrap"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "1", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/keycloak-bootstrap"
+      tag: "0.12.2@sha256:b3b058e49f9671e01530fca548a3308738aec3bf7d57c9ced9cde556f1f7545f"
+    nubusKeycloakExtensionHandler:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/keycloak-handler"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "0", "3"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/keycloak-handler"
+      tag: "0.19.2@sha256:6e4c65b375ad12819240cb8eabd4ef629858ad74179bd639acb713201c528ef4"
+    nubusKeycloakExtensionProxy:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/keycloak-proxy"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "0", "3"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/keycloak-proxy"
+      tag: "0.19.2@sha256:b7c897870a12214064d79d72d52d0030bf2513148078cb922b8782806c2e4773"
+    nubusLdapNotifier:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/ldap-notifier"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "8", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/ldap-notifier"
+      tag: "0.43.0@sha256:dcd4e7f1008eb4c6c1ae809785bee0da9cba1347af09ddbc147b76c422f4f35c"
+    nubusLdapServer:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/ldap-server"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "8", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/ldap-server"
+      tag: "0.43.0@sha256:67557ec3e3bd7ff4981666dddb5455672ee8767e12e3876ea79447627f9d9742"
+    nubusLdapServerDhInitContainer:
+      # providerCategory: 'Community'
+      # providerResponsible: 'Univention'
+      # upstreamRegistry: 'registry-1.docker.io'
+      # upstreamRepository: 'natsio/nats-box'
+      registry: "registry-1.docker.io"
+      repository: "natsio/nats-box"
+      tag: "0.16.0-nonroot@sha256:f486ca86dfc9b72a2310ea720994a94ce55e447ad01daccd2fb33d61f322dc51"
+    nubusLdapServerLeaderElector:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/ldap-server-elector"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "29", "1"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/ldap-server-elector"
+      tag: "0.43.0@sha256:179097cf89774b1ac48c5315ccc06cc8628cc89d085d95f2d89a223d52a75fe2"
+    nubusLdapUpdateUniventionObjectIdentifier:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/ldap-update-univention-object-identifier"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "34", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/ldap-update-univention-object-identifier"
+      tag: "0.37.1@sha256:0715b8c98390337f230c04e88ed63142b94faf590bb2cb1dacb41390b2e8edf0"
+    nubusNats:
+      # providerCategory: 'Community'
+      # providerResponsible: 'Univention'
+      # upstreamRegistry: 'registry-1.docker.io'
+      # upstreamRepository: 'library/nats'
+      registry: "registry-1.docker.io"
+      repository: "library/nats"
+      tag: "2.10.26@sha256:736d575e60135ce1d50fc206675d48d0e57dcaa0704f696f0cb4b5f6dadd49d7"
+    nubusNatsBox:
+      # providerCategory: 'Community'
+      # providerResponsible: 'Univention'
+      # upstreamRegistry: 'registry-1.docker.io'
+      # upstreamRepository: 'natsio/nats-box'
+      registry: "registry-1.docker.io"
+      repository: "natsio/nats-box"
+      tag: "0.16.0-nonroot@sha256:f486ca86dfc9b72a2310ea720994a94ce55e447ad01daccd2fb33d61f322dc51"
+    nubusNatsReloader:
+      # providerCategory: 'Community'
+      # providerResponsible: 'Univention'
+      # upstreamRegistry: 'registry-1.docker.io'
+      # upstreamRepository: 'natsio/nats-server-config-reloader'
+      registry: "registry-1.docker.io"
+      repository: "natsio/nats-server-config-reloader"
+      tag: "0.17.1@sha256:f364bb8330d3430666ca09f17c6a43bfaefde32f0f3e79d4a41c588c29936e99"
+    nubusNotificationsApi:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/notifications-api"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "9", "4"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/notifications-api"
+      tag: "0.70.0@sha256:0120cca997eddcd6b9a5f0b9d6fb39ac2ffb118357380c28ab5352c16130a873"
+    nubusOpendeskExtension:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/opendesk-nubus"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-nubus"
+      tag: "1.14.9@sha256:a2c7a5e302ed5cc52445fd1b18b277de4a3d45b2a2940f1a3970447dc13eb16c"
+    nubusOpendeskExtensionA2gMapper:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/opendesk-nubus-a2g-mapper"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-nubus-a2g-mapper"
+      tag: "1.0.1@sha256:527cf7d0515df441b7ac8bc29b40f8703c87246ddc9594d9e24531571dc6359d"
+    nubusOpenPolicyAgent:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://docker.software-univention.de"
+      # upstreamRepository: "guardian-authorization-api-opa"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "0", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/guardian-authorization-api-opa"
+      tag: "2.0.0@sha256:56a92a08da5addb951a2b2df09974889295ddde8526e93ad40dd973de1052ad4"
+    nubusOxExtension:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/ox-extension"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "10", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/ox-extension"
+      tag: "0.11.1@sha256:e57df5c02d0480ccf1d299964e3c676d92440d5e959b4f587945f08624da3ae9"
+    nubusPortalConsumer:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/portal-consumer"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "27", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/portal-consumer"
+      tag: "0.70.0@sha256:09eed9e5a7066f69b5d6085541ca91538ca9519d765ec7109d6934a6e67ab7cc"
+    nubusPortalExtension:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/portal-extension"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "28", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/portal-extension"
+      tag: "0.59.1@sha256:c9c7faa3cca2be2f45d073517a50e8a8cc89d46c978c2f3a6be3c13d0e6ae900"
+    nubusPortalFrontend:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/portal-frontend"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "67", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/portal-frontend"
+      tag: "0.70.0@sha256:9e0826c954e99b36b3c7b9ce6dfa1f567a3432158fb78af13337760197f94997"
+    nubusPortalServer:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/portal-server"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "9", "4"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/portal-server"
+      tag: "0.70.0@sha256:1331d5b5861574195f6bd0dfc3c8e1d6a2650b518e206a2815b682d43ab75d0b"
+    nubusProvisioningDispatcher:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/provisioning-dispatcher"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "14", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/provisioning-dispatcher"
+      tag: "0.58.0@sha256:2ac4d4a7362e45f67499537dd74d2fdfb7b54817b7f12eb9e2d88d87cf3a6f7e"
+    nubusProvisioningEventsAndConsumerApi:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/provisioning-events-and-consumer-api"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "14", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/provisioning-events-and-consumer-api"
+      tag: "0.58.0@sha256:083cf58d9522d5058d09a78355a9ca935be2882fc595ad221b1ffd707a7d615d"
+    nubusProvisioningPrefill:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/provisioning-prefill"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "14", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/provisioning-prefill"
+      tag: "0.58.0@sha256:368bc284956b642af02ca7199c6a7d94ae3bbdb3ede09db1c98822a146d9106d"
+    nubusProvisioningUdmListener:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/provisioning-udm-listener"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "14", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/provisioning-udm-listener"
+      tag: "0.58.0@sha256:5f924be8fdb29bda5734fd2b6b98f106913757e11530611bf5f6a5f144165be7"
+    nubusProvisioningUdmTransformer:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/provisioning-udm-transformer"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "14", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/provisioning-udm-transformer"
+      tag: "0.58.0@sha256:afa6028bbaec6c14e09035b7d18507aad45ff6d6aa852fb664ab485f2622a308"
+    nubusSelfServiceConsumer:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/selfservice-invitation"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "3", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/selfservice-invitation"
+      tag: "0.17.0@sha256:00e6124eecc1b763326023ecaf9702053e24b39b20f5efbcd35dfaad642d2cda"
+    nubusUdmRestApi:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/udm-rest-api"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "9", "3"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/udm-rest-api"
+      tag: "0.37.1@sha256:a0508191a52ed9c388e0574cf6a97031fdfffcff95ab8ca3e4231c795d3a68df"
+    nubusUmcGateway:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/umc-gateway"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "7", "3"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/umc-gateway"
+      tag: "0.47.1@sha256:71d1fb00a28a7cc83e1a8a675b8e9dc3ff67b1d7f366b2d60f9623fdb5f6e419"
+    nubusUmcServer:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/umc-server"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "7", "3"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/umc-server"
+      tag: "0.47.1@sha256:8f451e7b50c6a32a8d4bad5959a103e34e3ae8d0bef2fe3df2dc8fbe7ae9c1b6"
+    nubusUmcServerProxy:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "traefik"
+      registry: "registry-1.docker.io"
+      repository: "library/traefik"
+      tag: "3.0@sha256:a208c74fd80a566d4ea376053bff73d31616d7af3f1465a7747b8b89ee34d97e"
+    nubusWaitForDependency:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/wait-for-dependency"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "9", "4"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/wait-for-dependency"
+      tag: "0.34.0@sha256:6ed1ae644160f0e69c00b4ea90efd4ea4aeaadeefb87e77f3454bcafaacd5e01"
+    opendeskKeycloakBootstrap:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/opendesk-keycloak-bootstrap"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-keycloak-bootstrap"
+      tag: "1.3.0@sha256:f0c18be261666b7dbb1794f61aaac2321608d396060b007d18b429d0e4d703a7"
+    opendeskStaticFiles:
+      # providerCategory: "Community"
+      # providerResponsible: "Element"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "library/nginx"
+      registry: "registry-1.docker.io"
+      repository: "library/nginx"
+      tag: "1.28.0-alpine3.21@sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9"
+    openproject:
+      # providerCategory: "Supplier"
+      # providerResponsible: "OpenProject"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "openproject/open_desk"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)-?\d*$'
+      # upstreamMirrorStartFrom: ["13", "1", "1"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/openproject/images-mirror/open_desk"
+      tag: "16.1.1@sha256:2fe8a7d1cab42611b01f4ca20ce7179a0637477f2882364b4a1cfdebde9ecd6f"
+    openprojectBootstrap:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/opendesk-openproject-bootstrap"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/opendesk-openproject-bootstrap"
+      tag: "1.1.4@sha256:2fd97a316114428849aaeef87fb8755274e675830088a93afcafac91bb048d1d"
+    openprojectDbInit:
+      # providerCategory: "Community"
+      # providerResponsible: "OpenProject"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "library/postgres"
+      registry: "registry-1.docker.io"
+      repository: "library/postgres"
+      tag: "16.9-alpine3.20@sha256:e5507c984377515b8c9922b0eb19f55aba2063fdc7bccf268cefd53133f97054"
+    openxchangeBootstrap:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "alpine/k8s"
+      registry: "registry-1.docker.io"
+      repository: "alpine/k8s"
+      tag: "1.33.0@sha256:60333a52c38e9a8df0a9b93a5a24a4870f0db2c7ea3266b185386bd0a500d7dc"
+    openxchangeCoreGuidedtours:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/core-guidedtours"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["8", "6", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/core-guidedtours"
+      tag: "8.6.17@sha256:27178fc42f2334385f1d206e4e7991d4953a102f114729d186b61c0d40babb4f"
+    openxchangeCoreMW:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/middleware-public-sector"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["8", "20", "51"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/middleware-public-sector"
+      tag: "8.38.73@sha256:610d4bab888e5749ff918a782ba1c33ed4aa8da9e13d5be4ad71ca2f698d4044"
+    openxchangeCoreUI:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/core-ui"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["8", "20", "1"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/core-ui"
+      tag: "8.38.1@sha256:77bf250df7ac465006576d5e1e0a8420ce6d0fce622b749c6da318793b88490c"
+    openxchangeCoreUIMiddleware:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/core-ui-middleware"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["2", "0", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/core-ui-middleware"
+      tag: "2.1.2@sha256:36fe59a047fa466bef6fcdeed1ed8e4bbeaf7824c37c63e3bfe7262cd135cb9e"
+    openxchangeCoreUserGuide:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/core-user-guide"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["8", "20", "799279"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/core-user-guide"
+      tag: "8.38.1408226@sha256:1a18c6c7b6a7a0f16376a9c298e65a13a4b482f6df1351582250a88571f1fa73"
+    openxchangeDocumentConverter:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/documentconverter"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["8", "20", "50"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/documentconverter"
+      tag: "8.38.1817@sha256:d7537574765e19e7c9e13fe936c1a4c69b39bda216abcd000dad9f93fbb62f7b"
+    openxchangeGotenberg:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/gotenberg"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["7", "9", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/gotenberg"
+      tag: "8.15.3@sha256:0864c9cd905264f714f0c306d5b38eec8599b908c9096e0283b5db3ff6706172"
+    openxchangeGuardUI:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/guard-ui"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["4", "2", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/guard-ui"
+      tag: "8.33.2@sha256:920b5ac87128f30c176c0ae75c6bedd32d226a97c6c5a822235606c39992ee9a"
+    openxchangeImageConverter:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/imageconverter"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["8", "20", "50"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/imageconverter"
+      tag: "8.38.2105@sha256:9c79f29712c5a5479bc1a08e127c65415a50a63954b244c1d34a570f5f3ed1f6"
+    openxchangeNextcloudIntegrationUI:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/nextcloud-integration-ui"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "2", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/nextcloud-integration-ui"
+      tag: "1.4.1@sha256:423d596b52ab32778d7227d98ccc719f98395a00d95ff0bcac826665b59e1937"
+    openxchangePublicSectorUI:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Open-Xchange"
+      # upstreamRegistry: "https://registry.open-xchange.com"
+      # upstreamRepository: "appsuite-public-sector/public-sector-ui"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["2", "2", "1"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/open-xchange/images-mirror/public-sector-ui"
+      tag: "2.4.1@sha256:c9f0f5425517e1740aaf9998c5944ce36ce26eda52329754e6b8ac733e2dacc5"
+    oxConnector:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Univention"
+      # upstreamRegistry: "https://artifacts.software-univention.de"
+      # upstreamRepository: "nubus/images/ox-connector-standalone"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["0", "4", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/univention/images-mirror/ox-connector-standalone"
+      tag: "0.19.0@sha256:447e3c3e0cdd8bf1f86004d2088c24fcf6141ff6fef78ade8dfe86f7f16ba40e"
+    postfix:
+      # providerCategory: "Platform"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry.opencode.de"
+      # upstreamRepository: "bmi/opendesk/components/platform-development/images/postfix"
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/platform-development/images/postfix"
+      tag: "3.0.3@sha256:12bcebf57ddb53258c48eaa60e9c25b441f4319ee1b94b363c652ad0a992a875"
+    postfixBootstrap:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "alpine/k8s"
+      registry: "registry-1.docker.io"
+      repository: "alpine/k8s"
+      tag: "1.33.0@sha256:60333a52c38e9a8df0a9b93a5a24a4870f0db2c7ea3266b185386bd0a500d7dc"
+    postgresql:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "library/postgres"
+      registry: "registry-1.docker.io"
+      repository: "library/postgres"
+      tag: "15.13-alpine3.20@sha256:f7de0e2497b9a3b027d41377606f94bb0140a034ed303f6de690aa77637bfbc9"
+    prosody:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "jitsi/prosody"
+      # upstreamMirrorTagFilterRegEx: '^stable-(\d+)-?\d?$'
+      # upstreamMirrorStartFrom: ["8922"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/nordeck/images-mirror/prosody"
+      tag: "stable-9955@sha256:fa66872338c7c3b6fdb1f1a67ad770f2b62948f4193b91a58f12c0aa5ca2e783"
+    redis:
+      # providerCategory: "Community"
+      # providerResponsible: "openDesk"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "bitnami/redis"
+      registry: "registry-1.docker.io"
+      repository: "bitnami/redis"
+      tag: "7.4.3-debian-12-r0@sha256:a25b5d07a14ec13730022c7cd9bab6308d55ccd86b74af7315553c17be884889"
+    synapse:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "matrixdotorg/synapse"
+      # upstreamMirrorTagFilterRegEx: '^v(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "91", "2"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/element/images-mirror/synapse"
+      tag: "v1.129.0@sha256:13ac3293547d8c06e1e03fca4e02ef9a47f132acc2e2cdb4143a01495dd924cf"
+    synapseCreateUser:
+      # providerCategory: "Community"
+      # providerResponsible: "Nordeck"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "alpine/k8s"
+      registry: "registry-1.docker.io"
+      repository: "alpine/k8s"
+      tag: "1.33.0@sha256:60333a52c38e9a8df0a9b93a5a24a4870f0db2c7ea3266b185386bd0a500d7dc"
+    synapseGuestModule:
+      # providerCategory: "Supplier"
+      # providerResponsible: "Element"
+      # upstreamRegistry: "https://ghcr.io"
+      # upstreamRepository: "element-hq/synapse-guest-module"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)\.(\d+)$'
+      # upstreamMirrorStartFrom: ["1", "0", "0"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/element/images-mirror/synapse-guest-module"
+      tag: "1.0.1@sha256:a8c02b2eb4dfea9632b32d00415af8d5276870fa150fac392914f67053c161ea"
+    synapseWeb:
+      # providerCategory: "Community"
+      # providerResponsible: "Element"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "rapidfort/haproxy-official"
+      registry: "registry-1.docker.io"
+      repository: "rapidfort/haproxy-official"
+      tag: "3.1.7-bookworm@sha256:ab50f196f66884f62fb379c40824036cd0dabb10df660097cff99b7ae22c2c44"
+    wellKnown:
+      # providerCategory: "Community"
+      # providerResponsible: "Element"
+      # upstreamRegistry: "https://registry-1.docker.io"
+      # upstreamRepository: "library/nginx"
+      registry: "registry-1.docker.io"
+      repository: "library/nginx"
+      tag: "1.28.0-alpine3.21@sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9"
+    xwikiMariadb:
+      # providerCategory: "Supplier"
+      # providerResponsible: "XWiki"
+      # upstreamRegistry: "https://git.xwikisas.com:5050"
+      # upstreamRepository: "xwikisas/swp/xwiki"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)-mariadb.+$'
+      # upstreamMirrorStartFrom: ["0", "12"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/xwiki/images-mirror/xwiki"
+      tag: "0.25-mariadb-jetty-alpine@sha256:7175ef5e454b4eb0f6fd6a92a9503d8a680db3ca97b25c3a4eedac9c9bfbcdaf"
+    xwikiPostgres:
+      # providerCategory: "Supplier"
+      # providerResponsible: "XWiki"
+      # upstreamRegistry: "https://git.xwikisas.com:5050"
+      # upstreamRepository: "xwikisas/swp/xwiki"
+      # upstreamMirrorTagFilterRegEx: '^(\d+)\.(\d+)-postgres.+$'
+      # upstreamMirrorStartFrom: ["0", "23"]
+      registry: "registry.opencode.de"
+      repository: "bmi/opendesk/components/supplier/xwiki/images-mirror/xwiki"
+      tag: "0.25-postgres-jetty-alpine@sha256:1bfc57a65f8bc6b059d550791699b5afa33b91db8d4c75ca8f6f3d2299f7c335"
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/ingress.yaml.gotmpl?ref_type=heads
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    tls:
+      enabled: true
+      secretName: "opendesk-certificates-tls"
+    parameters:
+      bodySize:
+        collabora: "100M"
+        element: "100M"
+        nextcloud: "100M"
+        nextcloudNotifyPush: "100M"
+        notes: "100M"
+        openproject: "100M"
+        oxAppSuite: "100M"
+        xwiki: "100M"
+      bodyTimeout:
+        collabora: 600
+        element: 60
+        nextcloud: 600
+        nextcloudNotifyPush: 600
+        notes: 60
+        openproject: 60
+        oxAppSuite: 60
+        xwiki: 60
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/monitoring.yaml.gotmpl?ref_type=heads
+  monitoring:
+    prometheus:
+      serviceMonitors:
+        enabled: false
+        labels:
+          release: "kube-prometheus-stack"
+      podMonitors:
+        enabled: false
+        labels:
+          release: "kube-prometheus-stack"
+      prometheusRules:
+        enabled: false
+        annotations: {}
+        labels:
+          release: "kube-prometheus-stack"
+
+    grafana:
+      dashboards:
+        enabled: false
+        labels:
+          grafana_dashboard: "1"
+        annotations:
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/objectstores.yaml.gotmpl?ref_type=heads
+  objectstores:
+    dovecot:
+      bucket: "dovecot"
+      endpoint: ""
+      region: "eu-west-1"
+      secretKey: ""
+      username: "dovecot_user"
+      storageClass: "STANDARD"
+      useSSL: true
+      pathStyle: true
+      port: 443
+    migrations:
+      bucket: "migrations"
+      endpoint: ""
+      region: "eu-west-1"
+      secretKey: ""
+      username: "migration_user"
+      storageClass: "STANDARD"
+      useSSL: true
+      pathStyle: true
+      port: 443
+    nextcloud:
+      bucket: "nextcloud"
+      endpoint: ""
+      region: "eu-west-1"
+      secretKey: ""
+      username: "nextcloud_user"
+      storageClass: "STANDARD"
+      useSSL: true
+      pathStyle: true
+      port: 443
+    notes:
+      bucket: "notes"
+      endpoint: ""
+      secretKey: ""
+      username: "notes_user"
+      port: 443
+    nubus:
+      bucket: "ums"
+      endpoint: ""
+      region: "eu-west-1"
+      secretKey: ""
+      username: "ums_user"
+    openproject:
+      bucket: "openproject"
+      directUploads: true
+      enableSignatureV4Streaming: true
+      endpoint: ""
+      region: "eu-west-1"
+      secretKey: ""
+      username: "openproject_user"
+      pathStyle: true
+      useIamProfile: false
+    openxchange:
+      bucket: "openxchange"
+      endpoint: ""
+      # Size in MB
+      maxSize: 100000
+      region: ""
+      secretKey: ""
+      storageClass: "STANDARD"
+      username: "openxchange_user"
+      useSSL: true
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/opendesk_main.yaml.gotmpl?ref_type=heads
+  apps:
+    cassandra:
+      enabled: false
+      namespace: ~
+    certificates:
+      enabled: true
+      namespace: ~
+    clamavDistributed:
+      enabled: false
+      namespace: ~
+    clamavSimple:
+      enabled: true
+      namespace: ~
+    collabora:
+      enabled: true
+      namespace: ~
+    collaboraController:
+      enabled: false # if OPENDESK_ENTERPRISE then true, else false
+      namespace: ~
+    cryptpad:
+      enabled: true
+      namespace: ~
+    dkimpy:
+      enabled: false
+      namespace: ~
+    dovecot:
+      enabled: true
+      namespace: ~
+    element:
+      enabled: true
+      namespace: ~
+    elementAdmin:
+      enabled: false
+      namespace: ~
+    elementGroupsync:
+      enabled: false
+      namespace: ~
+    home:
+      enabled: true
+      namespace: ~
+    jitsi:
+      enabled: true
+      namespace: ~
+    mariadb:
+      enabled: true
+      namespace: ~
+    memcached:
+      enabled: true
+      namespace: ~
+    migrations:
+      enabled: true
+      namespace: ~
+    minio:
+      enabled: true
+      namespace: ~
+    nextcloud:
+      enabled: true
+      namespace: ~
+    notes:
+      enabled: false
+      namespace: ~
+    nubus:
+      enabled: true
+      namespace: ~
+    openproject:
+      enabled: true
+      namespace: ~
+    oxAppSuite:
+      enabled: true
+      namespace: ~
+    postfix:
+      enabled: true
+      namespace: ~
+    postgresql:
+      enabled: true
+      namespace: ~
+    redis:
+      enabled: true
+      namespace: ~
+    staticFiles:
+      enabled: true
+      namespace: ~
+    xwiki:
+      enabled: true
+      namespace: ~
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/persistence.yaml.gotmpl?ref_type=heads
+  persistence:
+    # Will be used as default if not otherwise define on the component level
+    storageClassNames:
+      RWX: ""
+      RWO: ""
+
+    storages:
+      cassandra:
+        size: "1Gi"
+        commitLogsize: "256Mi"
+        storageClassName: ~
+      clamav:
+        size: "1Gi"
+        storageClassName: ~
+      dovecot:
+        size: "1Gi"
+        storageClassName: ~
+      mariadb:
+        size: "1Gi"
+        storageClassName: ~
+      matrixNeoDateFixBot:
+        size: "1Gi"
+        storageClassName: ~
+      minio:
+        size: "10Gi"
+        storageClassName: ~
+      nubusLdapServerData:
+        size: "1Gi"
+        storageClassName: ~
+      nubusPortalConsumer:
+        size: "1Gi"
+        storageClassName: ~
+      nubusProvisioningNats:
+        size: "1Gi"
+        storageClassName: ~
+      # This option was introduced with openDesk 1.6. For now we want to use the Helm charts default empty string
+      # to avoid issues during the upgrade modifying an existing PV, as the migrations in 1.6 required a smooth
+      # Nubus deployment.
+      # In a later openDesk release we will advise in the migrations.md to explicitly set this on existing deployments
+      # to the default storage class.
+      nubusUdmListener:
+        size: "1Gi"
+        #storageClassName: ""
+      oxConnector:
+        size: "1Gi"
+        storageClassName: ~
+      postfix:
+        size: "1Gi"
+        storageClassName: ~
+      postgresql:
+        size: "1Gi"
+        storageClassName: ~
+      prosody:
+        size: "1Gi"
+        storageClassName: ~
+      redis:
+        size: "1Gi"
+        storageClassName: ~
+      synapse:
+        size: "1Gi"
+        storageClassName: ~
+      xwiki:
+        size: "1Gi"
+        storageClassName: ~
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/replicas.yaml.gotmpl?ref_type=heads
+  replicas:
+    # -- component: Cassandra
+    # -- scalable: tbd
+    cassandra: 1
+    # -- component: Antivirus (ClamAV)
+    # -- scalable: true
+    # -- comment: clamav-simple - supports `ReadWriteOnce` PVCs.
+    clamav: 1
+    # -- scalable: true
+    # -- comment: clamav-distributed - requires `ReadWriteMany` PVCs.
+    clamd: 1
+    # -- scalable: true
+    # -- comment: clamav-distributed - You do not want to scale this service, as it just updates the signature files
+    # centrally an should be a singleton.
+    freshclam: 1
+    # -- scalable: true
+    # -- comment: clamav-distributed - requires `ReadWriteMany` PVCs.
+    icap: 1
+    # -- scalable: true
+    # -- comment: clamav-distributed - requires `ReadWriteMany` PVCs.
+    milter: 1
+
+    # -- component: Weboffice (Collabora)
+    # -- scalable: true
+    # -- comment: If Collabora Controller is enabled, Collabora is autoscaling and the value below will be ignored.
+    # Please check `enterpriseFeatures.collabora.autoscaling` for autoscaling settings.
+    collabora: 1
+    # -- scalable: true
+    # -- comment: Load between Collabora Controller Pods is going to one Pod (the leader) only, therefore raise the number
+    # e.g. to `2` for high availability of the Collabora Controller.
+    collaboraController: 1
+
+    # -- component: Pad (CryptPad)
+    # -- scalable: false
+    cryptpad: 1
+
+    # -- component: Groupware (OX AppSuite, OX Dovecot etc.)
+    # -- scalable: false
+    # -- comment: Scalable in openDesk Enterprise only
+    dovecot: 1
+    # -- scalable: false
+    postfix: 1
+    # -- scalable: true
+    dkimpy: 1
+
+    # -- component: Chat (Element, Synapse)
+    # -- scalable: true
+    element: 1
+    # -- scalable: tbd
+    matrixNeoBoardWidget: 1
+    # -- scalable: tbd
+    matrixNeoChoiceWidget: 1
+    # -- scalable: tbd
+    matrixNeoDateFixBot: 1
+    # -- scalable: tbd
+    matrixNeoDateFixWidget: 1
+    # -- scalable: tbd
+    matrixUserVerificationService: 1
+    # -- scalable: tbd
+    synapse: 1
+    # -- scalable: true
+    synapseWeb: 1
+    # -- scalable: true
+    wellKnown: 1
+
+    # -- component: IAM (Nubus)
+    # -- scalable: true
+    intercomService: 1
+    # -- scalable: true
+    keycloak: 1
+    # -- scalable: false
+    oxConnector: 1
+    # -- scalable: tbd
+    umsGuardianAuthorizationApi: 1
+    # -- scalable: tbd
+    umsGuardianManagementApi: 1
+    # -- scalable: tbd
+    umsGuardianManagementUi: 1
+    # -- scalable: tbd
+    umsGuardianOpenPolicyAgent: 1
+    # -- scalable: false
+    # -- comment: Should not be scaled, is an async process.
+    umsKeycloakExtensionsHandler: 1
+    # -- scalable: true
+    umsKeycloakExtensionsProxy: 1
+    # -- scalable: tbd
+    umsLdapNotifier: 1
+    # -- scalable: true
+    # -- comment: Please find details on the following `umsLdapServer*` entries in the upstream documentation:
+    # https://docs.software-univention.de/nubus-kubernetes-operation/latest/en/configuration/ldap.html#directory-service-high-availability-and-scalability
+    umsLdapServerPrimary: 1
+    # -- scalable: true
+    umsLdapServerSecondary: 0
+    # -- scalable: true
+    # -- comment: The LDAP proxy is only required in situations where there are clients outside of UDM writing into the
+    # LDAP like Samba. This is not a use case within openDesk so the LDAP Proxy's replica count should be kept at `0`
+    umsLdapServerProxy: 0
+    # -- scalable: tbd
+    umsNotificationsApi: 1
+    # -- scalable: true
+    umsPortalFrontend: 1
+    # -- scalable: false
+    umsPortalConsumer: 1
+    # -- scalable: true
+    umsPortalServer: 1
+    # -- scalable: tdb
+    umsProvisioningApi: 1
+    # -- scalable: false
+    umsProvisioningDispatcher: 1
+    # -- scalable: tdb
+    umsProvisioningNats: 1
+    # -- scalable: tdb
+    umsProvisioningPrefill: 1
+    # -- scalable: false
+    umsProvisioningUdmTransformer: 1
+    # -- scalable: tbd
+    umsSelfserviceConsumer: 1
+    # -- scalable: true
+    umsUdmListener: 1
+    # -- scalable: tbd
+    umsUdmRestApi: 1
+    # -- scalable: tbd
+    umsUmcGateway: 1
+    # -- scalable: tbd
+    umsUmcServer: 1
+    # -- scalable: tbd
+    umsUmcServerProxy: 1
+    # -- scalable: true
+    nginxS3Gateway: 1
+
+    # -- component: Video conference (Jitsi)
+    # -- scalable: tbd
+    jibri: 1
+    # -- scalable: tbd
+    jicofo: 1
+    # -- scalable: tbd
+    jigasi: 1
+    # -- scalable: tbd
+    jitsi: 1
+    # -- scalable: tbd
+    jitsiKeycloakAdapter: 1
+    # -- scalable: tbd
+    jvb: 1
+
+    # -- component: Persistence Layer
+    # -- scalable: false
+    mariadb: 1
+    # -- scalable: false
+    memcached: 1
+    # -- scalable: true
+    minio: 1
+    # -- scalable: false
+    postgres: 1
+    # -- scalable: tbd
+    redis: 1
+
+    # -- component: Filestore (Nextcloud)
+    # -- scalable: true
+    nextcloud: 1
+    # -- scalable: true
+    nextcloudNotifyPush: 1
+    # -- scalable: true
+    nextcloudExporter: 1
+
+    # -- component: openDesk Static Files
+    # -- scalable: true
+    opendeskStaticFiles: 1
+
+    # -- component: Project management (OpenProject)
+    # -- scalable: true
+    openprojectWeb: 1
+    # -- scalable: true
+    # -- comment: Async service working on processing queue content. Can work on queues in parallel (when needed). Check
+    # https://www.openproject.org/docs/installation-and-operations/installation/helm-chart/ for details, as e.g.
+    # dedicated workers for specific queues are possible with OpenProject.
+    openprojectWorker: 1
+
+    # -- component: Groupware (OX App Suite)
+    # -- scalable: tbd
+    openxchangeCoreDocumentConverter: 1
+    # -- scalable: tbd
+    openxchangeCoreGuidedtours: 1
+    # -- scalable: tbd
+    openxchangeCoreImageConverter: 1
+    # -- scalable: tbd
+    openxchangeCoreMW: 1
+    # -- scalable: tbd
+    openxchangeCoreUI: 1
+    # -- scalable: tbd
+    openxchangeCoreUIMiddleware: 1
+    # -- scalable: tbd
+    openxchangeCoreUserGuide: 1
+    # -- scalable: tbd
+    openxchangeGotenberg: 1
+    # -- scalable: tbd
+    openxchangeGuardUI: 1
+    # -- scalable: tbd
+    openxchangeNextcloudIntegrationUI: 1
+    # -- scalable: tbd
+    openxchangePluginsUI: 1
+    # -- scalable: tbd
+    openxchangePublicSectorUI: 1
+
+    # -- component: Knowledge management (XWiki)
+    # -- scalable: false
+    xwiki: 1
+
+    # -- component: Note taking (Notes)
+    # -- scalable: true
+    notesBackend: 1
+    # -- scalable: true
+    notesFrontend: 1
+    # -- scalable: true
+    notesYProvider: 1
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/repositories.yaml.gotmpl?ref_type=heads
+  repositories:
+    # Fine-granular registry settings, useful when you can't use virtual (Artifactory) or group (Nexus) repositories.
+    # Higher precedence than `global.imageRegistry`
+    image:
+      dockerHub: ""
+      registryOpencodeDe: ""
+      registryOpencodeDeEnterprise: ""
+    # Fine-granular registry settings, useful when you can't use virtual (Artifactory) or group (Nexus) repositories.
+    # Higher precedence than `global.imageRegistry`
+    helm:
+      registryOpencodeDe: ""
+      registryOpencodeDeEnterprise: ""
+    # ClamAV registry settings
+    clamav:
+      auth: {}
+      #  username: ""
+      #  password: ""
+      mirror:
+        scheme: "https"
+        url: "clamavdb.c3sl.ufpr.br"
+      customURLs:
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/badmacro.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/blurl.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/bofhland_cracked_URL.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/bofhland_malware_attach.hdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/bofhland_malware_URL.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/bofhland_phishing_URL.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/foxhole_filename.cdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/foxhole_generic.cdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/foxhole_js.cdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/foxhole_js.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/hackingteam.hsb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/junk.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/jurlbl.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/jurlbla.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/lott.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/malwarehash.hsb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/phish.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/phishtank.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/porcupine.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/rogue.hdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/scam.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/shelter.ldb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/spamattach.hdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/spamimg.hdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/spear.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/spearl.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/winnow.attachments.hdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/winnow_bad_cw.hdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/winnow_extended_malware.hdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/winnow_extended_malware_links.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/winnow_malware.hdb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/winnow_malware_links.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/winnow_phish_complete_url.ndb"
+        - scheme: "https"
+          url: "ftp.swin.edu.au/sanesecurity/winnow_spam_complete.ndb"
+        - scheme: "https"
+          url: "urlhaus.abuse.ch/downloads/urlhaus.ndb"
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/resources.yaml.gotmpl?ref_type=heads
+  # Some charts do not support null or ~ values, because they use their default values.
+  # To not limit the CPU, we set all CPU limits to 99.
+  resources:
+    cassandra:
+      limits:
+        cpu: 99
+        memory: "4Gi"
+      requests:
+        cpu: 0.1
+        memory: "1Gi"
+    clamd:
+      limits:
+        cpu: 99
+        memory: "4Gi"
+      requests:
+        cpu: 0.1
+        memory: "1.5Gi"
+    collabora:
+      limits:
+        cpu: 99
+        memory: "4Gi"
+      requests:
+        cpu: 0.5
+        memory: "512Mi"
+    collaboraController:
+      limits:
+        cpu: 99
+        memory: "128Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    cryptpad:
+      limits:
+        cpu: 99
+        memory: "2Gi"
+      requests:
+        cpu: 0.1
+        memory: "512Mi"
+    dkimpy:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "128Mi"
+    dovecot:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    element:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    freshclam:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "96Mi"
+    icap:
+      limits:
+        cpu: 99
+        memory: "128Mi"
+      requests:
+        cpu: 0.1
+        memory: "16Mi"
+    intercomService:
+      limits:
+        cpu: 99
+        memory: "128Mi"
+      requests:
+        cpu: 0.1
+        memory: "64Mi"
+    # The Jibri container requires 2Gi /dev/shm so we need a limit based on the expected memory consumption of the
+    # service plus the 2Gi /dev/shm
+    jibri:
+      limits:
+        cpu: 99
+        memory: "3Gi"
+      requests:
+        cpu: 0.1
+        memory: "384Mi"
+    # The jicofo, jvb and jigasi containers require 3GB memory for the Java process, so we limit it to 3.5Gi overall consumption.
+    jicofo:
+      limits:
+        cpu: 99
+        memory: "3584Mi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    # The jicofo, jvb and jigasi containers require 3GB memory for the Java process, so we limit it to 3.5Gi overall consumption.
+    jigasi:
+      limits:
+        cpu: 99
+        memory: "3584Mi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    jitsi:
+      limits:
+        cpu: 99
+        memory: "512Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    jitsiKeycloakAdapter:
+      limits:
+        cpu: 99
+        memory: "128Mi"
+      requests:
+        cpu: 0.01
+        memory: "48Mi"
+    # The jicofo, jvb and jigasi containers require 3GB memory for the Java process, so we limit it to 3.5Gi overall consumption.
+    jvb:
+      limits:
+        cpu: 99
+        memory: "3584Mi"
+      requests:
+        cpu: 0.1
+        memory: "384Mi"
+    notesBackend:
+      limits:
+        cpu: 99
+        memory: "768Mi"
+      requests:
+        cpu: 0.1
+        memory: "512Mi"
+    notesFrontend:
+      limits:
+        cpu: 99
+        memory: "128Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    notesYProvider:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "128Mi"
+    opendeskKeycloakBootstrap:
+      limits:
+        cpu: 99
+        memory: "512Mi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    opendeskStaticFiles:
+      limits:
+        cpu: 99
+        memory: "64Mi"
+      requests:
+        cpu: 0.01
+        memory: "16Mi"
+    umsKeycloak:
+      limits:
+        cpu: 99
+        memory: "2Gi"
+      requests:
+        cpu: 0.1
+        memory: "512Mi"
+    umsKeycloakBootstrap:
+      limits:
+        cpu: 99
+        memory: "512Mi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsKeycloakExtensionHandler:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "48Mi"
+    umsKeycloakExtensionProxy:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "48Mi"
+    mariadb:
+      limits:
+        cpu: 99
+        memory: "2Gi"
+      requests:
+        cpu: 0.1
+        memory: "384Mi"
+    matrixNeoBoardWidget:
+      limits:
+        cpu: 99
+        memory: "128Mi"
+      requests:
+        cpu: 0.1
+        memory: "48Mi"
+    matrixNeoChoiceWidget:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "48Mi"
+    matrixNeoDateFixBot:
+      limits:
+        cpu: 99
+        memory: "512Mi"
+      requests:
+        cpu: 0.1
+        memory: "128Mi"
+    matrixNeoDateFixWidget:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "48Mi"
+    matrixUserVerificationService:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "128Mi"
+    memcached:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    milter:
+      limits:
+        cpu: 99
+        memory: "96Mi"
+      requests:
+        cpu: 0.1
+        memory: "16Mi"
+    minio:
+      limits:
+        cpu: 99
+        memory: "2Gi"
+      requests:
+        cpu: 0.25
+        memory: "256Mi"
+    nextcloud:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "512Mi"
+    nextcloudCron:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "512Mi"
+    nextcloudExporter:
+      limits:
+        cpu: 99
+        memory: "128Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    nextcloudNotifyPush:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "512Mi"
+    nginxS3Gateway:
+      limits:
+        cpu: 99
+        memory: "64Mi"
+      requests:
+        cpu: "100m"
+        memory: "16Mi"
+    openproject:
+      limits:
+        cpu: 99
+        memory: "2Gi"
+      requests:
+        cpu: 0.1
+        memory: "768Mi"
+    openprojectDbInit:
+      limits:
+        cpu: 99
+        memory: "768Mi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    openprojectAppInit:
+      limits:
+        cpu: 99
+        memory: "768Mi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    openprojectSeederJob:
+      limits:
+        cpu: 99
+        memory: "768Mi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    openprojectWorkers:
+      limits:
+        cpu: 99
+        memory: "4Gi"
+      requests:
+        cpu: 0.25
+        memory: "512Mi"
+    openxchangeCoreDocumentConverter:
+      limits:
+        cpu: 99
+        memory: "2Gi"
+      requests:
+        cpu: 0.25
+        memory: "1.25Gi"
+    openxchangeCoreGuidedtours:
+      limits:
+        cpu: 99
+        memory: "96Mi"
+      requests:
+        cpu: 0.01
+        memory: "32Mi"
+    openxchangeCoreImageConverter:
+      limits:
+        cpu: 99
+        memory: "2Gi"
+      requests:
+        cpu: 0.5
+        memory: "1.25Gi"
+    openxchangeCoreMW:
+      limits:
+        cpu: 99
+        memory: "8Gi"
+      requests:
+        cpu: 1
+        memory: "1.25Gi"
+    openxchangeCoreUI:
+      limits:
+        cpu: 99
+        memory: "96Mi"
+      requests:
+        cpu: 0.01
+        memory: "32Mi"
+    openxchangeCoreUIMiddleware:
+      limits:
+        cpu: 99
+        memory: "768Mi"
+      requests:
+        cpu: 0.5
+        memory: "192Mi"
+    openxchangeCoreUIMiddlewareUpdater:
+      limits:
+        cpu: 99
+        memory: "768Mi"
+      requests:
+        cpu: 0.5
+        memory: "192Mi"
+    openxchangeCoreUserGuide:
+      limits:
+        cpu: 99
+        memory: "96Mi"
+      requests:
+        cpu: 0.02
+        memory: "32Mi"
+    openxchangeGotenberg:
+      limits:
+        cpu: 99
+        memory: "96Mi"
+      requests:
+        cpu: 0.05
+        memory: "32Mi"
+    openxchangeGuardUI:
+      limits:
+        cpu: 99
+        memory: "96Mi"
+      requests:
+        cpu: 0.01
+        memory: "32Mi"
+    openxchangeNextcloudIntegrationUI:
+      limits:
+        cpu: 99
+        memory: "96Mi"
+      requests:
+        cpu: 0.01
+        memory: "32Mi"
+    openxchangePluginsUI:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.05
+        memory: "32Mi"
+    openxchangePublicSectorUI:
+      limits:
+        cpu: 99
+        memory: "96Mi"
+      requests:
+        cpu: 0.01
+        memory: "32Mi"
+    oxConnector:
+      limits:
+        cpu: 99
+        memory: "512Mi"
+      requests:
+        cpu: 0.1
+        memory: "64Mi"
+    postfix:
+      limits:
+        cpu: 99
+        memory: "128Mi"
+      requests:
+        cpu: 0.1
+        memory: "16Mi"
+    postgresql:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    prosody:
+      limits:
+        cpu: 99
+        memory: "512Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    redis:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    synapse:
+      limits:
+        cpu: 99
+        memory: "4Gi"
+      requests:
+        cpu: 0.5
+        memory: "256Mi"
+    synapseWeb:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "64Mi"
+    umsGuardianManagementApi:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsGuardianManagementUi:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsGuardianAuthorizationApi:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsOpenPolicyAgent:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsLdapNotifier:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsLdapServer:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsNotificationsApi:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsPortalFrontend:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsPortalConsumer:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsPortalConsumerDependencies:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsPortalServer:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsProvisioningApi:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "100Mi"
+    umsProvisioningDispatcher:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsProvisioningPrefill:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsProvisioningRegisterConsumers:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "64Mi"
+    umsProvisioningUdmTransformer:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "64Mi"
+    umsProvisioningNats:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "128Mi"
+    umsSelfserviceConsumer:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsStackDataUms:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsUdmListener:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsUdmRestApi:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsUdmRestApiInit:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsUmcGateway:
+      limits:
+        cpu: 99
+        memory: "1Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    umsUmcServer:
+      limits:
+        cpu: 99
+        memory: "2Gi"
+      requests:
+        cpu: 0.1
+        memory: "256Mi"
+    wellKnown:
+      limits:
+        cpu: 99
+        memory: "256Mi"
+      requests:
+        cpu: 0.1
+        memory: "32Mi"
+    xwiki:
+      limits:
+        cpu: 99
+        memory: "8Gi"
+      requests:
+        cpu: 0.1
+        memory: "1.5Gi"
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/security.yaml.gotmpl?ref_type=heads
+  security:
+    otterizeIntents:
+      enabled: false
+    clusterPostfix:
+      enabled: false
+      namespace: ""
+    ingressController:
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: "ingress-nginx"
+      namespace: "ingress-nginx"
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/selinux.yaml.gotmpl?ref_type=heads
+  seLinuxOptions:
+    cassandra: ~
+    clamavSimple: ~
+    clamav: ~
+    clamd: ~
+    collabora: ~
+    collaboraController: ~
+    cryptpad: ~
+    dkimpy: ~
+    dovecot: ~
+    element: ~
+    freshclam: ~
+    icap: ~
+    intercom: ~
+    # The Jibri Helm chart does not support setting the securityContext externally.
+    # jibri: ~
+    jicofo: ~
+    jigasi: ~
+    jitsi: ~
+    jitsiKeycloakAdapter: ~
+    jitsiPatchJVB: ~
+    jvb: ~
+    mariadb: ~
+    matrixNeoBoardWidget: ~
+    matrixNeoChoiceWidget: ~
+    matrixNeoDateFixBot: ~
+    matrixNeoDateFixWidget: ~
+    matrixUserVerificationService: ~
+    memcached: ~
+    migrations: ~
+    milter: ~
+    minio: ~
+    nextcloud: ~
+    nextcloudExporter: ~
+    nextcloudManagement: ~
+    notesBackend: ~
+    notesFrontend: ~
+    notesYProvider: ~
+    opendeskKeycloakBootstrap: ~
+    opendeskStaticFiles: ~
+    openproject: ~
+    openprojectBootstrap: ~
+    openprojectDbInit: ~
+    openxchangeBootstrap: ~
+    openxchangeCoreGuidedtours: ~
+    openxchangeCoreMW: ~
+    openxchangeCoreUI: ~
+    openxchangeCoreUIMiddleware: ~
+    openxchangeCoreUserGuide: ~
+    openxchangeDocumentConverter: ~
+    openxchangeGotenberg: ~
+    openxchangeGuardUI: ~
+    openxchangeImageConverter: ~
+    openxchangeNextcloudIntegrationUI: ~
+    openxchangePluginsUI: ~
+    openxchangePublicSectorUI: ~
+    oxConnector: ~
+    postfix: ~
+    postgresql: ~
+    prosody: ~
+    redis: ~
+    synapse: ~
+    synapseCreateUser: ~
+    synapseGuestModule: ~
+    synapseWeb: ~
+    umsGuardianAuthorizationApi: ~
+    umsGuardianManagementApi: ~
+    umsGuardianManagementUi: ~
+    umsGuardianOpenPolicyAgent: ~
+    umsKeycloak: ~
+    umsKeycloakBootstrap: ~
+    umsKeycloakExtensionHandler: ~
+    umsKeycloakExtensionProxy: ~
+    umsLdapNotifier: ~
+    umsLdapServer: ~
+    umsNotificationsApi: ~
+    umsPortalFrontend: ~
+    umsPortalConsumer: ~
+    umsPortalServer: ~
+    umsProvisioning: ~
+    umsProvisioningNats: ~
+    umsSelfserviceConsumer: ~
+    umsStackDataUms: ~
+    umsUdmListener: ~
+    umsUdmRestApi: ~
+    umsUmcGateway: ~
+    umsUmcServer: ~
+    wellKnown: ~
+    xwiki: ~
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/service.yaml.gotmpl?ref_type=heads
+  service:
+    # Only override when needed, the default is set in `.Values.cluster.service.type` defined in `cluster.yaml.gotmpl`
+    type:
+      jitsiVideoBridge: ~
+      dovecot: ~
+      postfix: ~
+  # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/sip.yaml.gotmpl?ref_type=heads
+  sip:
+    # When Jigasi is called, it expects to find a "Jitsi-Conference-Room" header
+    # in the invite with the name of the Jitsi Meet conference. If no header is
+    # present, it will join the room specified under "JIGASI_SIP_DEFAULT_ROOM".
+    # In openDesk, this default room is "siptest"
+    #
+    # While there are many different ways to do this, the typical flow is as
+    # follows:
+    #
+    # - The conference mapper provides PIN for the related meeting room. An
+    #   application can get it from the conference mapper and puts it into an
+    #   invite message or the meeting participants can get it from Jitsi UI
+    #   during the meeting and sends it to SIP participant.
+    #
+    # - SIP participant calls the dial-in phone number
+    #   jitsi.web.extraConfig.dialinPhoneNumbers
+    #
+    # - IVR accepts the call and asks for PIN.
+    #
+    # - SIP participant enters PIN
+    #
+    # - IVR gets the related meeting room from the conference mapper using PIN.
+    #
+    # - IVR redirects the call to Jigasi SIP account with "Jitsi-Conference-Room"
+    #   header.
+    #
+    # - Jigasi attaches SIP participant to the meeting room.
+    #
+    # IVR solution depends on the SIP server. For a reference implementation for
+    # FreeSwitch, see https://github.com/nordeck/jigasi-recepta
+    #
+    # See also:
+    # - https://github.com/jitsi/jigasi (incoming calls)
+    jigasi:
+      enabled: false
+      port: "5060"
+      # e.g. sip.mydomain.tld
+      server: ""
+      transport: "TCP"
+      # e.g. jigasi@sip.mydomain.tld
+      uri: ""
+      password: ~
+  smtp:
+    host: ""
+    port: 587
+    username: ""
+    password: ""
+    localpartNoReply: "no-reply"
+
+    # For the following settings to have effect `apps.dkimpy.enabled` must be `true`.
+    dkim:
+      key:
+        # DKIM private key as plaintext value.
+        value: ""
+
+        # DKIM private key from existing secret. As a higher precedence than the plain `value`.
+        secret:
+          name: ""
+          key: ""
+      selector: "rsa"
+      useED25519: false
+  technical:
+    # Collabora related technical settings
+    collabora:
+      # Defines the value for the start parameter `-o:num_prespawn_children`
+      numPrespawnChildren: 4
+  turn:
+    transport: "udp"
+    credentials: ""
+    server:
+      host: ""
+      port: "3478"
+    tls:
+      host: ""
+      port: "5349"
+  ldap:
+    host: "ums-ldap-server"
+    notifierHost: "ums-ldap-notifier"
+    baseDn: "dc=swp-ldap,dc=internal"
+  ## Define Keycloak realmname for openDesk
+  platform:
+    realm: "opendesk"
+  theme:
+    ## Define texts
+    #
+    texts:
+      productName: "openDesk"
+
+    ## Define colors
+    #
+    colors:
+      # Element, OX AppSuite, Xwiki, Jitsi
+      primary: "#571EFA"
+      # OX AppSuite
+      primary15: "#e7dffa"
+      # OX AppSuite
+      black: "#000000"
+      # OX AppSuite, Xwiki
+      white: "#ffffff"
+      # OX AppSuite, Xwiki, Jitsi
+      secondaryGreyLight: "#f5f5f5"
+
+      # Not in use yet
+      primary65: "#9673e9"
+      primary35: "#c7b3f3"
+      secondaryBlue: "#52c1ff"
+      secondaryBlueHighcontrast: "#0c3ff3"
+      secondaryRed: "#ff529e"
+      secondaryYellow: "#ffc700"
+      secondaryGreen: "#00ffcd"
+      secondaryGrey: "#adb3bc"

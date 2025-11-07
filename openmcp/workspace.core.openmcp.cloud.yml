@@ -1,0 +1,17 @@
+---
+apiVersion: core.openmcp.cloud/v1alpha1
+kind: Workspace
+metadata:
+  name: poc-bmi-opendesk
+  namespace: project-poc-bmi-opendesk
+  annotations:
+    openmcp.cloud/display-name: BMI openDesk with OCM PoC
+  labels:
+    openmcp.cloud.sap/charging-target: "0" ## Mandatory
+spec:
+  members:
+    - kind: User
+      # todo: replace with your admin user
+      name: <admin_user>
+      roles:
+        - admin

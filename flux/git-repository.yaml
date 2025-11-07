@@ -1,0 +1,13 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: poc-bmi-opendesk
+  namespace: default
+spec:
+  interval: 10s
+  secretRef:
+    name: github-pull-secret
+  url: https://github.com/platform-mesh/samples-opendesk-ocm-landscaper
+  ref:
+    branch: main

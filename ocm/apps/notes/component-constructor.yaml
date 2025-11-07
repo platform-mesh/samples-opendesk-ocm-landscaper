@@ -1,0 +1,15 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/notes
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/notes ##################
+      - name: helm-chart-notes
+        type: helmChart
+        version: "2.0.0"
+        access:
+          type: ociArtifact
+          imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/dinum/charts/notes/impress:2.0.0

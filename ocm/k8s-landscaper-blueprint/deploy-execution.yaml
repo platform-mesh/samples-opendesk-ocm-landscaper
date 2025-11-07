@@ -1,0 +1,930 @@
+deployItems:
+  - name: deploy-item-ingress-nginx
+    type: landscaper.gardener.cloud/helm
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: ingress-nginx
+      namespace: default
+      createNamespace: false
+      chart:
+        resourceRef: {{ getResourceKey `cd://resources/helm-chart-ingress-nginx` }}
+      values:
+        controller:
+          allowSnippetAnnotations: true
+          config:
+            # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/docs/requirements.md#supported-controllers
+            controller.config.annotations-risk-level: "Critical"
+            controller.config.strict-validate-path-type: false
+            annotations-risk-level: "Critical"
+            strict-validate-path-type: false
+            allow-snippet-annotations: true
+          service:
+            annotations:
+              ingressclass.kubernetes.io/is-default-class: "true"
+              loadbalancer.openstack.org/class: internet
+              # Let Gardener manage external DNS records for this Service.
+              dns.gardener.cloud/dnsnames: "*.{{ .imports.environmentsDefaults.global.domain | toYaml }}"
+              dns.gardener.cloud/ttl: "600"
+              dns.gardener.cloud/class: garden
+
+  - name: deploy-item-cert-manager
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ingress-nginx
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: cert-manager
+      namespace: default
+      createNamespace: false
+      chart:
+        resourceRef: {{ getResourceKey `cd://resources/helm-chart-cert-manager` }}
+      values:
+        webhook:
+          timeoutSeconds: 14
+        crds:
+          enabled: true
+
+###################################################### apps/opendesk-services ########################################################
+  - name: deploy-item-opendesk-otterize
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-cert-manager
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 15m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-otterize
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L124
+        component: "opendesk-services"
+        resourceRef: "helm-chart-home"
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/opendesk-services/values-home.yaml.gotmpl?ref_type=heads
+      values:
+          values: "otterize.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-home
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-opendesk-otterize
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 15m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-home
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L124
+        component: "opendesk-services"
+        resourceRef: "helm-chart-home"
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/opendesk-services/values-home.yaml.gotmpl?ref_type=heads
+      values:
+          values: "home.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-certificates
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-opendesk-home
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-certificates
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L19
+        component: "opendesk-services"
+        resourceRef: "helm-chart-certificates"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/opendesk-services/values-certificates.yaml.gotmpl?ref_type=heads
+          values: "certificates.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-static-files
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-opendesk-home
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 15m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-static-files
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L338
+        component: "opendesk-services"
+        resourceRef: "helm-chart-home"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/opendesk-services/values-opendesk-static-files.yaml.gotmpl?ref_type=heads
+        values: "opendesk-static-files.yaml.gotmpl"
+
+  ###################################################### apps/services-external ########################################################
+  - name: deploy-item-redis
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-cert-manager
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: redis
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L434
+        component: "services-external"
+        resourceRef: "helm-chart-redis"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/services-external/values-redis.yaml.gotmpl?ref_type=heads
+
+        values: "redis.yaml.gotmpl"
+
+  - name: deploy-item-memcached
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-cert-manager
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: memcached
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L216
+        component: "services-external"
+        resourceRef: "helm-chart-memcached"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/services-external/values-memcached.yaml.gotmpl?ref_type=heads
+        # @TODO: @Wiktor i think secrets is not needed.
+
+        values: "memcached.yaml.gotmpl"
+  
+  - name: deploy-item-postgresql
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-cert-manager
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: postgresql
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L424
+        component: "services-external"
+        resourceRef: "helm-chart-postgresql"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/services-external/values-postgresql.yaml.gotmpl?ref_type=heads
+
+        values: "postgresql.yaml.gotmpl"
+
+  - name: deploy-item-mariadb
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-cert-manager
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: mariadb
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L156
+        component: "services-external"
+        resourceRef: "helm-chart-mariadb"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/services-external/values-mariadb.yaml.gotmpl?ref_type=heads
+
+        values: "mariadb.yaml.gotmpl"
+
+  - name: deploy-item-postfix
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-cert-manager
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: postfix
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L414
+        component: "services-external"
+        resourceRef: "helm-chart-postfix"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/services-external/values-postfix.yaml.gotmpl?ref_type=heads
+
+        values: "postfix.yaml.gotmpl"
+
+  - name: deploy-item-clamav-simple
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-cert-manager
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: clamav-simple
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L29
+        component: "services-external"
+        resourceRef: "helm-chart-clamav"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/services-external/values-clamav-simple.yaml.gotmpl?ref_type=heads
+
+        values: "clamav-simple.yaml.gotmpl"
+
+  - name: deploy-item-minio
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-cert-manager
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: minio
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L236
+        component: "services-external"
+        resourceRef: "helm-chart-minio"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/services-external/values-minio.yaml.gotmpl?ref_type=heads
+
+        values: "minio.yaml.gotmpl"
+
+  ###################################################### apps/nubus ########################################################
+  - name: deploy-item-ums
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-postgresql
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 20m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: ums
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L296
+        component: "nubus"
+        resourceRef: "helm-chart-nubus"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/nubus/values-nubus.yaml.gotmpl?ref_type=heads
+        values: "nubus.yaml.gotmpl"
+
+  - name: deploy-item-intercom-service
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-postgresql
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: intercom-service
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L134
+        component: "nubus"
+        resourceRef: "helm-chart-intercom-service"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/nubus/values-intercom-service.yaml.gotmpl?ref_type=heads
+
+        values: "intercom-service.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-keycloak-bootstrap
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 15m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-keycloak-bootstrap
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L328
+        component: "nubus"
+        resourceRef: "helm-chart-opendesk-keycloak-bootstrap"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/nubus/values-opendesk-keycloak-bootstrap.yaml.gotmpl?ref_type=heads
+
+        values: "opendesk-keycloak-bootstrap.yaml.gotmpl"
+
+  - name: deploy-item-nginx-s3-gateway
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-postgresql
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 15m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: nginx-s3-gateway
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L276
+        component: "nubus"
+        resourceRef: "helm-chart-nginx-s3-gateway"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/nubus/values-nginx-s3-gateway.yaml.gotmpl?ref_type=heads
+        {{- $newContext := dict "Release" .imports.release "Values" (merge .imports.environmentsDefaults (dict "secrets" .imports.secrets)) }}
+        {{- with $newContext }}
+        {{ include "./helmfile/apps/nubus/values-nginx-s3-gateway.yaml.gotmpl" . | nindent 8 }}
+        {{- end }}
+
+  ###################################################### apps/open-xchange ########################################################
+  - name: deploy-item-dovecot
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: dovecot
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L94
+        component: "open-xchange"
+        resourceRef: "helm-chart-dovecot"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/open-xchange/values-dovecot.yaml.gotmpl?ref_type=heads
+
+        values: "dovecot.yaml.gotmpl"
+
+  - name: deploy-item-open-xchange
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: open-xchange
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L380
+        resourceRef: {{ getResourceKey `cd://componentReferences/open-xchange/resources/helm-chart-appsuite-public-sector` }}
+      values:
+        # TODO: Validate if correct values are used here.
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/open-xchange/values-openxchange.yaml.gotmpl?ref_type=heads
+        {{- $newContext := dict "Release" .imports.release "Values" (merge .imports.environmentsDefaults (dict "secrets" .imports.secrets)) }}
+        {{- with $newContext }}
+        {{ include "./helmfile/apps/open-xchange/values-openxchange.yaml.gotmpl" . | nindent 8 }}
+        {{- end }}
+
+  - name: deploy-item-opendesk-open-xchange-bootstrap
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-open-xchange-bootstrap
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L392
+        component: "open-xchange"
+        resourceRef: "helm-chart-opendesk-open-xchange-bootstrap"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/open-xchange/values-openxchange-bootstrap.yaml.gotmpl?ref_type=heads
+
+        values: "openxchange-bootstrap.yaml.gotmpl"
+
+  - name: deploy-item-ox-connector
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-open-xchange
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 20m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: ox-connector
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L402
+        component: "open-xchange"
+        resourceRef: "helm-chart-ox-connector"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/open-xchange/values-oxconnector.yaml.gotmpl?ref_type=heads
+
+        values: "oxconnector.yaml.gotmpl"
+
+  ################## apps/nextcloud ##################
+  - name: deploy-item-opendesk-nextcloud-management
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ox-connector
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-nextcloud-management
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L256
+        component: "nextcloud"
+        resourceRef: "helm-chart-opendesk-nextcloud-management"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/nextcloud/values-nextcloud-management.yaml.gotmpl?ref_type=heads
+
+        values: "nextcloud-management.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-nextcloud
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-opendesk-nextcloud-management
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-nextcloud
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L246
+        component: "nextcloud"
+        resourceRef: "helm-chart-opendesk-nextcloud"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/nextcloud/values-nextcloud.yaml.gotmpl?ref_type=heads
+
+        values: "nextcloud.yaml.gotmpl"
+
+  ################## apps/element ##################
+  - name: deploy-item-opendesk-element
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-element
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L104
+        component: "element"
+        resourceRef: "helm-chart-opendesk-element"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-element.yaml.gotmpl?ref_type=heads
+        values: "element.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-well-known
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-well-known
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L114
+        component: "element"
+        resourceRef: "helm-chart-opendesk-well-known"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-well-known.yaml.gotmpl?ref_type=heads
+
+        values: "well-known.yaml.gotmpl"
+
+  - name: deploy-item-matrix-neoboard-widget
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: matrix-neoboard-widget
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L166
+        component: "element"
+        resourceRef: "helm-chart-matrix-neoboard-widget"
+      values:
+        # theme.colors
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-matrix-neoboard-widget.yaml.gotmpl?ref_type=heads
+
+        values: "matrix-neoboard-widget.yaml.gotmpl"
+
+  - name: deploy-item-matrix-neochoice-widget
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: matrix-neochoice-widget
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L176
+        component: "element"
+        resourceRef: "helm-chart-matrix-neochoice-widget"
+      values:
+        # theme.colors
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-matrix-neochoice-widget.yaml.gotmpl?ref_type=heads
+
+        values: "matrix-neochoice-widget.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-synapse-web
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-synapse-web
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L500
+        component: "element"
+        resourceRef: "helm-chart-opendesk-synapse-web"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-synapse-web.yaml.gotmpl?ref_type=heads
+
+        values: "synapse-web.yaml.gotmpl"
+
+  - name: deploy-item-matrix-neodatefix-widget
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: matrix-neodatefix-widget
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L196
+        component: "element"
+        resourceRef: "helm-chart-matrix-neodatefix-widget"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-matrix-neodatefix-widget.yaml.gotmpl?ref_type=heads
+
+        values: "matrix-neodatefix-widget.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-synapse
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-synapse
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L444
+        component: "element"
+        resourceRef: "helm-chart-opendesk-synapse"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-synapse.yaml.gotmpl?ref_type=heads
+
+        values: "synapse.yaml.gotmpl"
+
+  - name: deploy-item-matrix-neodatefix-bot
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: matrix-neodatefix-bot
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L186
+        component: "element"
+        resourceRef: "helm-chart-matrix-neodatefix-bot"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-matrix-neodatefix-bot.yaml.gotmpl?ref_type=heads
+
+        values: "matrix-neodatefix-bot.yaml.gotmpl"
+
+  ####### sci-cluster-ocmopendesk-helm-chart-values-element-3 #######
+  - name: deploy-item-opendesk-matrix-user-verification-service-bootstrap
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-matrix-user-verification-service-bootstrap
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L472
+        component: "element"
+        resourceRef: "helm-chart-opendesk-synapse-create-account"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-matrix-user-verification-service-bootstrap.yaml.gotmpl?ref_type=heads
+
+        values: "matrix-user-verification-service-bootstrap.yaml.gotmpl"
+
+  # TODO: Verify this item's chart and values https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/helmfile-child.yaml.gotmpl#L214
+  - name: deploy-item-matrix-neodatefix-bot-bootstrap
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: matrix-neodatefix-bot-bootstrap
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L472
+        component: "element"
+        resourceRef: "helm-chart-opendesk-synapse-create-account"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-matrix-neodatefix-bot-bootstrap.yaml.gotmpl?ref_type=heads
+
+        values: "matrix-neodatefix-bot-bootstrap.yaml.gotmpl"
+
+  - name: deploy-item-opendesk-matrix-user-verification-service
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-matrix-user-verification-service
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L206
+        component: "element"
+        resourceRef: "helm-chart-opendesk-matrix-user-verification-service"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/element/values-matrix-user-verification-service.yaml.gotmpl?ref_type=heads
+
+        values: "matrix-user-verification-service.yaml.gotmpl"
+
+  # ################## apps/collabora ##################
+  - name: deploy-item-collabora
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: collabora-online
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L49
+        component: "collabora"
+        resourceRef: "helm-chart-collabora-online"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/collabora/values-collabora.yaml.gotmpl?ref_type=heads
+        values: "values.yaml.gotmpl"
+
+  # ################## apps/cryptpad ##################
+  - name: deploy-item-cryptpad
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: cryptpad
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L70
+        component: "cryptpad"
+        resourceRef: "helm-chart-cryptpad"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/cryptpad/values-cryptpad.yaml.gotmpl?ref_type=heads
+        values: "values.yaml.gotmpl"
+
+  # ################## apps/jitsi ##################
+  - name: deploy-item-jitsi
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: jitsi
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L146
+        component: "jitsi"
+        resourceRef: "helm-chart-opendesk-jitsi"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/jitsi/values-jitsi.yaml.gotmpl?ref_type=heads
+        values: "jitsi.yaml.gotmpl"
+
+  # ################## apps/openproject ##################
+  - name: deploy-item-openproject
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 30m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: openproject
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L348
+        component: "openproject"
+        resourceRef: "helm-chart-openproject"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/openproject/values.yaml.gotmpl?ref_type=heads
+        values: "values.yaml.gotmpl"
+
+  # ################## apps/xwiki ##################
+  - name: deploy-item-xwiki
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-ums
+      - deploy-item-intercom-service
+      - deploy-item-opendesk-keycloak-bootstrap
+      - deploy-item-nginx-s3-gateway
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    timeout: 30m
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: xwiki
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L510
+        component: "xwiki"
+        resourceRef: "helm-chart-xwiki"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/xwiki/values.yaml.gotmpl?ref_type=heads
+
+        values: "values.yaml.gotmpl"
+
+  # ################## apps/opendesk-openproject-bootstrap ##################
+  - name: deploy-item-opendesk-openproject-bootstrap
+    type: landscaper.gardener.cloud/helm
+    dependsOn:
+      - deploy-item-collabora
+      - deploy-item-cryptpad
+      - deploy-item-jitsi
+      - deploy-item-openproject
+      - deploy-item-xwiki
+    target:
+      import: cluster # "cluster" is the name of an import parameter
+    config:
+      apiVersion: helm.deployer.landscaper.gardener.cloud/v1alpha1
+      kind: ProviderConfiguration
+      name: opendesk-openproject-bootstrap
+      namespace: default
+      createNamespace: false
+      chart:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/environments/default/charts.yaml.gotmpl#L360
+        component: "opendesk-openproject-bootstrap"
+        resourceRef: "helm-chart-opendesk-openproject-bootstrap"
+      values:
+        # https://gitlab.opencode.de/bmi/opendesk/deployment/opendesk/-/blob/develop/helmfile/apps/opendesk-openproject-bootstrap/values.yaml.gotmpl?ref_type=heads
+
+        values: "values.yaml.gotmpl"

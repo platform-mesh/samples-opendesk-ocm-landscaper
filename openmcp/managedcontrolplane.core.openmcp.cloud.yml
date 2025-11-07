@@ -1,0 +1,45 @@
+---
+apiVersion: core.openmcp.cloud/v1alpha1
+kind: ManagedControlPlane
+metadata:
+  name: poc-bmi-opendesk
+  namespace: project-poc-bmi-opendesk--ws-poc-bmi-opendesk
+spec:
+  desiredRegion:
+    name: europe
+    direction: central
+  components:
+    apiServer:
+      type: GardenerDedicated
+    # btpServiceOperator:
+    #   version: 0.6.8
+    # externalSecretsOperator:
+    #   version: 0.13.0
+    flux:
+      version: 2.15.0
+    landscaper: {}
+    crossplane:
+      version: 1.19.0
+      providers:
+        # - name: provider-btp
+        #   version: 1.0.2
+        # - name: provider-gardener-auth
+        #   version: 0.0.4
+        - name: provider-kubernetes
+          version: 0.15.0
+        - name: provider-helm
+          version: 0.19.0
+        # - name: provider-vault
+        #   version: 1.0.0
+        # - name: provider-ias
+        #   version: 0.2.2
+  authentication:
+    enableSystemIdentityProvider: true # when set to true, enables the default identity with the prefix "openmcp"
+  authorization:
+    roleBindings:
+      # Supports the roles "admin" and "view"
+      - role: admin
+        subjects:
+          - kind: User # uses the system identity provider with the "openmcp" prefix
+            # todo: replace with your admin user
+            name: openmcp:<admin_user>

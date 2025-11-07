@@ -1,0 +1,27 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+
+components:
+  - name: opendesk.poc.sap.com/nextcloud
+    version: "${artifactVersion}"
+    provider:
+      name: opendesk
+    resources:
+      ################## apps/nextcloud ##################
+
+      - name: helm-chart-opendesk-nextcloud-management
+        type: helmChart
+        version: "4.2.0"
+        access:
+          type: helm
+          helmChart: opendesk-nextcloud-management:4.2.0
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-nextcloud
+          
+      - name: helm-chart-opendesk-nextcloud
+        type: helmChart
+        version: "4.2.0"
+        access:
+          type: helm
+          helmChart: opendesk-nextcloud:4.2.0
+          helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-nextcloud
+          
+          

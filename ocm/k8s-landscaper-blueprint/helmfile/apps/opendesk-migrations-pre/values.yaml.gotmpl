@@ -1,0 +1,12 @@
+additionalAnnotations:
+  {{ .Values.annotations.opendeskMigrationsPre.additional | toYaml | nindent 2 }}
+
+podAnnotations:
+  {{ .Values.annotations.opendeskMigrationsPre.pod | toYaml | nindent 2 }}
+
+serviceAccount:
+  annotations:
+    {{ .Values.annotations.opendeskMigrationsPre.serviceAccount | toYaml | nindent 4 }}
+
+migrations:
+  stage: "PRE"
