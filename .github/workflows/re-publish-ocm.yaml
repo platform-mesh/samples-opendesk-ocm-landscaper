@@ -31,7 +31,7 @@ on:
 
 jobs:
   ocm-version:
-    runs-on: [solinas]
+    runs-on: [ubuntu-latest]
     strategy:
       matrix:
         file: ${{ fromJson(inputs.files) }}

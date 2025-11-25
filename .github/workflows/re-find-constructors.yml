@@ -9,7 +9,7 @@ on:
 
 jobs:
   find-files:
-    runs-on: [solinas]
+    runs-on: [ubuntu-latest]
     outputs:
       files: ${{ steps.set-matrix.outputs.files }}
     steps:

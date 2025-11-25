@@ -19,7 +19,7 @@ on:
 
 jobs:
   bump-version:
-    runs-on: [solinas]
+    runs-on: [ubuntu-latest]
     outputs:
       version: ${{ steps.print-version.outputs.version }}
     steps:

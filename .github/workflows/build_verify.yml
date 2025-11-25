@@ -30,7 +30,7 @@ env:
 jobs:
   expose-env-vars:
     name: Expose Environment Variables
-    runs-on: [solinas]
+    runs-on: [ubuntu-latest]
     outputs:
       domain: ${{ env.DOMAIN }}
     steps:
@@ -60,7 +60,7 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     needs:
       - publish-ocm
-    runs-on: [solinas]
+    runs-on: [ubuntu-latest]
     steps:
       - name: Get commit SHA
         run: echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
