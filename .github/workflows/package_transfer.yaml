@@ -1,0 +1,86 @@
+name: OCM Package & Transfer
+
+run-name: >-
+  ${{ github.event_name == 'workflow_dispatch'
+    && format('Manual release: {0}', inputs.version)
+    || format('Automatic release') }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version to set/publish the OCM packages as. E.g., "1.2.3". If not provided, the version will be auto-incremented based on the latest existing tag.'
+        required: false
+        type: string
+  # To ensure this workflow only runs after successful PR checks via "Build and Verify" workflow, you must:
+  # - block direct pushes to main by enabling branch protection rules
+  # - require "Build and Verify" workflow to pass before merging and uncomment the 'push' trigger below.
+  # This way we can be sure that all changes go through the PR process.
+  push:
+    branches:
+      - main
+    paths:
+      - "**/helmfile/**"
+      - "**/component-constructor.yaml"
+  # Alternatively, disable the 'push' trigger and use 'workflow_run' to ensure this workflow is triggered by the "Build and Verify" workflow.
+  # workflow_run:
+  #   workflows: ["Build and Verify"]
+  #   types:
+  #     - completed
+  #   branches:
+  #     - main
+
+permissions:
+  pull-requests: write
+  contents: write
+  packages: read
+  actions: write
+  checks: write
+  statuses: write
+
+jobs:
+  bump-version:
+    name: Get OCM Version
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    uses: ./.github/workflows/re-get-version.yml
+    with:
+      bumped: true
+      version: ${{ github.event.inputs.version || '' }}
+  find-constructors:
+    name: Find Component Constructors
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    uses: ./.github/workflows/re-find-constructors.yml
+  publish-ocm:
+    name: Publish OCM Packages
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    needs:
+      - bump-version
+      - find-constructors
+    uses: ./.github/workflows/re-publish-ocm.yaml
+    with:
+      files: ${{ needs.find-constructors.outputs.files }}
+      dry-run: false
+      version: ${{ needs.bump-version.outputs.version }}
+      oci_registry: ghcr.io
+    secrets:
+      oci_reg_username: ${{ github.actor }}
+      oci_reg_password: ${{ secrets.GITHUB_TOKEN }}
+  create-release:
+    name: Create GitHub Release
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: [solinas]
+    needs:
+      - bump-version
+      - publish-ocm
+    steps:
+      - uses: actions/checkout@v5
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ocm-${{ needs.bump-version.outputs.version }}
+          name: Release ${{ needs.bump-version.outputs.version }}
+          generateReleaseNotes: true

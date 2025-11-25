@@ -1,0 +1,25 @@
+name: Find Component Constructors
+
+on:
+  workflow_call:
+    outputs:
+      files:
+        description: 'List of component-constructor.yaml files'
+        value: ${{ jobs.find-files.outputs.files }}
+
+jobs:
+  find-files:
+    runs-on: [solinas]
+    outputs:
+      files: ${{ steps.set-matrix.outputs.files }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Find all component-constructor.yaml files
+        id: set-matrix
+        run: |
+          files=$(find . -type f -name 'component-constructor.yaml' | jq -R -s -c 'split("\n")[:-1]')
+          echo "files=$files" >> $GITHUB_OUTPUT

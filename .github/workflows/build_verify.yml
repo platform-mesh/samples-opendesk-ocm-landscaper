@@ -1,0 +1,75 @@
+name: Build and Verify
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch: {}
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - "**/helmfile/**"
+  #     - "**/component-constructor.yaml"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  pull-requests: write
+  contents: write
+  packages: read
+  actions: write
+  checks: write
+  statuses: write
+
+env:
+  DOMAIN: "opendesk.internal"
+
+jobs:
+  expose-env-vars:
+    name: Expose Environment Variables
+    runs-on: [solinas]
+    outputs:
+      domain: ${{ env.DOMAIN }}
+    steps:
+      - run: echo "domain=${{ env.DOMAIN }}"
+  get-version:
+    name: Get OCM Version
+    uses: ./.github/workflows/re-get-version.yml
+  find-constructors:
+    name: Find Component Constructors
+    uses: ./.github/workflows/re-find-constructors.yml
+  publish-ocm:
+    name: Publish OCM Packages
+    needs:
+      - get-version
+      - find-constructors
+    uses: ./.github/workflows/re-publish-ocm.yaml
+    with:
+      files: ${{ needs.find-constructors.outputs.files }}
+      dry-run: true
+      version: ${{ needs.get-version.outputs.version }}
+      oci_registry: ghcr.io
+    secrets:
+      oci_reg_username: ${{ github.actor }}
+      oci_reg_password: ${{ secrets.GITHUB_TOKEN }}
+  set-pr-status:
+    name: Set PR Status
+    if: ${{ github.event_name == 'pull_request' }}
+    needs:
+      - publish-ocm
+    runs-on: [solinas]
+    steps:
+      - name: Get commit SHA
+        run: echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Set commit status
+        uses: myrotvorets/set-commit-status-action@master
+        if: always()
+        with:
+          allowForks: true
+          status: ${{ job.status }}
+          sha: ${{ env.commit }}
+          targetUrl: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
