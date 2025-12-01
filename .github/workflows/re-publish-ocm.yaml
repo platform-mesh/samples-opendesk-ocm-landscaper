@@ -21,6 +21,11 @@ on:
         required: false
         type: string
         default: 'ghcr.io'
+      oci_repository:
+        description: 'The OCI repository to publish the OCM packages to'
+        required: false
+        type: string
+        default: ''
     secrets:
       oci_reg_username:
         description: 'The username for the OCI registry'
@@ -28,6 +33,10 @@ on:
       oci_reg_password:
         description: 'The password for the OCI registry'
         required: true
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   ocm-version:
@@ -75,12 +84,11 @@ jobs:
       - run: |
           cd "$(dirname "${{ matrix.file }}")"
           pwd
-          ocm add components ${{ env.DRY_RUN }} --create --file ./ctf ${{ env.FILENAME }} artifactVersion=${{ inputs.version }} repository=${{ github.repository }}
+          ocm add components ${{ env.DRY_RUN }} --create --file ./ctf ${{ env.FILENAME }} artifactVersion=${{ inputs.version }} repository="${{ inputs.oci_registry }}${{ inputs.oci_repository != '' && '/' }}${{ inputs.oci_repository }}"
 
       - run: |
           cd "$(dirname "${{ matrix.file }}")"
           echo "github.event_name: ${{ github.event_name}}"
-          ocm transfer ctf --overwrite ./ctf ghcr.io
-          #ghcr.io/platform-mesh/samples-opendesk-ocm-k8s-toolkit
+          ocm transfer ctf --overwrite ./ctf ${{ inputs.oci_registry }}
         if: ${{ inputs.dry-run != true }}
 

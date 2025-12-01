@@ -19,7 +19,7 @@ on:
 permissions:
   pull-requests: write
   contents: write
-  packages: read
+  packages: write
   actions: write
   checks: write
   statuses: write
@@ -64,7 +64,6 @@ jobs:
     steps:
       - name: Get commit SHA
         run: echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
-
       - name: Set commit status
         uses: myrotvorets/set-commit-status-action@master
         if: always()

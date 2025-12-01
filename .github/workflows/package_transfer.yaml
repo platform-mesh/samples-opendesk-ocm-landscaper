@@ -37,7 +37,7 @@ on:
 permissions:
   pull-requests: write
   contents: write
-  packages: read
+  packages: write
   actions: write
   checks: write
   statuses: write
@@ -66,6 +66,7 @@ jobs:
       dry-run: false
       version: ${{ needs.bump-version.outputs.version }}
       oci_registry: ghcr.io
+      oci_repository: ${{ github.repository }}
     secrets:
       oci_reg_username: ${{ github.actor }}
       oci_reg_password: ${{ secrets.GITHUB_TOKEN }}

@@ -17,6 +17,9 @@ on:
         description: 'The new version'
         value: ${{ jobs.bump-version.outputs.version }}
 
+permissions:
+  contents: read
+
 jobs:
   bump-version:
     runs-on: [ubuntu-latest]
