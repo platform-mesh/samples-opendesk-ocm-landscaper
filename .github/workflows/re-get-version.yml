@@ -1,0 +1,96 @@
+name: Get Version
+
+on:
+  workflow_call:
+    inputs:
+      bumped:
+        description: 'Whether to bump the version'
+        type: boolean
+        required: false
+        default: false
+      version:
+        description: 'The version to set'
+        type: string
+        required: false
+    outputs:
+      version:
+        description: 'The new version'
+        value: ${{ jobs.bump-version.outputs.version }}
+
+permissions:
+  contents: read
+
+jobs:
+  bump-version:
+    runs-on: [ubuntu-latest]
+    outputs:
+      version: ${{ steps.print-version.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Get new version
+        id: get-version
+        run: |
+          if [ "${{ inputs.bumped }}" = "false" ]; then
+            echo "VERSION=$(make print-ocm-version)" >> $GITHUB_ENV
+          else
+            echo "VERSION=$(make print-ocm-version-bumped)" >> $GITHUB_ENV
+          fi
+        if: ${{ inputs.version == '' }}
+
+      - name: Validate provided version
+        id: validate-version
+        run: |
+          set -e
+          echo "${{ inputs.version }}" | grep -P '^[v]?(0|[1-9]\d*)(?:\.(0|[1-9]\d*))?(?:\.(0|[1-9]\d*))?(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'
+        if: ${{ inputs.version != '' }}
+
+      - name: Set provided version
+        id: set-version
+        run: |
+          set -e
+          
+          # Normalize version by padding with .0 if needed
+          VERSION="${{ inputs.version }}"
+          # Remove 'v' prefix if present
+          VERSION=${VERSION#v}
+          
+          # Split version into parts (before any pre-release or build metadata)
+          BASE_VERSION=$(echo "$VERSION" | cut -d'-' -f1 | cut -d'+' -f1)
+          # Get everything after the base version (pre-release and build metadata)
+          SUFFIX=$(echo "$VERSION" | sed "s/^$BASE_VERSION//")
+          
+          # Count dots in base version
+          DOT_COUNT=$(echo "$BASE_VERSION" | tr -cd '.' | wc -c)
+          
+          # Pad with .0 if needed
+          if [ $DOT_COUNT -eq 0 ]; then
+            # Only major version provided (e.g., "1" -> "1.0.0")
+            NORMALIZED_VERSION="$BASE_VERSION.0.0$SUFFIX"
+          elif [ $DOT_COUNT -eq 1 ]; then
+            # Major and minor provided (e.g., "1.2" -> "1.2.0")
+            NORMALIZED_VERSION="$BASE_VERSION.0$SUFFIX"
+          else
+            # Already has 3 or more components, don't change
+            NORMALIZED_VERSION="$VERSION"
+          fi
+          
+          # error if tag already exists
+          ! git tag -l | grep "ocm-$NORMALIZED_VERSION"
+          echo "VERSION=$NORMALIZED_VERSION" >> $GITHUB_ENV
+        if: ${{ inputs.version != '' }}
+
+      - name: Print version
+        id: print-version
+        run: |
+          echo "version=${{ env.VERSION }}" >> $GITHUB_OUTPUT
+          echo "New OCM version: ${{ env.VERSION }}"

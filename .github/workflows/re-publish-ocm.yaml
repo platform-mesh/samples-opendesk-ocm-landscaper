@@ -1,0 +1,94 @@
+name: Publish OCM Packages
+
+on:
+  workflow_call: 
+    inputs:
+      files:
+        description: 'List of component-constructor.yaml files'
+        required: true
+        type: string
+      version:
+        description: 'The version to publish the OCM packages as'
+        required: true
+        type: string
+      dry-run:
+        description: 'If true, the transfer step will be skipped'
+        required: false
+        type: boolean
+        default: false
+      oci_registry:
+        description: 'The OCI registry to publish the OCM packages to'
+        required: false
+        type: string
+        default: 'ghcr.io'
+      oci_repository:
+        description: 'The OCI repository to publish the OCM packages to'
+        required: false
+        type: string
+        default: ''
+    secrets:
+      oci_reg_username:
+        description: 'The username for the OCI registry'
+        required: true
+      oci_reg_password:
+        description: 'The password for the OCI registry'
+        required: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  ocm-version:
+    runs-on: [ubuntu-latest]
+    strategy:
+      matrix:
+        file: ${{ fromJson(inputs.files) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Login to OCI Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ inputs.oci_registry }}
+          username: ${{ secrets.oci_reg_username }}
+          password: ${{ secrets.oci_reg_password }}
+
+      - name: setup OCM
+        uses: open-component-model/ocm-setup-action@main
+
+      - run: ocm --version
+
+      - name: Show pwd and ocm version
+        run: |
+          file="${{ matrix.file }}"
+
+          printf "filename: %s\n" "${file##*/}"
+          printf "directory path: %s\n" "${file%/*}"
+
+          filename="${file##*/}"
+          echo "FILENAME=$filename" >> $GITHUB_ENV
+
+          folder="${file%/*}"
+          echo "FOLDER=$folder" >> $GITHUB_ENV
+
+      - name: Set dry-run flag
+        run: |
+          echo "DRY_RUN=--dry-run" >> $GITHUB_ENV
+        if: ${{ inputs.dry-run == true }}
+
+      - run: |
+          cd "$(dirname "${{ matrix.file }}")"
+          pwd
+          ocm add components ${{ env.DRY_RUN }} --create --file ./ctf ${{ env.FILENAME }} artifactVersion=${{ inputs.version }} repository="${{ inputs.oci_registry }}${{ inputs.oci_repository != '' && '/' }}${{ inputs.oci_repository }}"
+
+      - run: |
+          cd "$(dirname "${{ matrix.file }}")"
+          echo "github.event_name: ${{ github.event_name}}"
+          ocm transfer ctf --overwrite ./ctf ${{ inputs.oci_registry }}
+        if: ${{ inputs.dry-run != true }}
+
