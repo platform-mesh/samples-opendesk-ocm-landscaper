@@ -3,7 +3,7 @@ components:
   - name: opendesk.poc.sap.com/base
     version: "${artifactVersion}"
     provider:
-      name: opendesk
+      name: openDesk
 
     resources:
       ################## converge cloud core infrastructure ##################
