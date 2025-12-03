@@ -89,6 +89,6 @@ jobs:
       - run: |
           cd "$(dirname "${{ matrix.file }}")"
           echo "github.event_name: ${{ github.event_name}}"
-          ocm transfer ctf --overwrite ./ctf ${{ inputs.oci_registry }}
+          ocm transfer ctf --overwrite ./ctf ${{ inputs.oci_registry }}${{ inputs.oci_repository != '' && '/' || '' }}${{ inputs.oci_repository }}
         if: ${{ inputs.dry-run != true }}
 
