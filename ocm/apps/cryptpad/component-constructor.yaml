@@ -13,3 +13,9 @@ components:
         access:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/xwiki/charts-mirror/cryptpad:0.0.20
+      - name: image-cryptpad
+        type: ociImage
+        version: "0.0.0+opendesk-20241022"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/xwiki/images-mirror/cryptpad:opendesk-20241022@sha256:3e5bf06cb9d0a7ec8257874b8b347599200eb677fc428a2e043ccab06ef2be17

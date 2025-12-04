@@ -16,6 +16,18 @@ components:
           helmChart: opendesk-nextcloud-management:4.2.0
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-nextcloud
           
+      - name: image-nextcloud-aio
+        type: ociImage
+        version: "31.0.6"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/platform-development/images/opendesk-nextcloud:31.0.6@sha256:760d0f1ff724d53faa757987e7068d09df0c603e3ac4fbb8aefe1bf13270c615
+      - name: image-nextcloud-exporter
+        type: ociImage
+        version: "1.0.3"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/platform-development/images/opendesk-nextcloud-exporter:1.0.3@sha256:d38f211a3cdc8397deccd0243061e20972a8a796eeb9bb552fe4ddec5d56c829
       - name: helm-chart-opendesk-nextcloud
         type: helmChart
         version: "4.2.0"
