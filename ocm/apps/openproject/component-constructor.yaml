@@ -14,3 +14,21 @@ components:
           type: helm
           helmChart: openproject:10.1.0
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/supplier/openproject/charts-mirror
+      - name: image-openproject-cron
+        type: ociImage
+        version: "16.1.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/openproject/images-mirror/open_desk:16.1.1@sha256:2fe8a7d1cab42611b01f4ca20ce7179a0637477f2882364b4a1cfdebde9ecd6f
+      - name: image-openproject-web
+        type: ociImage
+        version: "16.1.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/openproject/images-mirror/open_desk:16.1.1@sha256:2fe8a7d1cab42611b01f4ca20ce7179a0637477f2882364b4a1cfdebde9ecd6f
+      - name: image-openproject-worker-default
+        type: ociImage
+        version: "16.1.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/openproject/images-mirror/open_desk:16.1.1@sha256:2fe8a7d1cab42611b01f4ca20ce7179a0637477f2882364b4a1cfdebde9ecd6f

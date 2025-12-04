@@ -13,21 +13,189 @@ components:
         access:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/univention/charts-mirror/nubus:1.11.2
+      - name: image-keycloak-extensions-handler-keycloak-bfp-handler
+        type: ociImage
+        version: "0.19.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/keycloak-handler:0.19.2@sha256:6e4c65b375ad12819240cb8eabd4ef629858ad74179bd639acb713201c528ef4
+      - name: image-keycloak-extensions-proxy-keycloak-bfp-proxy
+        type: ociImage
+        version: "0.19.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/keycloak-proxy:0.19.2@sha256:b7c897870a12214064d79d72d52d0030bf2513148078cb922b8782806c2e4773
+      - name: image-ldap-server-proxy
+        type: ociImage
+        version: "0.43.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/ldap-server:0.43.0@sha256:67557ec3e3bd7ff4981666dddb5455672ee8767e12e3876ea79447627f9d9742
+      - name: image-portal-frontend
+        type: ociImage
+        version: "0.70.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/portal-frontend:0.70.0@sha256:9e0826c954e99b36b3c7b9ce6dfa1f567a3432158fb78af13337760197f94997
+      - name: image-portal-server
+        type: ociImage
+        version: "0.70.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/portal-server:0.70.0@sha256:1331d5b5861574195f6bd0dfc3c8e1d6a2650b518e206a2815b682d43ab75d0b
+      - name: image-provisioning-api
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-events-and-consumer-api:0.58.0@sha256:083cf58d9522d5058d09a78355a9ca935be2882fc595ad221b1ffd707a7d615d
+      - name: image-provisioning-dispatcher
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-dispatcher:0.58.0@sha256:2ac4d4a7362e45f67499537dd74d2fdfb7b54817b7f12eb9e2d88d87cf3a6f7e
+      - name: image-provisioning-prefill
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-prefill:0.58.0@sha256:368bc284956b642af02ca7199c6a7d94ae3bbdb3ede09db1c98822a146d9106d
+      - name: image-provisioning-udm-transformer
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-udm-transformer:0.58.0@sha256:afa6028bbaec6c14e09035b7d18507aad45ff6d6aa852fb664ab485f2622a308
+      - name: image-selfservice-listener
+        type: ociImage
+        version: "0.17.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/selfservice-invitation:0.17.0@sha256:00e6124eecc1b763326023ecaf9702053e24b39b20f5efbcd35dfaad642d2cda
+      - name: image-udm-rest-api
+        type: ociImage
+        version: "0.37.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/udm-rest-api:0.37.1@sha256:a0508191a52ed9c388e0574cf6a97031fdfffcff95ab8ca3e4231c795d3a68df
+      - name: image-umc-gateway
+        type: ociImage
+        version: "0.47.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/umc-gateway:0.47.1@sha256:71d1fb00a28a7cc83e1a8a675b8e9dc3ff67b1d7f366b2d60f9623fdb5f6e419
+      - name: image-umc-server
+        type: ociImage
+        version: "3.0"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/library/traefik:3.0@sha256:a208c74fd80a566d4ea376053bff73d31616d7af3f1465a7747b8b89ee34d97e
+      - name: image-ldap-notifier
+        type: ociImage
+        version: "0.43.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/ldap-notifier:0.43.0@sha256:dcd4e7f1008eb4c6c1ae809785bee0da9cba1347af09ddbc147b76c422f4f35c
+      - name: image-ldap-server-primary
+        type: ociImage
+        version: "0.43.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/ldap-server:0.43.0@sha256:67557ec3e3bd7ff4981666dddb5455672ee8767e12e3876ea79447627f9d9742
+      - name: image-ldap-server-primary-leader-elector
+        type: ociImage
+        version: "0.43.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/ldap-server-elector:0.43.0@sha256:179097cf89774b1ac48c5315ccc06cc8628cc89d085d95f2d89a223d52a75fe2
+      - name: image-ldap-server-secondary
+        type: ociImage
+        version: "0.43.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/ldap-server:0.43.0@sha256:67557ec3e3bd7ff4981666dddb5455672ee8767e12e3876ea79447627f9d9742
+      - name: image-portal-consumer
+        type: ociImage
+        version: "0.70.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/portal-consumer:0.70.0@sha256:09eed9e5a7066f69b5d6085541ca91538ca9519d765ec7109d6934a6e67ab7cc
+      - name: image-provisioning-nats
+        type: ociImage
+        version: "2.10.26"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/library/nats:2.10.26@sha256:736d575e60135ce1d50fc206675d48d0e57dcaa0704f696f0cb4b5f6dadd49d7
+      - name: image-provisioning-nats-reloader
+        type: ociImage
+        version: "0.17.1"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/natsio/nats-server-config-reloader:0.17.1@sha256:f364bb8330d3430666ca09f17c6a43bfaefde32f0f3e79d4a41c588c29936e99
+      - name: image-provisioning-nats-nats-box
+        type: ociImage
+        version: "0.16.0-nonroot"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/natsio/nats-box:0.16.0-nonroot@sha256:f486ca86dfc9b72a2310ea720994a94ce55e447ad01daccd2fb33d61f322dc51
+      - name: image-provisioning-udm-listener
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-udm-listener:0.58.0@sha256:5f924be8fdb29bda5734fd2b6b98f106913757e11530611bf5f6a5f144165be7
+      - name: image-umc-server
+        type: ociImage
+        version: "0.47.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/umc-server:0.47.1@sha256:8f451e7b50c6a32a8d4bad5959a103e34e3ae8d0bef2fe3df2dc8fbe7ae9c1b6
+      - name: image-umc-server-sssd-sidecar
+        type: ociImage
+        version: "0.47.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/umc-server:0.47.1@sha256:8f451e7b50c6a32a8d4bad5959a103e34e3ae8d0bef2fe3df2dc8fbe7ae9c1b6
       - name: helm-chart-intercom-service
         type: helmChart
         version: "2.12.0"
         access:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/univention/charts-mirror/intercom-service:2.12.0
+      - name: image-intercom-service
+        type: ociImage
+        version: "2.12.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/intercom-service:2.12.0@sha256:380476d849fb353dc167ba52a6b0f6235b3fa7561c082e65c37e2242cedb0df1
       - name: helm-chart-opendesk-keycloak-bootstrap
         type: helmChart
         version: "2.6.0"
         access:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-keycloak-bootstrap/opendesk-keycloak-bootstrap:2.6.0
+      - name: image-keycloak
+        type: ociImage
+        version: "0.2.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/keycloak:0.2.1@sha256:c338d5bba11185b1cca6d5e5e1b6fe28bedcd8f02af8b4b96e431bde617f5f72
       - name: helm-chart-nginx-s3-gateway
         type: helmChart
         version: "1.0.1"
         access:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/nginx-s3-gateway/nginx-s3-gateway:1.0.1
+      - name: image-ingress-nginx-controller
+        type: ociImage
+        version: "v1.11.6"
+        access:
+          type: ociArtifact
+          imageReference: registry.k8s.io/ingress-nginx/controller:v1.11.6@sha256:4f04fad99f00e604ab488cf0945b4eaa2a93f603f97d2a45fc610ff0f3cad0f9
+      - name: image-nginx-s3-gateway
+        type: ociImage
+        version: "0.0.0+unprivileged-oss-20250512"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/nginxinc/nginx-s3-gateway:unprivileged-oss-20250512@sha256:064d14fc64ba968bd8123f2f25e446e597cfc5170124879b3834deac1a6d69fd

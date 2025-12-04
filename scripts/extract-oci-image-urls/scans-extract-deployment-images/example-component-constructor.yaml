@@ -1,0 +1,404 @@
+# yaml-language-server: $schema= https://ocm.software/schemas/configuration-schema.yaml
+# https://ocm.software/docs/tutorials/input-and-access-types/
+components:
+  - name: opendesk.poc-ocm-k8s-toolkit.sap.com/...
+    # ...
+    resources:
+      - name: image-cert-manager-controller
+        type: ociImage
+        version: "v1.17.2"
+        access:
+          type: ociArtifact
+          imageReference: quay.io/jetstack/cert-manager-controller:v1.17.2
+
+      - name: image-cert-manager-cainjector
+        type: ociImage
+        version: "v1.17.2"
+        access:
+          type: ociArtifact
+          imageReference: quay.io/jetstack/cert-manager-cainjector:v1.17.2
+
+      - name: image-cert-manager-webhook
+        type: ociImage
+        version: "v1.17.2"
+        access:
+          type: ociArtifact
+          imageReference: quay.io/jetstack/cert-manager-webhook:v1.17.2
+
+      - name: image-collabora-online
+        type: ociImage
+        version: "25.04.2.2.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/collabora/images/collabora-online-for-opendesk:25.04.2.2.1@sha256:03ec7f7740c5030eeb4f642c41fa0b9989d7a0dab81435a86b5c82479d0f78e2
+
+      - name: image-cryptpad
+        type: ociImage
+        version: "opendesk-20241022"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/xwiki/images-mirror/cryptpad:opendesk-20241022@sha256:3e5bf06cb9d0a7ec8257874b8b347599200eb677fc428a2e043ccab06ef2be17
+
+      - name: image-dovecot
+        type: ociImage
+        version: "2.3.21"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images/dovecot-public-sector:2.3.21@sha256:c76965a84d1ca527f523404eb027119f6736b199c094e4671037cb345ecad3dc
+
+      - name: image-ingress-nginx-controller
+        type: ociImage
+        version: "v1.11.6"
+        access:
+          type: ociArtifact
+          imageReference: registry.k8s.io/ingress-nginx/controller:v1.11.6@sha256:4f04fad99f00e604ab488cf0945b4eaa2a93f603f97d2a45fc610ff0f3cad0f9
+
+      - name: image-intercom-service
+        type: ociImage
+        version: "2.12.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/intercom-service:2.12.0@sha256:380476d849fb353dc167ba52a6b0f6235b3fa7561c082e65c37e2242cedb0df1
+
+      - name: image-jitsi-jibri
+        type: ociImage
+        version: "stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/jibri:stable-9955@sha256:a07b82f2758389b2071c794810145111641e78f1b768b1bbfa6d3d1dc76d3da9
+
+      - name: image-jitsi-jicofo
+        type: ociImage
+        version: "stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/jicofo:stable-9955@sha256:f1a1478d231bc4891b5eea06443d72187c378d5e38403bb545aab281446f8d50
+
+      - name: image-jitsi-jvb
+        type: ociImage
+        version: "stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/jvb:stable-9955@sha256:27753ac320910e04f5c4f4f628d20995ea969ea38523d90a9066adc52f9bc022
+
+      - name: image-jitsi-web
+        type: ociImage
+        version: "stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/web:stable-9955@sha256:81fdcfa14287fe3358532c363875584d0cdd40ff4030695b713af6e60192d306
+
+      - name: image-matrix-neoboard-widget
+        type: ociImage
+        version: "2.2.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-neoboard-widget:2.2.1@sha256:db404ba5b8e76cbd1166529dc2156d84506f1c2d341a1798d25a074e531b9d3d
+
+      - name: image-matrix-neochoice-widget
+        type: ociImage
+        version: "1.5.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-poll-widget:1.5.2@sha256:8d0cce2b4f71787cab6cd1b6e6ff52205224a5d01ba384b3ebfbf05bc3228930
+
+      - name: image-matrix-neodatefix-bot
+        type: ociImage
+        version: "2.8.3"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-meetings-bot:2.8.3@sha256:5bc9b8d67b4ecb38b618e84d54e759ba57c0533706300154a60423dfcf86f7e1
+
+      - name: image-matrix-neodatefix-widget
+        type: ociImage
+        version: "1.7.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-meetings-widget:1.7.1@sha256:c03917f78ba197b2f93a59eb3d6596447de1e2bf5836194afa121fae8ea18593
+
+      - name: image-memcached
+        type: ociImage
+        version: "1.6.38-debian-12-r3"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/bitnami/memcached:1.6.38-debian-12-r3@sha256:3e548fba727578be9d996262471f5f3e07726d625702d26743a5e0f34684cb21
+
+      - name: image-minio
+        type: ociImage
+        version: "2025.4.22-debian-12-r1"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/bitnami/minio:2025.4.22-debian-12-r1@sha256:d7cd0e172c4cc0870f4bdc3142018e2a37be9acf04d68f386600daad427e0cab
+
+      - name: image-nginx-s3-gateway
+        type: ociImage
+        version: "unprivileged-oss-20250512"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/nginxinc/nginx-s3-gateway:unprivileged-oss-20250512@sha256:064d14fc64ba968bd8123f2f25e446e597cfc5170124879b3834deac1a6d69fd
+
+      - name: image-ox-documentconverter
+        type: ociImage
+        version: "8.38.1817"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/documentconverter:8.38.1817@sha256:d7537574765e19e7c9e13fe936c1a4c69b39bda216abcd000dad9f93fbb62f7b
+
+      - name: image-ox-core-guidedtours
+        type: ociImage
+        version: "8.6.17"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-guidedtours:8.6.17@sha256:27178fc42f2334385f1d206e4e7991d4953a102f114729d186b61c0d40babb4f
+
+      - name: image-ox-imageconverter
+        type: ociImage
+        version: "8.38.2105"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/imageconverter:8.38.2105@sha256:9c79f29712c5a5479bc1a08e127c65415a50a63954b244c1d34a570f5f3ed1f6
+
+      - name: image-ox-core-ui
+        type: ociImage
+        version: "8.38.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-ui:8.38.1@sha256:77bf250df7ac465006576d5e1e0a8420ce6d0fce622b749c6da318793b88490c
+
+      - name: image-ox-core-ui-middleware
+        type: ociImage
+        version: "2.1.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-ui-middleware:2.1.2@sha256:36fe59a047fa466bef6fcdeed1ed8e4bbeaf7824c37c63e3bfe7262cd135cb9e
+
+      - name: image-ox-core-user-guide
+        type: ociImage
+        version: "8.38.1408226"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-user-guide:8.38.1408226@sha256:1a18c6c7b6a7a0f16376a9c298e65a13a4b482f6df1351582250a88571f1fa73
+
+      - name: image-ox-gotenberg
+        type: ociImage
+        version: "8.15.3"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/gotenberg:8.15.3@sha256:0864c9cd905264f714f0c306d5b38eec8599b908c9096e0283b5db3ff6706172
+
+      - name: image-ox-guard-ui
+        type: ociImage
+        version: "8.33.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/guard-ui:8.33.2@sha256:920b5ac87128f30c176c0ae75c6bedd32d226a97c6c5a822235606c39992ee9a
+
+      - name: image-ox-nextcloud-integration-ui
+        type: ociImage
+        version: "1.4.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/nextcloud-integration-ui:1.4.1@sha256:423d596b52ab32778d7227d98ccc719f98395a00d95ff0bcac826665b59e1937
+
+      - name: image-ox-public-sector-ui
+        type: ociImage
+        version: "2.4.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/public-sector-ui:2.4.1@sha256:c9f0f5425517e1740aaf9998c5944ce36ce26eda52329754e6b8ac733e2dacc5
+
+      - name: image-opendesk-element
+        type: ociImage
+        version: "latest-250304"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/element/images-mirror/opendesk-plugin:latest-250304@sha256:b997a9245c5a85ddb9935e6a9f8f8da60fed58aad17df8f1e1e2fabafdbf0dd1
+
+      - name: image-jitsi-keycloak-adapter
+        type: ociImage
+        version: "v20250314"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/jitsi-keycloak-adapter:v20250314@sha256:2e24db127ab266b90b8fd371ce547e7f9619b6be3fefed30906867b1ce368697
+
+      - name: image-matrix-user-verification-service
+        type: ociImage
+        version: "v3.0.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/element/images-mirror/matrix-user-verification-service:v3.0.0@sha256:25e685d595785e2a72e75a525dac78cf8c782445454f8ac090d3702431c38008
+
+      - name: image-opendesk-nextcloud-aio
+        type: ociImage
+        version: "31.0.6"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/platform-development/images/opendesk-nextcloud:31.0.6@sha256:760d0f1ff724d53faa757987e7068d09df0c603e3ac4fbb8aefe1bf13270c615
+
+      - name: image-opendesk-nextcloud-exporter
+        type: ociImage
+        version: "1.0.3"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/platform-development/images/opendesk-nextcloud-exporter:1.0.3@sha256:d38f211a3cdc8397deccd0243061e20972a8a796eeb9bb552fe4ddec5d56c829
+
+      - name: image-nginx
+        type: ociImage
+        version: "1.28.0-alpine3.21"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/library/nginx:1.28.0-alpine3.21@sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9
+
+      - name: image-haproxy
+        type: ociImage
+        version: "3.1.7-bookworm"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/rapidfort/haproxy-official:3.1.7-bookworm@sha256:ab50f196f66884f62fb379c40824036cd0dabb10df660097cff99b7ae22c2c44
+
+      - name: image-openproject
+        type: ociImage
+        version: "16.1.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/openproject/images-mirror/open_desk:16.1.1@sha256:2fe8a7d1cab42611b01f4ca20ce7179a0637477f2882364b4a1cfdebde9ecd6f
+
+      - name: image-postfix
+        type: ociImage
+        version: "3.0.3"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/platform-development/images/postfix:3.0.3@sha256:12bcebf57ddb53258c48eaa60e9c25b441f4319ee1b94b363c652ad0a992a875
+
+      - name: image-keycloak-handler
+        type: ociImage
+        version: "0.19.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/keycloak-handler:0.19.2@sha256:6e4c65b375ad12819240cb8eabd4ef629858ad74179bd639acb713201c528ef4
+
+      - name: image-keycloak-proxy
+        type: ociImage
+        version: "0.19.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/keycloak-proxy:0.19.2@sha256:b7c897870a12214064d79d72d52d0030bf2513148078cb922b8782806c2e4773
+
+      - name: image-ldap-server
+        type: ociImage
+        version: "0.43.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/ldap-server:0.43.0@sha256:67557ec3e3bd7ff4981666dddb5455672ee8767e12e3876ea79447627f9d9742
+
+      - name: image-portal-frontend
+        type: ociImage
+        version: "0.70.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/portal-frontend:0.70.0@sha256:9e0826c954e99b36b3c7b9ce6dfa1f567a3432158fb78af13337760197f94997
+
+      - name: image-portal-server
+        type: ociImage
+        version: "0.70.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/portal-server:0.70.0@sha256:1331d5b5861574195f6bd0dfc3c8e1d6a2650b518e206a2815b682d43ab75d0b
+
+      - name: image-provisioning-api
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-events-and-consumer-api:0.58.0@sha256:083cf58d9522d5058d09a78355a9ca935be2882fc595ad221b1ffd707a7d615d
+
+      - name: image-provisioning-dispatcher
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-dispatcher:0.58.0@sha256:2ac4d4a7362e45f67499537dd74d2fdfb7b54817b7f12eb9e2d88d87cf3a6f7e
+
+      - name: image-provisioning-prefill
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-prefill:0.58.0@sha256:368bc284956b642af02ca7199c6a7d94ae3bbdb3ede09db1c98822a146d9106d
+
+      - name: image-provisioning-udm-transformer
+        type: ociImage
+        version: "0.58.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/provisioning-udm-transformer:0.58.0@sha256:afa6028bbaec6c14e09035b7d18507aad45ff6d6aa852fb664ab485f2622a308
+
+      - name: image-selfservice-invitation
+        type: ociImage
+        version: "0.17.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/selfservice-invitation:0.17.0@sha256:00e6124eecc1b763326023ecaf9702053e24b39b20f5efbcd35dfaad642d2cda
+
+      - name: image-udm-rest-api
+        type: ociImage
+        version: "0.37.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/udm-rest-api:0.37.1@sha256:a0508191a52ed9c388e0574cf6a97031fdfffcff95ab8ca3e4231c795d3a68df
+
+      - name: image-umc-gateway
+        type: ociImage
+        version: "0.47.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/umc-gateway:0.47.1@sha256:71d1fb00a28a7cc83e1a8a675b8e9dc3ff67b1d7f366b2d60f9623fdb5f6e419
+
+      - name: image-traefik
+        type: ociImage
+        version: "3.0"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/library/traefik:3.0@sha256:a208c74fd80a566d4ea376053bff73d31616d7af3f1465a7747b8b89ee34d97e
+
+      - name: image-helm-controller
+        type: ociImage
+        version: "v1.3.0"
+        access:
+          type: ociArtifact
+          imageReference: ghcr.io/fluxcd/helm-controller:v1.3.0
+
+      - name: image-kustomize-controller
+        type: ociImage
+        version: "v1.6.1"
+        access:
+          type: ociArtifact
+          imageReference: ghcr.io/fluxcd/kustomize-controller:v1.6.1
+
+      - name: image-notification-controller
+        type: ociImage
+        version: "v1.6.0"
+        access:
+          type: ociArtifact
+          imageReference: ghcr.io/fluxcd/notification-controller:v1.6.0
+
+      - name: image-source-controller
+        type: ociImage
+        version: "v1.6.2"
+        access:
+          type: ociArtifact
+          imageReference: ghcr.io/fluxcd/source-controller:v1.6.2
+
+      - name: image-kro-controller
+        type: ociImage
+        version: "0.4.1"
+        access:
+          type: ociArtifact
+          imageReference: ghcr.io/kro-run/kro/controller:0.4.1
+
+      - name: image-ocm-k8s-toolkit-controller
+        type: ociImage
+        version: "latest"
+        access:
+          type: ociArtifact
+          imageReference: ghcr.io/open-component-model/kubernetes/controller:latest

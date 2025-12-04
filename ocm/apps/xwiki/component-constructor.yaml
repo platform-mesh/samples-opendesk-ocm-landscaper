@@ -13,3 +13,9 @@ components:
         access:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/supplier/xwiki/charts-mirror/xwiki:1.4.4
+      - name: image-xwiki
+        type: ociImage
+        version: "0.25-postgres-jetty-alpine"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/xwiki/images-mirror/xwiki:0.25-postgres-jetty-alpine@sha256:1bfc57a65f8bc6b059d550791699b5afa33b91db8d4c75ca8f6f3d2299f7c335

@@ -14,6 +14,12 @@ components:
           helmChart: opendesk-element:6.1.3
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element                     
                     
+      - name: image-element
+        type: ociImage
+        version: "0.0.0+latest-250304"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/element/images-mirror/opendesk-plugin:latest-250304@sha256:b997a9245c5a85ddb9935e6a9f8f8da60fed58aad17df8f1e1e2fabafdbf0dd1
       - name: helm-chart-matrix-neoboard-widget
         type: helmChart
         version: "3.5.1"
@@ -21,6 +27,12 @@ components:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-matrix-widgets/matrix-neoboard-widget:3.5.1
           
+      - name: image-neoboard-widget
+        type: ociImage
+        version: "2.2.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-neoboard-widget:2.2.1@sha256:db404ba5b8e76cbd1166529dc2156d84506f1c2d341a1798d25a074e531b9d3d
       - name: helm-chart-matrix-neochoice-widget
         type: helmChart
         version: "3.5.1"
@@ -28,6 +40,12 @@ components:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-matrix-widgets/matrix-neochoice-widget:3.5.1
 
+      - name: image-neochoice-widget
+        type: ociImage
+        version: "1.5.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-poll-widget:1.5.2@sha256:8d0cce2b4f71787cab6cd1b6e6ff52205224a5d01ba384b3ebfbf05bc3228930
       - name: helm-chart-opendesk-synapse-web
         type: helmChart
         version: "6.1.3"
@@ -35,6 +53,18 @@ components:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element/opendesk-synapse-web:6.1.3
 
+      - name: image-synapse-web-haproxy
+        type: ociImage
+        version: "3.1.7-bookworm"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/rapidfort/haproxy-official:3.1.7-bookworm@sha256:ab50f196f66884f62fb379c40824036cd0dabb10df660097cff99b7ae22c2c44
+      - name: image-synapse
+        type: ociImage
+        version: "v1.129.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/element/images-mirror/synapse:v1.129.0@sha256:13ac3293547d8c06e1e03fca4e02ef9a47f132acc2e2cdb4143a01495dd924cf
       - name: helm-chart-matrix-neodatefix-widget
         type: helmChart
         version: "3.5.1"
@@ -43,6 +73,12 @@ components:
           helmChart: matrix-neodatefix-widget:3.5.1
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-matrix-widgets
           
+      - name: image-neodatefix-widget
+        type: ociImage
+        version: "1.7.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-meetings-widget:1.7.1@sha256:c03917f78ba197b2f93a59eb3d6596447de1e2bf5836194afa121fae8ea18593
       - name: helm-chart-opendesk-synapse
         type: helmChart
         version: "6.1.3"
@@ -58,6 +94,12 @@ components:
           helmChart: matrix-neodatefix-bot:3.5.1
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-matrix-widgets
                     
+      - name: image-neodatefix-bot-widget
+        type: ociImage
+        version: "2.8.3"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/matrix-meetings-bot:2.8.3@sha256:5bc9b8d67b4ecb38b618e84d54e759ba57c0533706300154a60423dfcf86f7e1
       - name: helm-chart-opendesk-synapse-create-account
         type: helmChart
         version: "6.1.3"
@@ -74,6 +116,12 @@ components:
           helmChart: opendesk-matrix-user-verification-service:6.1.3
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element
       
+      - name: image-matrix-user-verification-service-uvs
+        type: ociImage
+        version: "v3.0.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/element/images-mirror/matrix-user-verification-service:v3.0.0@sha256:25e685d595785e2a72e75a525dac78cf8c782445454f8ac090d3702431c38008
       - name: helm-chart-opendesk-well-known  
         type: helmChart
         version: "6.1.3"
@@ -82,3 +130,9 @@ components:
           helmChart: opendesk-well-known:6.1.3
           # TODO: duplicate helmRepository, same as opendesk-element
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-element
+      - name: image-well-known
+        type: ociImage
+        version: "1.28.0-alpine3.21"
+        access:
+          type: ociArtifact
+          imageReference: registry-1.docker.io/library/nginx:1.28.0-alpine3.21@sha256:aed99734248e851764f1f2146835ecad42b5f994081fa6631cc5d79240891ec9

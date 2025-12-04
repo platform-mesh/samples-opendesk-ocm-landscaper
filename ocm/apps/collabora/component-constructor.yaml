@@ -17,3 +17,9 @@ components:
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/supplier/collabora/charts-mirror
           
           
+      - name: image-collabora-collabora-online
+        type: ociImage
+        version: "0.0.0+25.04.2.2.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/collabora/images/collabora-online-for-opendesk:25.04.2.2.1@sha256:03ec7f7740c5030eeb4f642c41fa0b9989d7a0dab81435a86b5c82479d0f78e2

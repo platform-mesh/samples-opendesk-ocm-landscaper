@@ -33,6 +33,84 @@ components:
           helmChart: "dovecot:3.1.1"
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-dovecot
 
+      - name: image-dovecot
+        type: ociImage
+        version: "2.3.21"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images/dovecot-public-sector:2.3.21@sha256:c76965a84d1ca527f523404eb027119f6736b199c094e4671037cb345ecad3dc
+      - name: image-open-xchange-core-documentconverter
+        type: ociImage
+        version: "8.38.1817"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/documentconverter:8.38.1817@sha256:d7537574765e19e7c9e13fe936c1a4c69b39bda216abcd000dad9f93fbb62f7b
+      - name: image-open-xchange-core-guidedtours
+        type: ociImage
+        version: "8.6.17"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-guidedtours:8.6.17@sha256:27178fc42f2334385f1d206e4e7991d4953a102f114729d186b61c0d40babb4f
+      - name: image-open-xchange-core-imageconverter
+        type: ociImage
+        version: "8.38.2105"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/imageconverter:8.38.2105@sha256:9c79f29712c5a5479bc1a08e127c65415a50a63954b244c1d34a570f5f3ed1f6
+      - name: image-open-xchange-core-ui
+        type: ociImage
+        version: "8.38.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-ui:8.38.1@sha256:77bf250df7ac465006576d5e1e0a8420ce6d0fce622b749c6da318793b88490c
+      - name: image-open-xchange-core-ui-middleware
+        type: ociImage
+        version: "2.1.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-ui-middleware:2.1.2@sha256:36fe59a047fa466bef6fcdeed1ed8e4bbeaf7824c37c63e3bfe7262cd135cb9e
+      - name: image-open-xchange-core-ui-middleware-updater
+        type: ociImage
+        version: "2.1.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-ui-middleware:2.1.2@sha256:36fe59a047fa466bef6fcdeed1ed8e4bbeaf7824c37c63e3bfe7262cd135cb9e
+      - name: image-open-xchange-core-user-guide
+        type: ociImage
+        version: "8.38.1408226"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/core-user-guide:8.38.1408226@sha256:1a18c6c7b6a7a0f16376a9c298e65a13a4b482f6df1351582250a88571f1fa73
+      - name: image-open-xchange-gotenberg
+        type: ociImage
+        version: "8.15.3"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/gotenberg:8.15.3@sha256:0864c9cd905264f714f0c306d5b38eec8599b908c9096e0283b5db3ff6706172
+      - name: image-open-xchange-guard-ui
+        type: ociImage
+        version: "8.33.2"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/guard-ui:8.33.2@sha256:920b5ac87128f30c176c0ae75c6bedd32d226a97c6c5a822235606c39992ee9a
+      - name: image-open-xchange-nextcloud-integration-ui
+        type: ociImage
+        version: "1.4.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/nextcloud-integration-ui:1.4.1@sha256:423d596b52ab32778d7227d98ccc719f98395a00d95ff0bcac826665b59e1937
+      - name: image-open-xchange-public-sector-ui
+        type: ociImage
+        version: "2.4.1"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/public-sector-ui:2.4.1@sha256:c9f0f5425517e1740aaf9998c5944ce36ce26eda52329754e6b8ac733e2dacc5
+      - name: image-open-xchange-core-mw-default
+        type: ociImage
+        version: "8.38.73"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/open-xchange/images-mirror/middleware-public-sector:8.38.73@sha256:610d4bab888e5749ff918a782ba1c33ed4aa8da9e13d5be4ad71ca2f698d4044
       - name: helm-chart-appsuite-public-sector
         type: helmChart
         version: "2.20.247"
@@ -48,3 +126,9 @@ components:
           type: helm
           helmChart: ox-connector:0.19.0
           helmRepository: oci://registry.opencode.de/bmi/opendesk/components/supplier/univention/charts-mirror
+      - name: image-ox-connector
+        type: ociImage
+        version: "0.19.0"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/univention/images-mirror/ox-connector-standalone:0.19.0@sha256:447e3c3e0cdd8bf1f86004d2088c24fcf6141ff6fef78ade8dfe86f7f16ba40e

@@ -13,3 +13,39 @@ components:
         access:
           type: ociArtifact
           imageReference: oci://registry.opencode.de/bmi/opendesk/components/platform-development/charts/opendesk-jitsi/opendesk-jitsi:3.1.0
+      - name: image-jitsi-jibri
+        type: ociImage
+        version: "0.0.0+stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/jibri:stable-9955@sha256:a07b82f2758389b2071c794810145111641e78f1b768b1bbfa6d3d1dc76d3da9
+      - name: image-jitsi-jicofo
+        type: ociImage
+        version: "0.0.0+stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/jicofo:stable-9955@sha256:f1a1478d231bc4891b5eea06443d72187c378d5e38403bb545aab281446f8d50
+      - name: image-jitsi-jvb
+        type: ociImage
+        version: "0.0.0+stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/jvb:stable-9955@sha256:27753ac320910e04f5c4f4f628d20995ea969ea38523d90a9066adc52f9bc022
+      - name: image-jitsi-web
+        type: ociImage
+        version: "0.0.0+stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/web:stable-9955@sha256:81fdcfa14287fe3358532c363875584d0cdd40ff4030695b713af6e60192d306
+      - name: image-jitsi-keycloak-adapter
+        type: ociImage
+        version: "v20250314"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/jitsi-keycloak-adapter:v20250314@sha256:2e24db127ab266b90b8fd371ce547e7f9619b6be3fefed30906867b1ce368697
+      - name: image-jitsi-prosody
+        type: ociImage
+        version: "0.0.0+stable-9955"
+        access:
+          type: ociArtifact
+          imageReference: registry.opencode.de/bmi/opendesk/components/supplier/nordeck/images-mirror/prosody:stable-9955@sha256:fa66872338c7c3b6fdb1f1a67ad770f2b62948f4193b91a58f12c0aa5ca2e783
