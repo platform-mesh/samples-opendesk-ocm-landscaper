@@ -177,23 +177,24 @@ These workflows find, package, and transfer all `./ocm/**/component-constructor.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     participant Dev as 👨‍💻 Developer
     participant GH as 🐙 GitHub
     participant BuildVerify as ⚙️ Build & Verify
     participant PackageTransfer as ⚙️ Package & Transfer
-    participant OCM as 📦 OCM CLI
-    participant Registry as 🏦 ghcr.io
-
-    Dev->>GH: 📤 Create PR
-    GH->>BuildVerify: 🚀 Trigger on PR
-    BuildVerify->>OCM: 🔍 Validate Components (dry-run)
-    OCM-->>BuildVerify: ✅ Validation Complete
+    participant Version as 🏷️ Version Management
+    participant OCM as 📦 OCM
+    participant Registry as 🏦 OCI Registry
+    Dev->>GH: 📤 Push PR
+    GH->>BuildVerify: 🚀 Triggers on PR
+    BuildVerify->>GH: 📦 Build & Verify
     Dev->>GH: 🔀 Merge to main
-    GH->>PackageTransfer: 🚀 Trigger on push/manual
-    PackageTransfer->>OCM: 📦 Package Components
-    OCM->>Registry: 🎯 Transfer to ghcr.io
-    PackageTransfer->>GH: 🏷️ Create Release Tag
-    Registry-->>Dev: ✅ Published
+    GH->>PackageTransfer: 🚀 Triggers on push
+    PackageTransfer->>Version: 🏷️ Get/Bump Version
+    Version-->>PackageTransfer: ✅ Version Ready
+    PackageTransfer->>OCM: 📦 Create & Transfer Components
+    OCM->>Registry: 🎯 Transfer Artifacts
+    Registry-->>Dev: ✅ Build Complete
 ```
 
 ### 🧩 Core Components
@@ -258,28 +259,6 @@ sequenceDiagram
 ### Key Files
 
 #### 🔄 Github Workflows
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Dev as 👨‍💻 Developer
-    participant GH as 🐙 GitHub
-    participant BuildVerify as ⚙️ Build & Verify
-    participant PackageTransfer as ⚙️ Package & Transfer
-    participant Version as 🏷️ Version Management
-    participant OCM as 📦 OCM
-    participant Registry as 🏦 OCI Registry
-    Dev->>GH: 📤 Push PR
-    GH->>BuildVerify: 🚀 Triggers on PR
-    BuildVerify->>GH: 📦 Build & Verify
-    Dev->>GH: 🔀 Merge to main
-    GH->>PackageTransfer: 🚀 Triggers on push
-    PackageTransfer->>Version: 🏷️ Get/Bump Version
-    Version-->>PackageTransfer: ✅ Version Ready
-    PackageTransfer->>OCM: 📦 Create & Transfer Components
-    OCM->>Registry: 🎯 Transfer Artifacts
-    Registry-->>Dev: ✅ Build Complete
-```
 
 ##### `build_verify.yml`
 The Build and Verify workflow [`.github/workflows/build_verify.yml`](./.github/workflows/build_verify.yml) runs on pull requests and:
