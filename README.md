@@ -170,8 +170,8 @@ flowchart TB
 
 Two GitHub Workflows manage the OCM component lifecycle:
 
-1. **[Build and Verify](./.github/workflows/build_verify.yml)** - Runs on pull requests to validate OCM components
-2. **[OCM Package & Transfer](./.github/workflows/package_transfer.yaml)** - Packages and publishes OCM components on push to main or manual dispatch
+1. **[🔍 OCM: Build & Verify](./.github/workflows/build_verify.yml)** - Runs on pull requests to validate OCM components
+2. **[📦 OCM: Package, Release & Transfer](./.github/workflows/package_transfer.yaml)** - Packages and publishes OCM components on push to main or manual dispatch
 
 These workflows find, package, and transfer all `./ocm/**/component-constructor.yaml` to an OCI repository (ghcr.io).
 
@@ -180,8 +180,8 @@ sequenceDiagram
     autonumber
     participant Dev as 👨‍💻 Developer
     participant GH as 🐙 GitHub
-    participant BuildVerify as ⚙️ Build & Verify
-    participant PackageTransfer as ⚙️ Package & Transfer
+    participant BuildVerify as 🔍 OCM: Build & Verify
+    participant PackageTransfer as 📦 OCM: Package, Release & Transfer
     participant Version as 🏷️ Version Management
     participant OCM as 📦 OCM
     participant Registry as 🏦 OCI Registry
