@@ -1,4 +1,9 @@
-name: Build and Verify
+name: "🔍 OCM: Build & Verify"
+
+run-name: >-
+  ${{ github.event_name == 'workflow_dispatch'
+    && format('Manual Package & Verify')
+    || format('Automatic Package & Verify') }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -6,12 +11,6 @@ concurrency:
 
 on:
   workflow_dispatch: {}
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - "**/helmfile/**"
-  #     - "**/component-constructor.yaml"
   pull_request:
     branches:
       - main

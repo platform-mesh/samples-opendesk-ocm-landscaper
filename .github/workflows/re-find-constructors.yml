@@ -1,4 +1,4 @@
-name: Find Component Constructors
+name: 🔄 Find Component Constructors
 
 on:
   workflow_call:
