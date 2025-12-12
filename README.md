@@ -237,11 +237,11 @@ sequenceDiagram
 ```
 ├── .github/
 │   └── workflows/
-│       ├── build_verify.yml         # Build and Verify workflow (runs on PRs)
-│       ├── package_transfer.yaml    # OCM Package & Transfer workflow
-│       ├── re-find-constructors.yml # Find OCM component constructors
-│       ├── re-get-version.yml       # Version management workflow
-│       └── re-publish-ocm.yaml      # Publish OCM components workflow
+│       ├── build_verify.yml         # 🔍 OCM: Build & Verify workflow
+│       ├── package_transfer.yaml    # 📦 OCM: Package, Release & Transfer workflow
+│       ├── re-find-constructors.yml # 🔄 Find Component Constructors workflow
+│       ├── re-get-version.yml       # 🔄 Get Version workflow
+│       └── re-publish-ocm.yaml      # 🔄 Publish OCM components workflow
 ├── README.md                    # Comprehensive documentation (this file)
 ├── Makefile                     # Build and deployment automation
 ├── renovate.json                # Dependency update configuration
@@ -261,15 +261,14 @@ sequenceDiagram
 #### 🔄 Github Workflows
 
 ##### `build_verify.yml`
-The Build and Verify workflow [`.github/workflows/build_verify.yml`](./.github/workflows/build_verify.yml) runs on pull requests and:
+The "🔍 OCM: Build & Verify" workflow [`.github/workflows/build_verify.yml`](./.github/workflows/build_verify.yml) runs on pull requests and:
 - Verifies OCM component constructors
 - Validates the overall build process
 
 ##### `package_transfer.yaml`
-The OCM Package & Transfer workflow [`.github/workflows/package_transfer.yaml`](./.github/workflows/package_transfer.yaml) is triggered on pushes to main branch or manual dispatch and:
+The "📦 OCM: Package, Release & Transfer" workflow [`.github/workflows/package_transfer.yaml`](./.github/workflows/package_transfer.yaml) is triggered on pushes to main branch or manual dispatch and:
 - Packages all OCM components defined in `./ocm/**/component-constructor.yaml`
 - Transfers components to OCI repository (ghcr.io)
-- Publishes ConfigMaps as OCI artifacts
 
 ##### `re-find-constructors.yml`
 A reusable workflow that scans the repository to find all `component-constructor.yaml` files. This workflow:
