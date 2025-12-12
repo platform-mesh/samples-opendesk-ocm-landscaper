@@ -1,4 +1,4 @@
-name: "🔍 OCM: Build & Verify"
+name: "OCM: Build & Verify"
 
 run-name: >-
   ${{ github.event_name == 'workflow_dispatch'
