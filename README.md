@@ -167,21 +167,33 @@ flowchart TB
 
 
 ### 🔄 Open Component Model Pipeline
-A Github Workflow [`.github/workflows/ocm-component-check.yml`](./.github/workflows/ocm-component-check.yml) is used to find, package and transfer all `./ocm/**/component-constructor.yaml` to an an OCI repository.
+
+Two GitHub Workflows manage the OCM component lifecycle:
+
+1. **[Build and Verify](./.github/workflows/build_verify.yml)** - Runs on pull requests to validate OCM components
+2. **[OCM Package & Transfer](./.github/workflows/package_transfer.yaml)** - Packages and publishes OCM components on push to main or manual dispatch
+
+These workflows find, package, and transfer all `./ocm/**/component-constructor.yaml` to an OCI repository (ghcr.io).
 
 ```mermaid
 sequenceDiagram
     participant Dev as 👨‍💻 Developer
     participant GH as 🐙 GitHub
-    participant GithubWorkflow as ⚙️ Github Workflow
-    participant OCM as 📦 OCM
-    participant JFrog as 🏦 JFrog
+    participant BuildVerify as ⚙️ Build & Verify
+    participant PackageTransfer as ⚙️ Package & Transfer
+    participant OCM as 📦 OCM CLI
+    participant Registry as 🏦 ghcr.io
 
-    Dev->>GH: 📤 Push Code
-    GH->>GithubWorkflow: 🚀 Trigger Build
-    GithubWorkflow->>OCM: 📦 Create Component
-    OCM->>JFrog: 🎯 Transfer Artifacts
-    JFrog-->>Dev: ✅ Build Complete
+    Dev->>GH: 📤 Create PR
+    GH->>BuildVerify: 🚀 Trigger on PR
+    BuildVerify->>OCM: 🔍 Validate Components (dry-run)
+    OCM-->>BuildVerify: ✅ Validation Complete
+    Dev->>GH: 🔀 Merge to main
+    GH->>PackageTransfer: 🚀 Trigger on push/manual
+    PackageTransfer->>OCM: 📦 Package Components
+    OCM->>Registry: 🎯 Transfer to ghcr.io
+    PackageTransfer->>GH: 🏷️ Create Release Tag
+    Registry-->>Dev: ✅ Published
 ```
 
 ### 🧩 Core Components
