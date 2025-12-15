@@ -1,4 +1,4 @@
-name: OCM Package & Transfer
+name: "📦 OCM: Package, Release & Transfer"
 
 run-name: >-
   ${{ github.event_name == 'workflow_dispatch'
@@ -16,23 +16,12 @@ on:
         description: 'The version to set/publish the OCM packages as. E.g., "1.2.3". If not provided, the version will be auto-incremented based on the latest existing tag.'
         required: false
         type: string
-  # To ensure this workflow only runs after successful PR checks via "Build and Verify" workflow, you must:
-  # - block direct pushes to main by enabling branch protection rules
-  # - require "Build and Verify" workflow to pass before merging and uncomment the 'push' trigger below.
-  # This way we can be sure that all changes go through the PR process.
   push:
     branches:
       - main
     paths:
       - "**/helmfile/**"
       - "**/component-constructor.yaml"
-  # Alternatively, disable the 'push' trigger and use 'workflow_run' to ensure this workflow is triggered by the "Build and Verify" workflow.
-  # workflow_run:
-  #   workflows: ["Build and Verify"]
-  #   types:
-  #     - completed
-  #   branches:
-  #     - main
 
 permissions:
   pull-requests: write

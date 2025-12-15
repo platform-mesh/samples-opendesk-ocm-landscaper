@@ -1,4 +1,4 @@
-name: Publish OCM Packages
+name: 🔄 Publish OCM Packages
 
 on:
   workflow_call: 
