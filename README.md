@@ -137,7 +137,7 @@ flowchart TB
         JFrog["OCM Repository"]
     end
     
-    subgraphopenMCP["`OpenManagedControlPlane`"]
+    subgraph openMCP["`OpenManagedControlPlane`"]
         Flux["Flux (GitOps)"]
         Landscaper["Landscaper"]
         ExtSecrets["External Secrets"]
@@ -151,7 +151,7 @@ flowchart TB
     Github_Stack --> Github_Workflow
     Github_Workflow --> | package & transports | JFrog
     JFrog --> | fetch Dep. | Renovate_Stack
-    Renovate_Stack --> | update Dep. / Versions | Github_Stack
+    Renovate_Stack --> | update Dep. / Versions | Github_Stack
     JFrog --> | fetches | Landscaper
     
     Flux --> |sync| Manifests
@@ -160,7 +160,6 @@ flowchart TB
     Landscaper --> |deploy| Shoot
     Manifests --> |instructs| Landscaper
     ExtSecrets --> |fetch secrets| Vault[(Vault)]
-
 
 ```
 </details>
