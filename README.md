@@ -50,6 +50,46 @@ This repository contains a Proof of Concept (PoC) implementation of OpenDesk, a 
 ### 📊 Architecture Overview
 
 ```mermaid
+flowchart TB
+    subgraph Github["Github"]
+        Github_Stack["Repository"]   
+        Renovate_Stack["Renovate Bot"]     
+        Github_Workflow["Workflow: OCM"]
+    end
+
+    subgraph Hyperspace["JFrog / OCI Artifactory"]
+        JFrog["OCM Repository"]
+    end
+    
+    subgraph openMCP["`OpenManagedControlPlane`"]
+        Flux["Flux (GitOps)"]
+        Landscaper["Landscaper"]
+        ExtSecrets["External Secrets"]
+        Manifests["k8s manifests"]
+    end
+    
+    subgraph GardenerShoot["SAP Cloud Infrastructure Cluster"]
+        Shoot["openDesk"]
+    end
+
+    Github_Stack --> Github_Workflow
+    Github_Workflow --> | package & transports | JFrog
+    JFrog --> | fetch Dep. | Renovate_Stack
+    Renovate_Stack --> | update Dep. / Versions | Github_Stack
+    JFrog --> | fetches | Landscaper
+    
+    Flux --> |sync| Manifests
+    Github_Stack --> |fetch| Flux
+    
+    Landscaper --> |deploy| Shoot
+    Manifests --> |instructs| Landscaper
+    ExtSecrets --> |fetch secrets| Vault[(Vault)]
+```
+
+<details>
+<summary><strong> Detailed Architecture </strong></summary>
+
+```mermaid
 graph TB
     subgraph "SAP Cloud Infrastructure (SCI)"
         subgraph "Gardener Shoot Cluster"
@@ -120,47 +160,6 @@ graph TB
     OCM --> LS
     DNS --> LB
     LB --> NG
-```
-
-<details>
-<summary><strong> Detailed Architecture </strong></summary>
-
-```mermaid
-flowchart TB
-    subgraph Github["Github"]
-        Github_Stack["Repository"]   
-        Renovate_Stack["Renovate Bot"]     
-        Github_Workflow["Workflow: OCM"]
-    end
-
-    subgraph Hyperspace["JFrog / OCI Artifactory"]
-        JFrog["OCM Repository"]
-    end
-    
-    subgraphopenMCP["`OpenManagedControlPlane`"]
-        Flux["Flux (GitOps)"]
-        Landscaper["Landscaper"]
-        ExtSecrets["External Secrets"]
-        Manifests["k8s manifests"]
-    end
-    
-    subgraph GardenerShoot["SAP Cloud Infrastructure Cluster"]
-        Shoot["openDesk"]
-    end
-
-    Github_Stack --> Github_Workflow
-    Github_Workflow --> | package & transports | JFrog
-    JFrog --> | fetch Dep. | Renovate_Stack
-    Renovate_Stack --> | update Dep. / Versions | Github_Stack
-    JFrog --> | fetches | Landscaper
-    
-    Flux --> |sync| Manifests
-    Github_Stack --> |fetch| Flux
-    
-    Landscaper --> |deploy| Shoot
-    Manifests --> |instructs| Landscaper
-    ExtSecrets --> |fetch secrets| Vault[(Vault)]
-
 
 ```
 </details>
