@@ -28,7 +28,7 @@ components:
         version: "1.12.2"
         access:
           type: ociArtifact
-          imageReference: https://registry.k8s.io/ingress-nginx/controller:v1.12.2
+          imageReference: registry.k8s.io/ingress-nginx/controller:v1.12.2
 
       - name: helm-chart-cert-manager
         type: helmChart
